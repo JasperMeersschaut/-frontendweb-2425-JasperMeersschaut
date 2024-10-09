@@ -5,10 +5,10 @@
 > Verwijder alle instructies (lijnen die starten met >).
 
 - Student: Jasper Meersschaut
-- Studentennummer: xxxxxxxxx
-- E-mailadres: <mailto:jasper.meersschaut@student.hogent.be>
+- Studentennummer: 202396570
+- E-mailadres: [jasper.meersschaut@student.hogent.be](mailto:jasper.meersschaut@student.hogent.be)
 - Demo: <DEMO_LINK_HIER>
-- GitHub-repository: <GITHUB_REPO_LINK_HIER>
+- GitHub-repository: [GitHub Repository](https://github.com/HOGENT-frontendweb/frontendweb-2425-JasperMeersschaut)
 - Front-end Web Development
   - Online versie: <LINK_ONLINE_VERSIE_HIER>
 - Web Services:
