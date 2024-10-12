@@ -31,6 +31,7 @@
 ## Projectbeschrijving
 
 > Omschrijf hier duidelijk waarover jouw project gaat. Voeg een domeinmodel (of EERD) toe om jouw entiteiten te verduidelijken.
+https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2EmXPPDPXRkztjE9NVKnAjewL1UnfwNOKqXbgrGQgdmTbcgXo_kmu0pxTSCt5aF-AHTa51lgYk4mTdw8YwAeE1EFR0MmhrQM-oh55MQB9909HBNtGvpJcly_flDvyUDtRVJ82qU_12pjlKtmRwm3z5U2wrxIZ9U8ggK4TgbC3D-sG4EMUS-CiKrMgM_hec4LmKufqZ8M_iDQN6dwo=
 
 ## Screenshots
 
