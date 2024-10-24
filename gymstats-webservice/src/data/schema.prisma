@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId    Int      @id @default(autoincrement()) @db.UnsignedInt
+  name      String
+  lastName  String
+  userName  String
+  email     String   @unique
+  sex       String
+  birthdate DateTime @db.DateTime(0)
+  length    String
+
+  plans Plan[]
+}
+
+model Plan {
+  id    Int    @id @default(autoincrement()) @db.UnsignedInt
+  dagen Int
+  focus String
+
+  workouts Plan_Workout[]
+  user     User           @relation(fields: [userId], references: [userId])
+  userId   Int
+}
+
+model Plan_Workout {
+  PID Int
+  WID Int
+
+  plan    Plan    @relation(fields: [PID], references: [id])
+  workout Workout @relation(fields: [WID], references: [id])
+
+  @@id([PID, WID])
+}
+
+model Workout {
+  id          Int    @id @default(autoincrement()) @db.UnsignedInt
+  type        String
+  duration    Int
+  equipment   String
+  muscleFocus String
+
+  exerciseWorkouts Exercise_Workout[]
+  planWorkouts     Plan_Workout[]
+}
+
+model Exercise_Workout {
+  EID Int
+  WID Int
+
+  exercise Exercise @relation(fields: [EID], references: [id])
+  workout  Workout  @relation(fields: [WID], references: [id])
+
+  @@id([EID, WID])
+}
+
+model Exercise {
+  id         Int    @id @default(autoincrement()) @db.UnsignedInt
+  soort      String
+  spiergroep String
+
+  exerciseWorkouts Exercise_Workout[]
+}
