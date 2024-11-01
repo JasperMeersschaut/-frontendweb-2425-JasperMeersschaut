@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound.jsx';
 import WorkoutList from './pages/workouts/WorkoutList.jsx';
 import ExercisesList from './pages/exercises/exercisesList.jsx';
 import Layout from './components/Layout.jsx';
+import { AuthProvider } from './contexts/Auth.context.jsx';
 
 const router = createBrowserRouter([{
   element: <Layout />,
@@ -25,6 +26,8 @@ const router = createBrowserRouter([{
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <AuthProvider>
+      <RouterProvider router={router}/>
+    </AuthProvider>
   </StrictMode>,
 );
