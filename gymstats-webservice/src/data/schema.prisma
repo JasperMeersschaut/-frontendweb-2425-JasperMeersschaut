@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,31 +8,31 @@ datasource db {
 }
 
 model User {
-  userId    Int      @id @default(autoincrement()) @db.UnsignedInt
+  userId    Int      @id @default(autoincrement()) @db.UnsignedInt  
   name      String
   lastName  String
-  userName  String
   email     String   @unique
   sex       String
   birthdate DateTime @db.DateTime(0)
-  length    String
+  length    Int
+  weight    Float
 
   plans Plan[]
 }
 
 model Plan {
   id    Int    @id @default(autoincrement()) @db.UnsignedInt
-  dagen Int
+  days  Int
   focus String
 
   workouts Plan_Workout[]
   user     User           @relation(fields: [userId], references: [userId])
-  userId   Int
+  userId   Int            @db.UnsignedInt
 }
 
 model Plan_Workout {
-  PID Int
-  WID Int
+  PID Int @db.UnsignedInt
+  WID Int @db.UnsignedInt
 
   plan    Plan    @relation(fields: [PID], references: [id])
   workout Workout @relation(fields: [WID], references: [id])
@@ -58,8 +52,8 @@ model Workout {
 }
 
 model Exercise_Workout {
-  EID Int
-  WID Int
+  EID Int @db.UnsignedInt
+  WID Int @db.UnsignedInt
 
   exercise Exercise @relation(fields: [EID], references: [id])
   workout  Workout  @relation(fields: [WID], references: [id])
@@ -68,9 +62,9 @@ model Exercise_Workout {
 }
 
 model Exercise {
-  id         Int    @id @default(autoincrement()) @db.UnsignedInt
-  soort      String
-  spiergroep String
+  id          Int    @id @default(autoincrement()) @db.UnsignedInt
+  type        String
+  muscleGroup String
 
   exerciseWorkouts Exercise_Workout[]
 }

@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  // Create Exercises
   const squat = await prisma.exercise.create({
     data: {
       type: 'Squat',
@@ -52,7 +51,6 @@ async function main() {
     },
   });
 
-  // Additional Exercises
   const tricepDip = await prisma.exercise.create({
     data: {
       type: 'Tricep Dip',
@@ -95,11 +93,10 @@ async function main() {
     },
   });
 
-  // Create Workouts
   const workout1 = await prisma.workout.create({
     data: {
       type: 'Strength',
-      duration: 60, // minutes
+      duration: 60,
       equipment: 'Barbell',
       muscleFocus: 'Full Body',
       exerciseWorkouts: {
@@ -114,7 +111,7 @@ async function main() {
   const workout2 = await prisma.workout.create({
     data: {
       type: 'Hypertrophy',
-      duration: 45, // minutes
+      duration: 45,
       equipment: 'Dumbbells',
       muscleFocus: 'Upper Body',
       exerciseWorkouts: {
@@ -129,7 +126,7 @@ async function main() {
   const workout3 = await prisma.workout.create({
     data: {
       type: 'Endurance',
-      duration: 50, // minutes
+      duration: 50,
       equipment: 'Bodyweight',
       muscleFocus: 'Full Body',
       exerciseWorkouts: {
@@ -144,7 +141,7 @@ async function main() {
   const workout4 = await prisma.workout.create({
     data: {
       type: 'Cardio',
-      duration: 30, // minutes
+      duration: 30,
       equipment: 'Treadmill',
       muscleFocus: 'Legs',
       exerciseWorkouts: {
@@ -159,7 +156,7 @@ async function main() {
   const workout5 = await prisma.workout.create({
     data: {
       type: 'Strength',
-      duration: 60, // minutes
+      duration: 60,
       equipment: 'Dumbbells',
       muscleFocus: 'Upper Body',
       exerciseWorkouts: {
@@ -171,11 +168,10 @@ async function main() {
     },
   });
 
-  // New Workouts
   const workout6 = await prisma.workout.create({
     data: {
       type: 'Strength',
-      duration: 50, // minutes
+      duration: 50,
       equipment: 'Machines',
       muscleFocus: 'Legs',
       exerciseWorkouts: {
@@ -190,7 +186,7 @@ async function main() {
   const workout7 = await prisma.workout.create({
     data: {
       type: 'Circuit',
-      duration: 45, // minutes
+      duration: 45, 
       equipment: 'Kettlebell',
       muscleFocus: 'Full Body',
       exerciseWorkouts: {
@@ -218,16 +214,15 @@ async function main() {
     },
   });
 
-  // Create Users with Plans (adding new plans for existing users)
   const user1 = await prisma.user.create({
     data: {
-      name: 'John',
-      lastName: 'Doe',
-      userName: 'john_doe',
-      email: 'john.doe@example.com',
+      name: 'Jan',
+      lastName: 'Jansen',
+      email: 'jan.jansen@example.com',
       sex: 'Male',
       birthdate: new Date('1990-01-01'),
-      length: '180cm',
+      length: 180,
+      weight: 75.5,
       plans: {
         create: [
           {
@@ -257,13 +252,13 @@ async function main() {
 
   const user2 = await prisma.user.create({
     data: {
-      name: 'Jane',
-      lastName: 'Smith',
-      userName: 'jane_smith',
-      email: 'jane.smith@example.com',
+      name: 'Marie',
+      lastName: 'Dubois',
+      email: 'marie.dubois@example.com',
       sex: 'Female',
-      birthdate: new Date('1995-05-15'),
-      length: '165cm',
+      birthdate: new Date('1985-05-15'),
+      length: 165,
+      weight: 60.0,
       plans: {
         create: [
           {
@@ -282,13 +277,13 @@ async function main() {
 
   const user3 = await prisma.user.create({
     data: {
-      name: 'Mark',
-      lastName: 'Johnson',
-      userName: 'mark_johnson',
-      email: 'mark.johnson@example.com',
+      name: 'Pieter',
+      lastName: 'De Vries',
+      email: 'pieter.devries@example.com',
       sex: 'Male',
-      birthdate: new Date('1988-12-12'),
-      length: '185cm',
+      birthdate: new Date('1992-07-20'),
+      length: 175,
+      weight: 70.0,
       plans: {
         create: [
           {
@@ -317,13 +312,13 @@ async function main() {
 
   const user4 = await prisma.user.create({
     data: {
-      name: 'Alice',
-      lastName: 'Williams',
-      userName: 'alice_williams',
-      email: 'alice.williams@example.com',
+      name: 'Sofie',
+      lastName: 'Peeters',
+      email: 'sofie.peeters@example.com',
       sex: 'Female',
-      birthdate: new Date('1992-07-07'),
-      length: '170cm',
+      birthdate: new Date('1988-11-30'),
+      length: 170,
+      weight: 65.0,
       plans: {
         create: [
           {
@@ -350,32 +345,7 @@ async function main() {
     },
   });
 
-  const user5 = await prisma.user.create({
-    data: {
-      name: 'Emma',
-      lastName: 'Brown',
-      userName: 'emma_brown',
-      email: 'emma.brown@example.com',
-      sex: 'Female',
-      birthdate: new Date('1990-04-15'),
-      length: '165cm',
-      plans: {
-        create: [
-          {
-            days: 4,
-            focus: 'Upper Body Strength',
-            workouts: {
-              create: [
-                { workout: { connect: { id: workout5.id } } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  });
-
-  console.log({ user1, user2, user3, user4, user5 });
+  console.log({ user1, user2, user3, user4 });
 }
 
 main()
