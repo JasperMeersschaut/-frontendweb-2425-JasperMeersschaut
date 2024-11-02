@@ -139,7 +139,7 @@ async function main() {
     // Create User Workouts
     const userWorkout1 = await prisma.userWorkout.create({
       data: {
-        userId: user1.userId,
+        userId: user1.id,
         workoutId: workout1.id,
         date: new Date(),
         notes: 'Great workout!',
@@ -149,7 +149,7 @@ async function main() {
 
     const userWorkout2 = await prisma.userWorkout.create({
       data: {
-        userId: user2.userId,
+        userId: user2.id,
         workoutId: workout2.id,
         date: new Date(),
         notes: 'Felt strong today!',

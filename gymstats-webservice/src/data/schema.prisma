@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  userId    Int      @id @default(autoincrement()) @db.UnsignedInt
+  id        Int      @id @default(autoincrement()) @db.UnsignedInt
   name      String
   lastName  String
   email     String   @unique
@@ -52,7 +52,7 @@ model Exercise {
 
 model UserWorkout {
   id        Int      @id @default(autoincrement()) @db.UnsignedInt
-  user      User     @relation(fields: [userId], references: [userId])
+  user      User     @relation(fields: [id], references: [id])
   userId    Int      @db.UnsignedInt
   workout   Workout  @relation(fields: [workoutId], references: [id])
   workoutId Int      @db.UnsignedInt

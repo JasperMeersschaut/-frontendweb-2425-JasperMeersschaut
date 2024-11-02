@@ -1,5 +1,6 @@
 import Router from '@koa/router';
-import installTransactionRouter from './exercise';
+import installExerciseRouter from './exercise';
+import installUserRouter from './user';
 import type { GymStatsAppContext, GymStatsAppState, KoaApplication } from '../types/koa';
 
 export default (app: KoaApplication) => {
@@ -7,7 +8,8 @@ export default (app: KoaApplication) => {
     prefix: '/api',
   });
 
-  installTransactionRouter(router);
+  installExerciseRouter(router);
+  installUserRouter(router);
 
   app.use(router.routes()).use(router.allowedMethods());
 };

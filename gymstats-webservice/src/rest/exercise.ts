@@ -20,7 +20,7 @@ const getAllExercises = async (ctx: KoaContext<GetAllExercisesResponse>) => {
 };
 
 const getExerciseById = async (ctx: KoaContext<GetExerciseByIdResponse, IdParams>) => {
-  const id = parseInt(ctx.params.id, 10);
+  const id = Number(ctx.params.id);
   if (isNaN(id)) {
     ctx.status = 400;
     return;
