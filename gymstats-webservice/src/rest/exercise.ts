@@ -16,15 +16,20 @@ const getAllExercises = async (ctx: KoaContext<GetAllExercisesResponse>) => {
   const exercise = await exerciseService.getAll();
   ctx.body = {
     items: exercise,
-  };
+  }; 
 };
 
 const getExerciseById = async (ctx: KoaContext<GetExerciseByIdResponse, IdParams>) => {
-  const exercise = await exerciseService.getById(ctx.params.id);
+  const id = parseInt(ctx.params.id, 10);
+  if (isNaN(id)) {
+    ctx.status = 400;
+    return;
+  }
+  const exercise = await exerciseService.getById(id);
   if (exercise) {
     ctx.body = exercise;
   } else {
-    ctx.status = 404;
+    ctx.status = 404;;
   }
 };
 

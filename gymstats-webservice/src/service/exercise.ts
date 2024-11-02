@@ -1,5 +1,4 @@
 // src/service/transaction.ts
-import { EXERCISES } from '../data/mock_data';
 import { prisma  } from '../data';
 import type { Exercise,ExerciseUpdateInput,ExerciseCreateInput } from '../types/exercise';
 
@@ -15,16 +14,19 @@ export const getAll = async () => {
   });
 };
 
-export const getById = (id: number) => {
-  return EXERCISES.find((t) => t.id === id);
+export const getById = async (id: number) => {
+  return prisma.exercise.findUnique({
+    where: {
+      id,
+    },
+    select: EXERCISE_SELECT,
+  });
 };
 
 export const create = async (exercise: ExerciseCreateInput): Promise<Exercise> => {
- 
-  return await prisma.exercise.create({
+  return prisma.exercise.create({
     data: exercise,
   });
- 
 };
 
 export const updateById = async (
