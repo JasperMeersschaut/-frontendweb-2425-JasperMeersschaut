@@ -2,355 +2,218 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const squat = await prisma.exercise.create({
-    data: {
-      type: 'Squat',
-      muscleGroup: 'Legs',
-    },
-  });
-
-  const benchPress = await prisma.exercise.create({
-    data: {
-      type: 'Bench Press',
-      muscleGroup: 'Chest',
-    },
-  });
-
-  const deadlift = await prisma.exercise.create({
-    data: {
-      type: 'Deadlift',
-      muscleGroup: 'Back',
-    },
-  });
-
-  const pullUp = await prisma.exercise.create({
-    data: {
-      type: 'Pull-up',
-      muscleGroup: 'Back',
-    },
-  });
-
-  const bicepCurl = await prisma.exercise.create({
-    data: {
-      type: 'Bicep Curl',
-      muscleGroup: 'Arms',
-    },
-  });
-
-  const lunges = await prisma.exercise.create({
-    data: {
-      type: 'Lunges',
-      muscleGroup: 'Legs',
-    },
-  });
-
-  const shoulderPress = await prisma.exercise.create({
-    data: {
-      type: 'Shoulder Press',
-      muscleGroup: 'Shoulders',
-    },
-  });
-
-  const tricepDip = await prisma.exercise.create({
-    data: {
-      type: 'Tricep Dip',
-      muscleGroup: 'Arms',
-    },
-  });
-
-  const legPress = await prisma.exercise.create({
-    data: {
-      type: 'Leg Press',
-      muscleGroup: 'Legs',
-    },
-  });
-
-  const latPulldown = await prisma.exercise.create({
-    data: {
-      type: 'Lat Pulldown',
-      muscleGroup: 'Back',
-    },
-  });
-
-  const planks = await prisma.exercise.create({
-    data: {
-      type: 'Planks',
-      muscleGroup: 'Core',
-    },
-  });
-
-  const burpees = await prisma.exercise.create({
-    data: {
-      type: 'Burpees',
-      muscleGroup: 'Full Body',
-    },
-  });
-
-  const kettlebellSwing = await prisma.exercise.create({
-    data: {
-      type: 'Kettlebell Swing',
-      muscleGroup: 'Legs',
-    },
-  });
-
-  const workout1 = await prisma.workout.create({
-    data: {
-      type: 'Strength',
-      duration: 60,
-      equipment: 'Barbell',
-      muscleFocus: 'Full Body',
-      exerciseWorkouts: {
-        create: [
-          { exercise: { connect: { id: squat.id } } },
-          { exercise: { connect: { id: benchPress.id } } },
-        ],
+  try {
+    console.log('Creating exercises...');
+    // Create Exercises
+    const squat = await prisma.exercise.create({
+      data: {
+        type: 'Squat',
+        muscleGroup: 'Legs',
       },
-    },
-  });
+    });
+    console.log('Created exercise: Squat');
 
-  const workout2 = await prisma.workout.create({
-    data: {
-      type: 'Hypertrophy',
-      duration: 45,
-      equipment: 'Dumbbells',
-      muscleFocus: 'Upper Body',
-      exerciseWorkouts: {
-        create: [
-          { exercise: { connect: { id: benchPress.id } } },
-          { exercise: { connect: { id: deadlift.id } } },
-        ],
+    const benchPress = await prisma.exercise.create({
+      data: {
+        type: 'Bench Press',
+        muscleGroup: 'Chest',
       },
-    },
-  });
+    });
+    console.log('Created exercise: Bench Press');
 
-  const workout3 = await prisma.workout.create({
-    data: {
-      type: 'Endurance',
-      duration: 50,
-      equipment: 'Bodyweight',
-      muscleFocus: 'Full Body',
-      exerciseWorkouts: {
-        create: [
-          { exercise: { connect: { id: pullUp.id } } },
-          { exercise: { connect: { id: lunges.id } } },
-        ],
+    const deadlift = await prisma.exercise.create({
+      data: {
+        type: 'Deadlift',
+        muscleGroup: 'Back',
       },
-    },
-  });
+    });
+    console.log('Created exercise: Deadlift');
 
-  const workout4 = await prisma.workout.create({
-    data: {
-      type: 'Cardio',
-      duration: 30,
-      equipment: 'Treadmill',
-      muscleFocus: 'Legs',
-      exerciseWorkouts: {
-        create: [
-          { exercise: { connect: { id: lunges.id } } },
-          { exercise: { connect: { id: bicepCurl.id } } },
-        ],
+    const pullUp = await prisma.exercise.create({
+      data: {
+        type: 'Pull-up',
+        muscleGroup: 'Back',
       },
-    },
-  });
+    });
+    console.log('Created exercise: Pull-up');
 
-  const workout5 = await prisma.workout.create({
-    data: {
-      type: 'Strength',
-      duration: 60,
-      equipment: 'Dumbbells',
-      muscleFocus: 'Upper Body',
-      exerciseWorkouts: {
-        create: [
-          { exercise: { connect: { id: benchPress.id } } },
-          { exercise: { connect: { id: shoulderPress.id } } },
-        ],
+    const bicepCurl = await prisma.exercise.create({
+      data: {
+        type: 'Bicep Curl',
+        muscleGroup: 'Arms',
       },
-    },
-  });
+    });
+    console.log('Created exercise: Bicep Curl');
 
-  const workout6 = await prisma.workout.create({
-    data: {
-      type: 'Strength',
-      duration: 50,
-      equipment: 'Machines',
-      muscleFocus: 'Legs',
-      exerciseWorkouts: {
-        create: [
-          { exercise: { connect: { id: legPress.id } } },
-          { exercise: { connect: { id: squat.id } } },
-        ],
+    const lunges = await prisma.exercise.create({
+      data: {
+        type: 'Lunges',
+        muscleGroup: 'Legs',
       },
-    },
-  });
+    });
+    console.log('Created exercise: Lunges');
 
-  const workout7 = await prisma.workout.create({
-    data: {
-      type: 'Circuit',
-      duration: 45, 
-      equipment: 'Kettlebell',
-      muscleFocus: 'Full Body',
-      exerciseWorkouts: {
-        create: [
-          { exercise: { connect: { id: burpees.id } } },
-          { exercise: { connect: { id: kettlebellSwing.id } } },
-          { exercise: { connect: { id: planks.id } } },
-        ],
+    const shoulderPress = await prisma.exercise.create({
+      data: {
+        type: 'Shoulder Press',
+        muscleGroup: 'Shoulders',
       },
-    },
-  });
+    });
+    console.log('Created exercise: Shoulder Press');
 
-  const workout8 = await prisma.workout.create({
-    data: {
-      type: 'Hypertrophy',
-      duration: 60, // minutes
-      equipment: 'Cable',
-      muscleFocus: 'Back',
-      exerciseWorkouts: {
-        create: [
-          { exercise: { connect: { id: latPulldown.id } } },
-          { exercise: { connect: { id: deadlift.id } } },
-        ],
+    const tricepDip = await prisma.exercise.create({
+      data: {
+        type: 'Tricep Dip',
+        muscleGroup: 'Arms',
       },
-    },
-  });
+    });
+    console.log('Created exercise: Tricep Dip');
 
-  const user1 = await prisma.user.create({
-    data: {
-      name: 'Jan',
-      lastName: 'Jansen',
-      email: 'jan.jansen@example.com',
-      sex: 'Male',
-      birthdate: new Date('1990-01-01'),
-      length: 180,
-      weight: 75.5,
-      plans: {
-        create: [
-          {
-            days: 3,
-            focus: 'Strength Training',
-            workouts: {
-              create: [
-                { workout: { connect: { id: workout1.id } } },
-                { workout: { connect: { id: workout2.id } } },
-              ],
-            },
-          },
-          {
-            days: 4,
-            focus: 'Legs and Core',
-            workouts: {
-              create: [
-                { workout: { connect: { id: workout6.id } } }, // Strength
-                { workout: { connect: { id: workout7.id } } }, // Circuit
-              ],
-            },
-          },
-        ],
+    const legPress = await prisma.exercise.create({
+      data: {
+        type: 'Leg Press',
+        muscleGroup: 'Legs',
       },
-    },
-  });
+    });
+    console.log('Created exercise: Leg Press');
 
-  const user2 = await prisma.user.create({
-    data: {
-      name: 'Marie',
-      lastName: 'Dubois',
-      email: 'marie.dubois@example.com',
-      sex: 'Female',
-      birthdate: new Date('1985-05-15'),
-      length: 165,
-      weight: 60.0,
-      plans: {
-        create: [
-          {
-            days: 4,
-            focus: 'Hypertrophy',
-            workouts: {
-              create: [
-                { workout: { connect: { id: workout2.id } } },
-              ],
-            },
-          },
-        ],
+    const latPulldown = await prisma.exercise.create({
+      data: {
+        type: 'Lat Pulldown',
+        muscleGroup: 'Back',
       },
-    },
-  });
+    });
+    console.log('Created exercise: Lat Pulldown');
 
-  const user3 = await prisma.user.create({
-    data: {
-      name: 'Pieter',
-      lastName: 'De Vries',
-      email: 'pieter.devries@example.com',
-      sex: 'Male',
-      birthdate: new Date('1992-07-20'),
-      length: 175,
-      weight: 70.0,
-      plans: {
-        create: [
-          {
-            days: 5,
-            focus: 'Endurance Training',
-            workouts: {
-              create: [
-                { workout: { connect: { id: workout3.id } } },
-                { workout: { connect: { id: workout4.id } } },
-              ],
-            },
-          },
-          {
-            days: 4,
-            focus: 'Full Body Hypertrophy',
-            workouts: {
-              create: [
-                { workout: { connect: { id: workout8.id } } }, // Hypertrophy
-              ],
-            },
-          },
-        ],
+    console.log('Creating users...');
+    // Create Users
+    const user1 = await prisma.user.create({
+      data: {
+        name: 'Jan',
+        lastName: 'Jansen',
+        email: 'jan.jansen@example.com',
+        sex: 'Male',
+        birthdate: new Date('1990-01-01'),
+        length: 180,
+        weight: 75.5,
       },
-    },
-  });
+    });
+    console.log('Created user: Jan Jansen');
 
-  const user4 = await prisma.user.create({
-    data: {
-      name: 'Sofie',
-      lastName: 'Peeters',
-      email: 'sofie.peeters@example.com',
-      sex: 'Female',
-      birthdate: new Date('1988-11-30'),
-      length: 170,
-      weight: 65.0,
-      plans: {
-        create: [
-          {
-            days: 3,
-            focus: 'Cardio and Strength',
-            workouts: {
-              create: [
-                { workout: { connect: { id: workout4.id } } },
-                { workout: { connect: { id: workout5.id } } },
-              ],
-            },
-          },
-          {
-            days: 3,
-            focus: 'Circuit Training',
-            workouts: {
-              create: [
-                { workout: { connect: { id: workout7.id } } }, // Circuit
-              ],
-            },
-          },
-        ],
+    const user2 = await prisma.user.create({
+      data: {
+        name: 'Marie',
+        lastName: 'Dubois',
+        email: 'marie.dubois@example.com',
+        sex: 'Female',
+        birthdate: new Date('1985-05-15'),
+        length: 165,
+        weight: 60.0,
       },
-    },
-  });
+    });
+    console.log('Created user: Marie Dubois');
 
-  console.log({ user1, user2, user3, user4 });
+    console.log('Creating workouts...');
+    // Create Workouts
+    const workout1 = await prisma.workout.create({
+      data: {
+        type: 'Strength',
+        duration: 60,
+        equipment: 'Barbell',
+        muscleFocus: 'Full Body',
+      },
+    });
+    console.log('Created workout: Strength');
+
+    const workout2 = await prisma.workout.create({
+      data: {
+        type: 'Hypertrophy',
+        duration: 45,
+        equipment: 'Dumbbells',
+        muscleFocus: 'Upper Body',
+      },
+    });
+    console.log('Created workout: Hypertrophy');
+
+    console.log('Creating user workouts...');
+    // Create User Workouts
+    const userWorkout1 = await prisma.userWorkout.create({
+      data: {
+        userId: user1.userId,
+        workoutId: workout1.id,
+        date: new Date(),
+        notes: 'Great workout!',
+      },
+    });
+    console.log('Created user workout for Jan Jansen');
+
+    const userWorkout2 = await prisma.userWorkout.create({
+      data: {
+        userId: user2.userId,
+        workoutId: workout2.id,
+        date: new Date(),
+        notes: 'Felt strong today!',
+      },
+    });
+    console.log('Created user workout for Marie Dubois');
+
+    console.log('Creating exercise details...');
+    // Create Exercise Details
+    await prisma.exerciseDetail.create({
+      data: {
+        userWorkoutId: userWorkout1.id,
+        exerciseId: squat.id,
+        reps: 10,
+        sets: 3,
+        weight: 100.0,
+      },
+    });
+    console.log('Created exercise detail for Squat in Jan Jansen\'s workout');
+
+    await prisma.exerciseDetail.create({
+      data: {
+        userWorkoutId: userWorkout1.id,
+        exerciseId: deadlift.id,
+        reps: 8,
+        sets: 4,
+        weight: 120.0,
+      },
+    });
+    console.log('Created exercise detail for Deadlift in Jan Jansen\'s workout');
+
+    await prisma.exerciseDetail.create({
+      data: {
+        userWorkoutId: userWorkout2.id,
+        exerciseId: benchPress.id,
+        reps: 8,
+        sets: 4,
+        weight: 80.0,
+      },
+    });
+    console.log('Created exercise detail for Bench Press in Marie Dubois\'s workout');
+
+    await prisma.exerciseDetail.create({
+      data: {
+        userWorkoutId: userWorkout2.id,
+        exerciseId: pullUp.id,
+        reps: 12,
+        sets: 3,
+        weight: 0.0,
+      },
+    });
+    console.log('Created exercise detail for Pull-up in Marie Dubois\'s workout');
+
+    console.log('Seeding completed successfully.');
+  } catch (error) {
+    console.error('Error during seeding:', error);
+  } finally {
+    await prisma.$disconnect();
+  }
 }
 
 main()
   .catch((e) => {
-    console.error(e);
+    console.error('Error during seeding:', e);
     process.exit(1);
   })
   .finally(async () => {

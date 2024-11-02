@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  userId    Int      @id @default(autoincrement()) @db.UnsignedInt  
+  userId    Int      @id @default(autoincrement()) @db.UnsignedInt
   name      String
   lastName  String
   email     String   @unique
@@ -17,27 +17,7 @@ model User {
   length    Int
   weight    Float
 
-  plans Plan[]
-}
-
-model Plan {
-  id    Int    @id @default(autoincrement()) @db.UnsignedInt
-  days  Int
-  focus String
-
-  workouts Plan_Workout[]
-  user     User           @relation(fields: [userId], references: [userId])
-  userId   Int            @db.UnsignedInt
-}
-
-model Plan_Workout {
-  PID Int @db.UnsignedInt
-  WID Int @db.UnsignedInt
-
-  plan    Plan    @relation(fields: [PID], references: [id])
-  workout Workout @relation(fields: [WID], references: [id])
-
-  @@id([PID, WID])
+  userWorkouts UserWorkout[]
 }
 
 model Workout {
@@ -48,7 +28,7 @@ model Workout {
   muscleFocus String
 
   exerciseWorkouts Exercise_Workout[]
-  planWorkouts     Plan_Workout[]
+  userWorkouts     UserWorkout[]
 }
 
 model Exercise_Workout {
@@ -67,4 +47,28 @@ model Exercise {
   muscleGroup String
 
   exerciseWorkouts Exercise_Workout[]
+  ExerciseDetail   ExerciseDetail[]
+}
+
+model UserWorkout {
+  id        Int      @id @default(autoincrement()) @db.UnsignedInt
+  user      User     @relation(fields: [userId], references: [userId])
+  userId    Int      @db.UnsignedInt
+  workout   Workout  @relation(fields: [workoutId], references: [id])
+  workoutId Int      @db.UnsignedInt
+  date      DateTime @default(now())
+  notes     String?
+
+  exerciseDetails ExerciseDetail[]
+}
+
+model ExerciseDetail {
+  id            Int         @id @default(autoincrement()) @db.UnsignedInt
+  userWorkout   UserWorkout @relation(fields: [userWorkoutId], references: [id])
+  userWorkoutId Int         @db.UnsignedInt
+  exercise      Exercise    @relation(fields: [exerciseId], references: [id])
+  exerciseId    Int         @db.UnsignedInt
+  reps          Int
+  sets          Int
+  weight        Float?
 }
