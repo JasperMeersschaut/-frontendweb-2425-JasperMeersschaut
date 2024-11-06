@@ -40,12 +40,12 @@ export const createExercise = async (ctx: KoaContext<CreateExerciseResponse, voi
 };
 
 export const updateExerciseById = async (ctx: KoaContext<UpdateExerciseResponse, IdParams, UpdateExerciseRequest>) => {
-  const exercise = await exerciseService.updateById(ctx.params.id, ctx.request.body);
+  const exercise = await exerciseService.updateById(Number(ctx.params.id), ctx.request.body);
   ctx.body = exercise;
 };
 
 export const deleteExerciseById = async (ctx: KoaContext<void, IdParams>) => {
-  await exerciseService.deleteById(ctx.params.id);
+  await exerciseService.deleteById(Number(ctx.params.id));
   ctx.status = 204;
 };
 

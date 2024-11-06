@@ -40,12 +40,12 @@ export const createUser = async (ctx: KoaContext<CreateUserResponse, void, Creat
 };
 
 export const updateUserById = async (ctx: KoaContext<UpdateUserResponse, IdParams, UpdateUserRequest>) => {
-  const user = await userService.updateById(ctx.params.id, ctx.request.body);
+  const user = await userService.updateById((Number(ctx.params.id)), ctx.request.body);
   ctx.body = user;
 };
 
 export const deleteUserById = async (ctx: KoaContext<void, IdParams>) => {
-  await userService.deleteById(ctx.params.id);
+  await userService.deleteById(Number(ctx.params.id));
   ctx.status = 204;
 };
 
