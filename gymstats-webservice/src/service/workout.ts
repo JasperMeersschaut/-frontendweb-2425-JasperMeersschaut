@@ -6,6 +6,7 @@ const WORKOUT_SELECT = {
   type: true,
   duration: true,
   muscleFocus: true,
+  items: true,
 };
 
 export const getAll = async () => {

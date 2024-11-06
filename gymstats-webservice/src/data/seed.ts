@@ -7,6 +7,7 @@ async function main() {
     // Create Exercises
     const squat = await prisma.exercise.create({
       data: {
+        id: 1,
         type: 'Squat',
         muscleGroup: 'Legs',
       },
@@ -15,6 +16,7 @@ async function main() {
 
     const benchPress = await prisma.exercise.create({
       data: {
+        id: 2,
         type: 'Bench Press',
         muscleGroup: 'Chest',
       },
@@ -23,6 +25,7 @@ async function main() {
 
     const deadlift = await prisma.exercise.create({
       data: {
+        id: 3,
         type: 'Deadlift',
         muscleGroup: 'Back',
       },
@@ -31,6 +34,7 @@ async function main() {
 
     const pullUp = await prisma.exercise.create({
       data: {
+        id:4,
         type: 'Pull-up',
         muscleGroup: 'Back',
       },
@@ -39,6 +43,7 @@ async function main() {
 
     const bicepCurl = await prisma.exercise.create({
       data: {
+        id: 5,
         type: 'Bicep Curl',
         muscleGroup: 'Arms',
       },
@@ -47,6 +52,7 @@ async function main() {
 
     const lunges = await prisma.exercise.create({
       data: {
+        id: 6,
         type: 'Lunges',
         muscleGroup: 'Legs',
       },
@@ -55,6 +61,7 @@ async function main() {
 
     const shoulderPress = await prisma.exercise.create({
       data: {
+        id  : 7,
         type: 'Shoulder Press',
         muscleGroup: 'Shoulders',
       },
@@ -63,6 +70,7 @@ async function main() {
 
     const tricepDip = await prisma.exercise.create({
       data: {
+        id: 8,
         type: 'Tricep Dip',
         muscleGroup: 'Arms',
       },
@@ -71,6 +79,7 @@ async function main() {
 
     const legPress = await prisma.exercise.create({
       data: {
+        id: 9,
         type: 'Leg Press',
         muscleGroup: 'Legs',
       },
@@ -79,6 +88,7 @@ async function main() {
 
     const latPulldown = await prisma.exercise.create({
       data: {
+        id: 10,
         type: 'Lat Pulldown',
         muscleGroup: 'Back',
       },
@@ -112,7 +122,7 @@ async function main() {
       },
     });
     console.log('Created user: Marie Dubois');
-
+    
     console.log('Creating workouts...');
     // Create Workouts
     const workout1 = await prisma.workout.create({
@@ -120,8 +130,16 @@ async function main() {
         type: 'Strength',
         duration: 60,
         muscleFocus: 'Full Body',
+        items: {
+          connect:[{
+            id:1},{
+            id:2},{
+            id:3}],
+        },
+         
       },
-    });
+    },
+    );
     console.log('Created workout: Strength');
 
     const workout2 = await prisma.workout.create({
@@ -129,8 +147,16 @@ async function main() {
         type: 'Hypertrophy',
         duration: 45,
         muscleFocus: 'Upper Body',
+        items: {
+          connect:[{
+            id:5},{
+            id:6},{
+            id:7}],
+        },
       },
-    });
+    },
+   
+    );
     console.log('Created workout: Hypertrophy');
 
     console.log('Creating user workouts...');

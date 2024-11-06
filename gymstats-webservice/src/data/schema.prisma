@@ -25,28 +25,16 @@ model Workout {
   type        String
   duration    Int
   muscleFocus String
-
-  exerciseWorkouts Exercise_Workout[]
+  items Exercise[]
   userWorkouts     UserWorkout[]
-}
-
-model Exercise_Workout {
-  EID Int @db.UnsignedInt
-  WID Int @db.UnsignedInt
-
-  exercise Exercise @relation(fields: [EID], references: [id])
-  workout  Workout  @relation(fields: [WID], references: [id])
-
-  @@id([EID, WID])
 }
 
 model Exercise {
   id          Int    @id @default(autoincrement()) @db.UnsignedInt
   type        String
   muscleGroup String
-
-  exerciseWorkouts Exercise_Workout[]
-  ExerciseDetail   ExerciseDetail[]
+  workouts Workout[]
+  // ExerciseDetail   ExerciseDetail[]
 }
 
 model UserWorkout {
@@ -58,16 +46,16 @@ model UserWorkout {
   date      DateTime @default(now())
   notes     String?
 
-  exerciseDetails ExerciseDetail[]
+  // exerciseDetails ExerciseDetail[]
 }
 
-model ExerciseDetail {
-  id            Int         @id @default(autoincrement()) @db.UnsignedInt
-  userWorkout   UserWorkout @relation(fields: [userWorkoutId], references: [id])
-  userWorkoutId Int         @db.UnsignedInt
-  exercise      Exercise    @relation(fields: [exerciseId], references: [id])
-  exerciseId    Int         @db.UnsignedInt
-  reps          Int
-  sets          Int
-  weight        Float?
-}
+// model ExerciseDetail {
+//   id            Int         @id @default(autoincrement()) @db.UnsignedInt
+//   userWorkout   UserWorkout @relation(fields: [userWorkoutId], references: [id])
+//   userWorkoutId Int         @db.UnsignedInt
+//   exercise      Exercise    @relation(fields: [exerciseId], references: [id])
+//   exerciseId    Int         @db.UnsignedInt
+//   reps          Int
+//   sets          Int
+//   weight        Float?
+// }
