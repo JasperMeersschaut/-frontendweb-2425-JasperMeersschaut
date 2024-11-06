@@ -13,9 +13,9 @@ import type {
 import type { IdParams } from '../types/common'; 
 
 const getAllUsers = async (ctx: KoaContext<GetAllUsersResponse>) => {
-  const exercise = await userService.getAll();
+  const user = await userService.getAll();
   ctx.body = {
-    items: exercise,
+    items: user,
   }; 
 };
 
@@ -25,9 +25,9 @@ const getUserById = async (ctx: KoaContext<GetUserByIdResponse, IdParams>) => {
     ctx.status = 400;
     return;
   }
-  const exercise = await userService.getById(id);
-  if (exercise) {
-    ctx.body = exercise;
+  const user = await userService.getById(id);
+  if (user) {
+    ctx.body = user;
   } else {
     ctx.status = 404;;
   }
