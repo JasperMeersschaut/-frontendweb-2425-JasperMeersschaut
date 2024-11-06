@@ -119,7 +119,6 @@ async function main() {
       data: {
         type: 'Strength',
         duration: 60,
-        equipment: 'Barbell',
         muscleFocus: 'Full Body',
       },
     });
@@ -129,7 +128,6 @@ async function main() {
       data: {
         type: 'Hypertrophy',
         duration: 45,
-        equipment: 'Dumbbells',
         muscleFocus: 'Upper Body',
       },
     });

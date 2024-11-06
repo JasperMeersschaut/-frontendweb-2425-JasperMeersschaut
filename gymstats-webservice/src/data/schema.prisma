@@ -24,7 +24,6 @@ model Workout {
   id          Int    @id @default(autoincrement()) @db.UnsignedInt
   type        String
   duration    Int
-  equipment   String
   muscleFocus String
 
   exerciseWorkouts Exercise_Workout[]

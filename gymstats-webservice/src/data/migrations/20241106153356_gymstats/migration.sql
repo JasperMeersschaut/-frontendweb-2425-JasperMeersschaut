@@ -18,7 +18,6 @@ CREATE TABLE `Workout` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `type` VARCHAR(191) NOT NULL,
     `duration` INTEGER NOT NULL,
-    `equipment` VARCHAR(191) NOT NULL,
     `muscleFocus` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
