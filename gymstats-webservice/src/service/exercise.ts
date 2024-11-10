@@ -14,6 +14,16 @@ export const getAll = async () => {
   });
 };
 
+export const getAllMuscleGroups = async () => {
+  const muscleGroups = await prisma.exercise.findMany({
+    distinct: ['muscleGroup'],
+    select: {
+      muscleGroup: true,
+    },
+  });
+  return muscleGroups.map((group) => group.muscleGroup);
+};
+
 export const getById = async (id: number) => {
   return prisma.exercise.findUnique({
     where: {

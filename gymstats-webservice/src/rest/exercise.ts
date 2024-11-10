@@ -48,6 +48,10 @@ export const deleteExerciseById = async (ctx: KoaContext<void, IdParams>) => {
   await exerciseService.deleteById(Number(ctx.params.id));
   ctx.status = 204;
 };
+const getAllMuscleGroups = async (ctx: KoaContext) => {
+  const muscleGroups = await exerciseService.getAllMuscleGroups();
+  ctx.body = { items: muscleGroups };
+};
 
 export default (parent: KoaRouter) => {
   const router = new Router<GymStatsAppState, GymStatsAppContext>({
@@ -55,6 +59,7 @@ export default (parent: KoaRouter) => {
   });
 
   router.get('/', getAllExercises);
+  router.get('/muscle-groups', getAllMuscleGroups);
   router.post('/', createExercise);
   router.get('/:id', getExerciseById);
   router.put('/:id', updateExerciseById);

@@ -6,6 +6,37 @@
     z-index: 99;
     background-color: gray;
   }
-  html{
-    padding: 25px;;
-  }
+html{
+  padding: 25px;
+}
+
+.btn-check:checked + .btn {
+  background-color: #007bff;
+  border-color: #007bff; 
+  color: white;
+}
+
+.btn-check:not(:checked) + .btn {
+  background-color: #d5d8da; 
+  border-color: #d5d8da;
+  color: black;
+}
+
+/* Stijlen voor de exerciseCards */
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: contain;
+}
+
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
