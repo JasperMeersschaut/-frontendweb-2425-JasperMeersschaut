@@ -12,7 +12,7 @@ export default function Profile() {
     <div className="container text-center mt-5">
       <div className="profile-picture">
         <img
-          src={`../../../public/images/${user.userId}.jpg`}
+          src={`http://localhost:9000/images/profilePictures/${user.userId}.jpg`}
           alt="Profile Picture"
           className="rounded-circle"
           width="150"

@@ -1,4 +1,5 @@
 import Koa from 'koa';
+import serve from 'koa-static';
 import bodyParser from 'koa-bodyparser'; 
 import { getLogger } from './core/logging'; 
 import installRest from './rest';
@@ -12,12 +13,11 @@ const CORS_MAX_AGE = config.get<number>('cors.maxAge');
 
 async function main(): Promise<void> {
   const app = new Koa<GymStatsAppState, GymStatsAppContext>();
-
   app.use(
     koaCors({
       origin: (ctx) => {
         if (CORS_ORIGINS.indexOf(ctx.request.header.origin!) !== -1) {
-          return ctx.request.header.origin!;
+          return ctx.request.header.origin!; 
         }
         return CORS_ORIGINS[0] || '';
       },
@@ -25,8 +25,10 @@ async function main(): Promise<void> {
       maxAge: CORS_MAX_AGE,
     }),
   );
-
+  
   app.use(bodyParser());
+
+  app.use(serve('public'));
 
   await initializeData(); 
 
