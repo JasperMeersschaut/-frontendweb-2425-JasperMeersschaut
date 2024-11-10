@@ -40,3 +40,17 @@ html{
   flex-direction: column;
   justify-content: space-between;
 }
+.exercise-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.exercise-img {
+  width: 100px; 
+  height: 100px;
+  object-fit: contain;
+  border: 1px solid black;
+}
