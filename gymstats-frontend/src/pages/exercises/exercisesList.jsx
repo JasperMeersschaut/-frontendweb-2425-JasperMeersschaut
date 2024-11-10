@@ -17,6 +17,7 @@ export default function ExercisesList() {
     ? exercises.filter((exercise) => exercise.muscleGroup === selectedMuscleGroup)
     : exercises;
 
+  const sortedExercises = filteredExercises.sort((a, b) => a.type.localeCompare(b.type));
   return (
     <div className="container mt-5">
       <h1>Exercises</h1>
@@ -54,7 +55,7 @@ export default function ExercisesList() {
         </div>
       </div>
       <div className="row">
-        {filteredExercises.map((exercise) => (
+        {sortedExercises.map((exercise) => (
           <ExerciseCard key={exercise.id} exercise={exercise} />
         ))}
       </div>
