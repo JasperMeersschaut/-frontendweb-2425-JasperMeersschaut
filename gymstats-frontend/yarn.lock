@@ -1777,6 +1777,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-icons: "npm:^5.3.0"
+    react-lorem-ipsum: "npm:^1.4.10"
     react-router: "npm:~6.26.0"
     react-router-dom: "npm:^6.27.0"
     swr: "npm:^2.2.5"
@@ -2975,6 +2976,13 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 10c0/33977da7a5f1a287936a0c85639fec6ca74f4f15ef1e59a6bc20338fc73dc69555381e211f7a3529b8150a1f71e4225525b41b60b52965bda53ce7d47377ada1
+  languageName: node
+  linkType: hard
+
+"react-lorem-ipsum@npm:^1.4.10":
+  version: 1.4.10
+  resolution: "react-lorem-ipsum@npm:1.4.10"
+  checksum: 10c0/b1da8a87be12ada39fa770ee0c7f2c9610dc89587ded5599cb758fb4793dade7142ecea5e4aaef484a8a4afe83bcaa9d757bfaef80b0866f5909a59aab4f2140
   languageName: node
   linkType: hard
 

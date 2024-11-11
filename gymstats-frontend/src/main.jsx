@@ -7,6 +7,7 @@ import Profile from './pages/profile/Profile.jsx';
 import NotFound from './pages/NotFound.jsx';
 import WorkoutList from './pages/workouts/WorkoutList.jsx';
 import ExercisesList from './pages/exercises/exercisesList.jsx';
+import ExercisesLarge from './pages/exercises/exerciseLarge.jsx';
 import Layout from './components/Layout.jsx';
 import { AuthProvider } from './contexts/Auth.context.jsx';
 
@@ -17,7 +18,8 @@ const router = createBrowserRouter([{
     element: <App />,
   },
   { path: 'workouts', element: <WorkoutList /> }, 
-  { path: 'exercises', element: <ExercisesList /> }, 
+  { path: 'exercises', element: <ExercisesList />} , 
+  { path: 'exercises/:id', element: <ExercisesLarge />},
   { path: 'profile', element: <Profile /> }, 
   { path: '*', element: <NotFound /> } ],
 },
