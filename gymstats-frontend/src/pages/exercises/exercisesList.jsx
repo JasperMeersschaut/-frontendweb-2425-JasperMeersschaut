@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import { getAll } from '../../api';
 import ExerciseCard from '../../components/exercises/ExerciseCard.jsx';
 
@@ -7,6 +7,33 @@ export default function ExercisesList() {
   const { data: exercises, error: exercisesError } = useSWR('exercises', getAll);
   const {data:muscleGroups, error: muscleGroupsError} = useSWR('exercises/muscle-groups',getAll);
   const [selectedMuscleGroup, setSelectedMuscleGroup] = useState('');
+  
+  useEffect(() => {
+    const muscleGroupFilter = sessionStorage.getItem('muscleGroupFilter');
+    if (muscleGroupFilter) {
+      setSelectedMuscleGroup(muscleGroupFilter);
+    }
+  }, []); //Als muscleGroupFilter in de sessionstorage niet leeg is zet hij de filter op de filter in musclestorage
+  
+  useEffect(() => {
+    sessionStorage.setItem('muscleGroupFilter', selectedMuscleGroup);
+  }, [selectedMuscleGroup]);
+
+  useEffect(() => {
+    const scrollPosition = sessionStorage.getItem('scrollPosition');
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition, 10));
+    }
+
+    const handleScroll = () => {
+      sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   if (exercisesError) return <div>Failed to load exercises</div>;
   if(muscleGroupsError) return <div>Failed to load muscle groups</div>;
