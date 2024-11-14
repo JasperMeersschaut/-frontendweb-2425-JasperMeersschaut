@@ -1,5 +1,7 @@
 import { prisma } from '../data';
 import type { User, UserCreateInput, UserUpdateInput } from '../types/user';
+import ServiceError from '../core/serviceError';
+import handleDBError from './_handleDBError';
 
 const USER_SELECT = {
   id: true,
@@ -18,13 +20,14 @@ export const getAll = async () => {
   });
 };
 
-export const getById = async (id: number) => {
-  return prisma.user.findUnique({
-    where: {
-      id,
-    }, 
-    select: USER_SELECT,
-  });
+export const getById = async (id: number): Promise<User> => {
+  const user = await prisma.user.findUnique({ where: { id },select:USER_SELECT });
+
+  if (!user) {
+    throw ServiceError.notFound('No user with this id exists');
+  }
+
+  return user;
 };
 
 export const create = async (user: UserCreateInput): Promise<User> => {
@@ -32,23 +35,22 @@ export const create = async (user: UserCreateInput): Promise<User> => {
     data: user,
   });
 };
- 
-export const updateById = async (
-  id: number,
-  changes: UserUpdateInput,
-): Promise<User> => {
-  return prisma.user.update({
-    where: {
-      id,
-    },
-    data: changes,
-  });
+export const updateById = async (id: number, changes: UserUpdateInput) => {
+  try {
+    const user = await prisma.user.update({
+      where: { id },
+      data: changes,
+    });
+    return user;
+  } catch (error) {
+    throw handleDBError(error);
+  }
 };
 
 export const deleteById = async (id: number): Promise<void> => {
-  await prisma.user.delete({
-    where: {
-      id,
-    },
-  });
+  try {
+    await prisma.user.delete({ where: { id } });
+  } catch (error) {
+    throw handleDBError(error);
+  }
 };
