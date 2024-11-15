@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 export default function WorkoutCard({ workout }) {
   
   const shuffleArray = (array) => {
@@ -13,22 +14,25 @@ export default function WorkoutCard({ workout }) {
   return (
     <div className="col-md-4 mb-4">
       <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">{workout.type}</h5>
-          <p className="card-text">Duration: {workout.duration} minutes</p>
-          <p className="card-text">Muscle Focus: {workout.muscleFocus}</p>
-          <div className="exercise-images">
-            {shuffledExercises.map((exercise) => (
-              <img
-                key={exercise.id}
-                src={`http://localhost:9000/images/exercises/${exercise.id}.jpg`}
-                className="exercise-img"
-                alt={exercise.type}
-                onError={(e) => (e.target.src = 'http://localhost:9000/images/exercises/default.jpg')}
-              />
-            ))}
-          </div>
-        </div>
+        <Link to={`/workout/${workout.id}` } className="text-decoration-none text-black">
+          <div className="card-body">
+            <h5 className="card-title">{workout.type}</h5>
+            <p className="card-text">Duration: {workout.duration} minutes</p>
+            <p className="card-text">Muscle Focus: {workout.muscleFocus}</p>
+            <div className="exercise-images">
+              {shuffledExercises.map((exercise) => (
+                <img
+                  key={exercise.id}
+                  src={`http://localhost:9000/images/exercises/${exercise.id}.jpg`}
+                  className="exercise-img"
+                  alt={exercise.type}
+                  onError={(e) => (e.target.src = 'http://localhost:9000/images/exercises/default.jpg')}
+                />
+              ))}
+            </div>
+         
+          </div> 
+        </Link>
       </div>
     </div>
   );
