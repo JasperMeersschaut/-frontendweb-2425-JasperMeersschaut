@@ -1,4 +1,4 @@
-import { prisma } from '../data';
+import { prisma } from '../data'; //TODO: nachecken of alles klopt
 import type { User, UserCreateInput, UserUpdateInput } from '../types/user';
 import ServiceError from '../core/serviceError';
 import handleDBError from './_handleDBError';

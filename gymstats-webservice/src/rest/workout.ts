@@ -2,6 +2,8 @@ import Router from '@koa/router';
 import * as workoutService from '../service/workout';
 import type { GymStatsAppContext, GymStatsAppState } from '../types/koa';
 import type { KoaContext, KoaRouter } from '../types/koa';
+import Joi from 'joi';
+import validate from '../core/validation';
 import type {
   CreateWorkoutRequest,
   CreateWorkoutResponse,
@@ -12,41 +14,66 @@ import type {
 } from '../types/workout';
 import type { IdParams } from '../types/common'; 
 
-const getAllUsers = async (ctx: KoaContext<GetAllWorkoutsResponse>) => {
+//getAll
+const getAllWorkouts = async (ctx: KoaContext<GetAllWorkoutsResponse>) => {
   const workout = await workoutService.getAll();
-  ctx.body = {
-    items: workout,
-  }; 
+  ctx.body = {    items: workout  }; 
 };
+getAllWorkouts.validationScheme=null;
 
-const getUserById = async (ctx: KoaContext<GetWorkoutByIdResponse, IdParams>) => {
+//getById
+const GetWorkoutById = async (ctx: KoaContext<GetWorkoutByIdResponse, IdParams>) => {
   const id = Number(ctx.params.id);
-  if (isNaN(id)) {
-    ctx.status = 400;
-    return;
-  }
-  const workout = await workoutService.getById(id);
-  if (workout) {
-    ctx.body = workout;
+  const exercise = await workoutService.getById(id);
+  if (exercise) {
+    ctx.body = exercise;
   } else {
-    ctx.status = 404;;
+    ctx.status = 404;
   }
 };
+GetWorkoutById.validationScheme = {
+  params: {
+    id: Joi.number().integer().positive(),
+  },
+};
 
-export const createUser = async (ctx: KoaContext<CreateWorkoutResponse, void, CreateWorkoutRequest>) => {
+//createWorkout
+export const creatWorkout = async (ctx: KoaContext<CreateWorkoutResponse, void, CreateWorkoutRequest>) => {
   const workout = await workoutService.create(ctx.request.body);
   ctx.status = 201;
   ctx.body = workout;
 };
+creatWorkout.validationScheme={
+  body:{
+    type: Joi.string().min(1).max(50).required(),
+    duration: Joi.number().integer().positive().required(),
+    muscleFocus: Joi.string().min(1).max(50).required(),
+  },
+};
 
-export const updateUserById = async (ctx: KoaContext<UpdateWorkoutResponse, IdParams, UpdateWorkoutRequest>) => {
+//updateWorkoutById
+export const updateWorkoutById = async (ctx: KoaContext<UpdateWorkoutResponse, IdParams, UpdateWorkoutRequest>) => {
   const user = await workoutService.updateById((Number(ctx.params.id)), ctx.request.body);
   ctx.body = user;
 };
+updateWorkoutById.validationScheme = {
+  params: {
+    id: Joi.number().integer().positive().required(),
+  },
+  body: {
+    type: Joi.string().min(1).max(50).required(),
+    muscleGroup: Joi.string().min(1).max(50).required(),
+  },
+};
 
-export const deleteUserById = async (ctx: KoaContext<void, IdParams>) => {
+export const deleteWorkoutById = async (ctx: KoaContext<void, IdParams>) => {
   await workoutService.deleteById(Number(ctx.params.id));
   ctx.status = 204;
+};
+deleteWorkoutById.validationScheme = {
+  params: {
+    id: Joi.number().integer().positive(),
+  },
 };
 
 export default (parent: KoaRouter) => {
@@ -54,11 +81,11 @@ export default (parent: KoaRouter) => {
     prefix: '/workouts',
   });
 
-  router.get('/', getAllUsers);
-  router.post('/', createUser);
-  router.get('/:id', getUserById);
-  router.put('/:id', updateUserById);
-  router.delete('/:id', deleteUserById);
+  router.get('/', validate(getAllWorkouts.validationScheme), getAllWorkouts);
+  router.post('/', validate(creatWorkout.validationScheme), creatWorkout);
+  router.get('/:id', validate(GetWorkoutById.validationScheme), GetWorkoutById);
+  router.put('/:id', validate(updateWorkoutById.validationScheme), updateWorkoutById);
+  router.delete('/:id', validate(deleteWorkoutById.validationScheme), deleteWorkoutById);
 
   parent.use(router.routes()).use(router.allowedMethods());
 };
