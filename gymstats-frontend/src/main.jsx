@@ -9,11 +9,12 @@ import WorkoutList from './pages/workouts/WorkoutList.jsx';
 import ExercisesList from './pages/exercises/exercisesList.jsx';
 import ExercisesLarge from './pages/exercises/exerciseLarge.jsx';
 import WorkoutLarge from './pages/workouts/WorkoutLarge.jsx';
+import AddExercise from './pages/exercises/addExercise.jsx';
 import Layout from './components/Layout.jsx';
 import { AuthProvider } from './contexts/Auth.context.jsx';
 
 const router = createBrowserRouter([{
-  element: <Layout />,
+  element: <Layout />, 
   children: [ {
     path: '/',
     element: <App />,
@@ -21,11 +22,11 @@ const router = createBrowserRouter([{
   { path: 'workouts', element: <WorkoutList /> }, 
   { path: 'exercises', element: <ExercisesList />} , 
   { path: 'exercises/:id', element: <ExercisesLarge />},
+  {path: 'exercises/add', element: <AddExercise />},
   {path: 'workout/:id', element: <WorkoutLarge />},
   { path: 'profile', element: <Profile /> }, 
   { path: '*', element: <NotFound /> } ],
 },
- 
 ]);
 
 createRoot(document.getElementById('root')).render(

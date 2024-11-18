@@ -2,12 +2,13 @@ import useSWR from 'swr';
 import { useState ,useEffect} from 'react';
 import { getAll } from '../../api';
 import ExerciseCard from '../../components/exercises/ExerciseCard.jsx';
+import { Link } from 'react-router-dom';
 
 export default function ExercisesList() {
   const { data: exercises, error: exercisesError } = useSWR('exercises', getAll);
   const {data:muscleGroups, error: muscleGroupsError} = useSWR('exercises/muscle-groups',getAll);
   const [selectedMuscleGroup, setSelectedMuscleGroup] = useState('');
-  
+
   useEffect(() => {
     const muscleGroupFilter = sessionStorage.getItem('muscleGroupFilter');
     if (muscleGroupFilter) {
@@ -47,7 +48,17 @@ export default function ExercisesList() {
   const sortedExercises = filteredExercises.sort((a, b) => a.type.localeCompare(b.type));
   return (
     <div className="container mt-5">
-      <h1>Exercises</h1>
+      <div className="row mb-4">
+        <div className="col-4 d-flex justify-content-start">
+          <Link to="/exercises/add" className="btn btn-primary">
+            Create New Exercise
+          </Link>
+        </div>
+        <div className="col-4 d-flex justify-content-center">
+          <h1 className="text-center">Exercises</h1>
+        </div>
+        <div className="col-4"></div>
+      </div>
       <div className="mb-4">
         <h5>Filter by Muscle Group:</h5>
         {muscleGroups.map((group) => (
@@ -88,4 +99,4 @@ export default function ExercisesList() {
       </div>
     </div>
   );
-}
+};
