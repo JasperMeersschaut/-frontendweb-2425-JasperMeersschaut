@@ -1,37 +1,35 @@
 // src/components/Navbar.jsx
 import { NavLink } from 'react-router-dom';
-// import { useContext } from 'react';
-// import { IoMoonSharp,IoSunny } from 'react-icons/io5';
 import { CgProfile } from 'react-icons/cg';
 
 export default function Navbar() {
   return (
-    <nav className={'navbar sticky-top mb-4 navbar-light bg-light text-bg-light'}>
-      <div className='container-fluid flex-column flex-sm-row align-items-start align-items-sm-center'>
-        <div className='nav-item my-2 mx-sm-3 my-sm-0'>
-          <NavLink className='nav-link' to='/'>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-100 text-gray-800">
+      <div className="container mx-auto flex flex-col sm:flex-row items-start sm:items-center p-4">
+        <div className="my-2 sm:my-0 sm:mx-3">
+          <NavLink className="text-lg font-medium" to="/">
             Home
           </NavLink>
         </div>
-        <div className='nav-item my-2 mx-sm-3 my-sm-0'>
-          <NavLink className='nav-link' to='/workouts'>
+        <div className="my-2 sm:my-0 sm:mx-3">
+          <NavLink className="text-lg font-medium" to="/workouts">
             Workouts
           </NavLink>
         </div>
-        <div className='nav-item my-2 mx-sm-3 my-sm-0'>
-          <NavLink className='nav-link' to='/exercises'>
+        <div className="my-2 sm:my-0 sm:mx-3">
+          <NavLink className="text-lg font-medium" to="/exercises">
             Exercises
           </NavLink>
         </div>
-        <div className='nav-item my-2 mx-sm-3 my-sm-0'>
-          <NavLink className='nav-link' to='/profile'>
+        <div className="my-2 sm:my-0 sm:mx-3">
+          <NavLink className="text-lg font-medium" to="/profile">
             Profile
           </NavLink>
         </div>
-        <div className='flex-grow-1'></div>
-        <button className='btn btn-secondary'></button>
-        <NavLink className='btn' to='/profile'> 
-          <CgProfile />
+        <div className="flex-grow"></div>
+        <button className="bg-gray-200 text-gray-800 p-2 rounded-md">Button</button>
+        <NavLink className="ml-4" to="/profile">
+          <CgProfile className="text-2xl" />
         </NavLink>
       </div>
     </nav>
