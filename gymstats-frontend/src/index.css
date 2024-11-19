@@ -2,51 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html{
+html {
   padding: 50px;
-}
-
-.btn-check:checked + .btn {
-  background-color: #007bff;
-  border-color: #007bff; 
-  color: white;
-}
-
-.btn-check:not(:checked) + .btn {
-  background-color: #d5d8da; 
-  border-color: #d5d8da;
-  color: black;
-}
-
-/* Stijlen voor de exerciseCards */
-.card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-img-top {
-  height: 200px;
-  object-fit: contain;
-}
-
-.card-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.exercise-images {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
-}
-
-.exercise-img {
-  width: 100px; 
-  height: 100px;
-  object-fit: contain;
-  border: 1px solid black;
+  overflow-y: scroll;
 }
