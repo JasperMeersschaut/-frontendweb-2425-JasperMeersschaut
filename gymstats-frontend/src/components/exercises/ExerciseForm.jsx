@@ -1,7 +1,5 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
-import LabelInput from '../LabelInput.jsx';
-import SelectList from '../SelectList.jsx';
 
 const EMPTY_EXERCISE = {
   id: undefined,
@@ -48,21 +46,45 @@ export default function ExerciseForm({ muscleGroups = [], exercise = EMPTY_EXERC
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className='mb-5'>
-        <LabelInput
-          label='Type'
-          name='type'
-          type='text'
-          validationRules={validationRules.type}
-          data-cy='type_input'
-        />
-        <SelectList
-          label='Muscle Group'
-          name='muscleGroup'
-          placeholder='-- Select a muscle group --'
-          items={muscleGroups}
-          validationRules={validationRules.muscleGroup}
-          data-cy='muscle_group_input'
-        />
+        <div className='mb-3'>
+          <label htmlFor='type' className='form-label'>
+            Type
+          </label>
+          <input
+            {...methods.register('type', validationRules.type)}
+            id='type'
+            name='type'
+            type='text'
+            className='form-control'
+            placeholder='Type'
+            required
+          />
+          {methods.formState.errors.type && 
+          <p className="form-text text-danger">{methods.formState.errors.type.message}</p>}
+        </div>
+        <div className='mb-3'>
+          <label htmlFor='muscleGroup' className='form-label'>
+            Muscle Group
+          </label>
+          <select
+            {...methods.register('muscleGroup', validationRules.muscleGroup)}
+            id='muscleGroup'
+            name='muscleGroup'
+            className='form-select'
+            required
+          >
+            <option value='' disabled>
+              -- Select a Muscle Group --
+            </option>
+            {muscleGroups.map((muscleGroup, index) => (
+              <option key={index} value={muscleGroup}>
+                {muscleGroup}
+              </option>
+            ))}
+          </select>
+          {methods.formState.errors.muscleGroup && 
+          <p className="form-text text-danger">{methods.formState.errors.muscleGroup.message}</p>}
+        </div>
         <div className='clearfix'>
           <div className='btn-group float-end'>
             <button

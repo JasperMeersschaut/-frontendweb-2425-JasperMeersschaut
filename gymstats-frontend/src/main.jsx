@@ -9,7 +9,7 @@ import WorkoutList from './pages/workouts/WorkoutList.jsx';
 import ExercisesList from './pages/exercises/exercisesList.jsx';
 import ExercisesLarge from './pages/exercises/exerciseLarge.jsx';
 import WorkoutLarge from './pages/workouts/WorkoutLarge.jsx';
-import AddExercise from './pages/exercises/addExercise.jsx';
+import AddOrEditExercise from './pages/exercises/AddOrEditExercise.jsx';
 import Layout from './components/Layout.jsx';
 import { AuthProvider } from './contexts/Auth.context.jsx';
 
@@ -22,7 +22,8 @@ const router = createBrowserRouter([{
   { path: 'workouts', element: <WorkoutList /> }, 
   { path: 'exercises', element: <ExercisesList />} , 
   { path: 'exercises/:id', element: <ExercisesLarge />},
-  {path: 'exercises/add', element: <AddExercise />},
+  { path: 'exercises/add',    element: <AddOrEditExercise />},
+  { path: 'exercises/edit/:id',    element: <AddOrEditExercise />},
   {path: 'workout/:id', element: <WorkoutLarge />},
   { path: 'profile', element: <Profile /> }, 
   { path: '*', element: <NotFound /> } ],

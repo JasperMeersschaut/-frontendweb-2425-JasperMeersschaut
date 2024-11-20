@@ -2973,13 +2973,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-use-form@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "react-hook-use-form@npm:1.2.0"
-  checksum: 10c0/d3780eea93a914ce350246ef1536762cea79f77cabd401a5135cd54816925d45fd3102cfa270210f154a4461c2b004f6ac2bb8bd564cd63682653d976f839a9b
-  languageName: node
-  linkType: hard
-
 "react-icons@npm:^5.3.0":
   version: 5.3.0
   resolution: "react-icons@npm:5.3.0"
