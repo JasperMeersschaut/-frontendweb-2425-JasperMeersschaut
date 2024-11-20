@@ -1,17 +1,28 @@
 import { createContext, useState } from 'react';
+import useSWR from 'swr';
+import { getById } from '../api/index.js';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    userId: 1,
-    name: 'Jasper Meersschaut',
-    email: 'jasper.meersschaut@example.com',
-    sex: 'male',
-    birthdate: '2005-01-16',
-    length: 177,
-    weight: 73,
-  });
+  const { data: opgevraagdeUser, error } = useSWR('users/1', getById);
+
+  const [user, setUser] = useState(null);
+
+  if (error) return <div>Failed to load user</div>;
+  if (!opgevraagdeUser) return <div>Loading...</div>;
+
+  if (user === null) {
+    setUser({
+      userId: opgevraagdeUser.id,
+      name: opgevraagdeUser.name,
+      email: opgevraagdeUser.email,
+      sex: opgevraagdeUser.sec,
+      birthdate: opgevraagdeUser.birthdate,
+      length: opgevraagdeUser.length,
+      weight: opgevraagdeUser.weight,
+    });
+  }
 
   const login = (userData) => {
     setUser(userData);
