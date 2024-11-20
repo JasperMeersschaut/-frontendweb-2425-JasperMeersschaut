@@ -34,3 +34,17 @@ export async function getBmi(kg, cm) {
   });
   return data;
 }
+
+
+export async function save(url, { arg: { id, ...data } }) {
+  await axios({
+    method: id ? 'PUT' : 'POST',
+    url: `${baseUrl}/${url}/${id ?? ''}`,
+    data,
+  });
+}
+
+export const updateById = async (url, { arg: body }) => {
+  const { id, ...values } = body;
+  await axios.put(`${baseUrl}/${url}/${id}`, values);
+};

@@ -2,12 +2,13 @@ import useSWR from 'swr';
 import { useState, useEffect } from 'react';
 import { getAll } from '../../api';
 import ExerciseCard from '../../components/exercises/ExerciseCard.jsx';
+import { Link } from 'react-router-dom';
 
 export default function ExercisesList() {
   const { data: exercises, error: exercisesError } = useSWR('exercises', getAll);
   const { data: muscleGroups, error: muscleGroupsError } = useSWR('exercises/muscle-groups', getAll);
   const [selectedMuscleGroup, setSelectedMuscleGroup] = useState('');
-
+  
   useEffect(() => {
     const muscleGroupFilter = sessionStorage.getItem('muscleGroupFilter');
     if (muscleGroupFilter) {
@@ -48,6 +49,9 @@ export default function ExercisesList() {
 
   return (
     <div className='container mx-auto' >
+      <Link to="/exercises/add" className="btn btn-primary">
+        Create New Exercise
+      </Link>
       <h1 className="text-3xl font-bold mb-4 mt-3">Exercises</h1>
       <div className="mb-4">
         <h5 className="text-xl font-semibold mb-4">Filter by Muscle Group:</h5>
@@ -99,4 +103,4 @@ export default function ExercisesList() {
       </div>
     </div>
   );
-}
+};
