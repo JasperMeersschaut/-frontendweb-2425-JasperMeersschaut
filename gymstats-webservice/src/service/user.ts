@@ -1,47 +1,43 @@
 import { prisma } from '../data'; //TODO: nachecken of alles klopt
-import type { User, UserCreateInput, UserUpdateInput } from '../types/user';
+import type { User, UserCreateInput, UserUpdateInput,PublicUser } from '../types/user';
 import ServiceError from '../core/serviceError';
 import handleDBError from './_handleDBError';
+import { hashPassword, verifyPassword } from '../core/password';
+import { generateJWT } from '../core/jwt';
 
-const USER_SELECT = {
-  id: true,
-  name: true,
-  lastName: true,
-  email: true,
-  sex: true,
-  birthdate: true,
-  length: true,
-  weight: true,
+const makeExposedUser=({id,name,lastName,email,sex,birthdate,length,weight}:User):PublicUser => {
+  return {id,name,lastName,email,sex,birthdate,length,weight};
 };
 
-export const getAll = async () => {
-  return prisma.user.findMany({
-    select: USER_SELECT,
-  });
+export const getAll = async (): Promise<PublicUser[]> => {
+  const users = await prisma.user.findMany();
+  return users.map(makeExposedUser);
 };
 
-export const getById = async (id: number): Promise<User> => {
-  const user = await prisma.user.findUnique({ where: { id },select:USER_SELECT });
+export const getById = async (id: number): Promise<PublicUser> => {
+  const user = await prisma.user.findUnique({ where: { id } });
 
   if (!user) {
     throw ServiceError.notFound('No user with this id exists');
   }
 
-  return user;
+  return makeExposedUser(user);
 };
 
-export const create = async (user: UserCreateInput): Promise<User> => {
+export const register = async ({name,lastName,email,sex,password,birthdate,length,weight}:UserCreateInput): 
+Promise<PublicUser> => {
+  const passwordHash = await hashPassword(password);
   return prisma.user.create({
-    data: user,
-  });
+    data: {name,lastName,email,sex,birthdate,length,weight,password_hash:passwordHash,roles:['user']}});
 };
-export const updateById = async (id: number, changes: UserUpdateInput) => {
+
+export const updateById = async (id: number, changes: UserUpdateInput): Promise<PublicUser> => {
   try {
     const user = await prisma.user.update({
       where: { id },
       data: changes,
     });
-    return user;
+    return makeExposedUser(user);
   } catch (error) {
     throw handleDBError(error);
   }
@@ -53,4 +49,19 @@ export const deleteById = async (id: number): Promise<void> => {
   } catch (error) {
     throw handleDBError(error);
   }
+};
+
+export const login = async (email: string, password: string): Promise<string> => {
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  if (!user) {
+    throw ServiceError.unauthorized('Invalid email or password');
+  }
+
+  const passwordValid = verifyPassword(password, user.password_hash);
+  if (!passwordValid) {
+    throw ServiceError.unauthorized('Invalid email or password');
+  }
+
+  return await generateJWT(user);
 };

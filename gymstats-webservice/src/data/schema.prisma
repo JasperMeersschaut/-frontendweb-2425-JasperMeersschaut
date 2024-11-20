@@ -8,32 +8,34 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement()) @db.UnsignedInt
-  name      String
-  lastName  String
-  email     String   @unique
-  sex       String
-  birthdate DateTime @db.DateTime(0)
-  length    Int
-  weight    Float
+  id            Int      @id @default(autoincrement()) @db.UnsignedInt
+  name          String
+  lastName      String
+  email         String   @unique(map: "idx_user_email_unique")
+  sex           String
+  birthdate     DateTime @db.DateTime(0)
+  length        Int
+  weight        Float
+  password_hash String   @db.VarChar(255)
+  roles         Json
 
   userWorkouts UserWorkout[]
 }
 
 model Workout {
-  id          Int    @id @default(autoincrement()) @db.UnsignedInt
-  type        String
-  duration    Int
-  muscleFocus String
-  items Exercise[]
-  userWorkouts     UserWorkout[]
+  id           Int           @id @default(autoincrement()) @db.UnsignedInt
+  type         String
+  duration     Int
+  muscleFocus  String
+  items        Exercise[]
+  userWorkouts UserWorkout[]
 }
 
 model Exercise {
-  id          Int    @id @default(autoincrement()) @db.UnsignedInt
+  id          Int       @id @default(autoincrement()) @db.UnsignedInt
   type        String
   muscleGroup String
-  workouts Workout[]
+  workouts    Workout[]
   // ExerciseDetail   ExerciseDetail[]
 }
 

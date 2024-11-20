@@ -43,7 +43,7 @@ getUserById.validationScheme ={
 
 //user creation
 export const createUser = async (ctx: KoaContext<CreateUserResponse, void, CreateUserRequest>) => {
-  const user = await userService.create(ctx.request.body);
+  const user = await userService.register(ctx.request.body);
   ctx.status = 201;
   ctx.body = user;
 };
@@ -56,6 +56,7 @@ createUser.validationScheme={
     birthdate: Joi.date().iso().less('now').required(),
     length: Joi.number().integer().positive().required(),
     weight: Joi.number().positive().required(),
+    password: Joi.string().min(8).required(),
   },
 };
 
@@ -76,6 +77,7 @@ updateUserById.validationScheme = {
     birthdate: Joi.date().iso().less('now').required(),
     length: Joi.number().integer().positive().required(),
     weight: Joi.number().positive().required(),
+    password: Joi.string().min(8).required(),
   },
 };
 

@@ -1,8 +1,11 @@
 import { PrismaClient } from '@prisma/client';
+import { hashPassword } from '../core/password';
+import Role from '../core/roles';
 const prisma = new PrismaClient();
 
 async function main() {
   try {
+    const passwordHash = await hashPassword('12345678');
     console.log('Creating exercises...');
     // Create Exercises
     // arm exercises
@@ -289,6 +292,8 @@ async function main() {
         birthdate: new Date('2005-01-16'),
         length: 177,
         weight: 73,
+        password_hash: passwordHash,
+        roles:JSON.stringify([Role.ADMIN, Role.USER]),
       },
     });
     console.log('Created user: Jasper Meersschaut');
@@ -302,6 +307,8 @@ async function main() {
         birthdate: new Date('1985-05-15'),
         length: 165,
         weight: 60.0,
+        password_hash: passwordHash,
+        roles: JSON.stringify([ Role.USER]),
       },
     });
     console.log('Created user: Marie Dubois');
