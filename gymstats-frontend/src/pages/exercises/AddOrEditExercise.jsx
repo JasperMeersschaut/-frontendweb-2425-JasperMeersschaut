@@ -26,8 +26,8 @@ export default function AddOrEditExercise() {
   } = useSWR('exercises/muscle-groups', getAll);
 
   return (
-    <>
-      <h1>{id ? 'Edit' : 'Add'} exercise</h1>
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4">{id ? 'Edit' : 'Add'} Exercise</h1>
       <AsyncData
         error={exerciseError || muscleGroupsError || saveError}
         loading={exerciseLoading || muscleGroupsLoading}
@@ -38,6 +38,6 @@ export default function AddOrEditExercise() {
           saveExercise={saveExercise}
         />
       </AsyncData>
-    </>
+    </div>
   );
 }

@@ -49,9 +49,11 @@ export default function ExercisesList() {
 
   return (
     <div className='container mx-auto' >
-      <Link to="/exercises/add" className="btn btn-primary">
-        Create New Exercise
-      </Link>
+      <div className='flex justify-end'>
+        <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+          Create New Exercise
+        </Link>
+      </div>
       <h1 className="text-3xl font-bold mb-4 mt-3">Exercises</h1>
       <div className="mb-4">
         <h5 className="text-xl font-semibold mb-4">Filter by Muscle Group:</h5>
