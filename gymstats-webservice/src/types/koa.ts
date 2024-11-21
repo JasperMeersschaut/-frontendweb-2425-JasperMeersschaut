@@ -4,7 +4,7 @@ import type Application from 'koa';
 import type Router from '@koa/router';
 
 export interface GymStatsAppState {
-
+  session:SessionInfo;
 }
 
 export interface GymStatsAppContext<

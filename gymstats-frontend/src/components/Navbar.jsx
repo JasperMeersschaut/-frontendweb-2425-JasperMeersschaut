@@ -1,7 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
+import { useAuth } from '../contexts/auth.js';
+import { Link } from 'react-router-dom';
 // TODO: Add hamburger menu for mobile
 export default function Navbar() {
+  const {isAuthed} = useAuth();
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-gray-100 text-gray-800">
       <div className="mx-auto flex flex-col sm:flex-row items-start sm:items-center p-4">
@@ -25,6 +28,24 @@ export default function Navbar() {
             Profile
           </NavLink>
         </div>
+        {
+          // 👇 2
+          isAuthed ? (
+            // 👇 3
+            <div className='nav-item my-2 mx-sm-3 my-sm-0'>
+              <Link className='nav-link' to='/logout'>
+                Logout
+              </Link>
+            </div>
+          ) : (
+            // 👇 4
+            <div className='nav-item my-2 mx-sm-3 my-sm-0'>
+              <Link className='nav-link' to='/login'>
+                Login
+              </Link>
+            </div>
+          )
+        }
         <div className="flex-grow"></div>
         <button className="bg-gray-200 text-gray-800 p-2 rounded-md">LightMode</button> 
         {/* TODO: Light/Darkmode toggle implementation */}

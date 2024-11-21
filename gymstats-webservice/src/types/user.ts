@@ -53,3 +53,8 @@ export interface LoginRequest {
 export interface LoginResponse {
   token: string;
 }
+
+export interface GetUserRequest{
+  id:number |'me'
+}
+

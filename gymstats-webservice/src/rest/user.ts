@@ -6,13 +6,16 @@ import Joi from 'joi';
 import validate from '../core/validation';
 import type {
   CreateUserRequest,
-  CreateUserResponse,
+  LoginResponse,
   GetUserByIdResponse,
   UpdateUserRequest,
   UpdateUserResponse,
   GetAllUsersResponse,
+  GetUserRequest,
 } from '../types/user';
 import type { IdParams } from '../types/common'; 
+import { requireAuthentication, makeRequireRole } from '../core/auth'; // 👈 2
+import roles from '../core/roles';
 
 //getAll
 const getAllUsers = async (ctx: KoaContext<GetAllUsersResponse>) => {
@@ -22,13 +25,15 @@ const getAllUsers = async (ctx: KoaContext<GetAllUsersResponse>) => {
 getAllUsers.validationScheme = null;
 
 //getbyid
-const getUserById = async (ctx: KoaContext<GetUserByIdResponse, IdParams>) => {
+const getUserById = async (ctx: KoaContext<GetUserByIdResponse, GetUserRequest>) => {
+  const user = await userService.getById(
+    ctx.params.id=='me' ? ctx.state.session.userId : ctx.params.id);
+  
   const id = Number(ctx.params.id);
   if (isNaN(id)) {
     ctx.status = 400;
     return;
   }
-  const user = await userService.getById(id);
   if (user) {
     ctx.body = user;
   } else {
@@ -37,15 +42,15 @@ const getUserById = async (ctx: KoaContext<GetUserByIdResponse, IdParams>) => {
 };
 getUserById.validationScheme ={
   params:{
-    id:Joi.number().integer().positive(),
+    id:Joi.  number().integer().positive(),
   },
 };
 
 //user creation
-export const createUser = async (ctx: KoaContext<CreateUserResponse, void, CreateUserRequest>) => {
-  const user = await userService.register(ctx.request.body);
+export const createUser = async (ctx: KoaContext<LoginResponse, void, CreateUserRequest>) => {
+  const token  = await userService.register(ctx.request.body);
   ctx.status = 201;
-  ctx.body = user;
+  ctx.body = {token};
 };
 createUser.validationScheme={  
   body:{ 
@@ -96,11 +101,13 @@ export default (parent: KoaRouter) => {
     prefix: '/users',
   });
 
-  router.get('/', validate(getAllUsers.validationScheme),getAllUsers);
+  const requireAdmin=makeRequireRole(roles.ADMIN);
+
+  router.get('/', requireAuthentication,validate(getAllUsers.validationScheme),getAllUsers);
   router.post('/', validate(createUser.validationScheme), createUser);
-  router.get('/:id', validate(getUserById.validationScheme),getUserById) ;
-  router.put('/:id',validate(updateUserById.validationScheme), updateUserById);
-  router.delete('/:id', validate(deleteUserById.validationScheme), deleteUserById);
+  router.get('/:id', requireAuthentication, validate(getUserById.validationScheme),getUserById) ;
+  router.put('/:id', requireAuthentication,validate(updateUserById.validationScheme), updateUserById);
+  router.delete('/:id', requireAuthentication, validate(deleteUserById.validationScheme), deleteUserById);
 
   parent.use(router.routes()).use(router.allowedMethods());
 };

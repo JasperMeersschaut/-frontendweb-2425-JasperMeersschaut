@@ -1,39 +1,61 @@
-import { createContext, useState } from 'react';
+import {
+  createContext,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react';
 import useSWR from 'swr';
-import { getById } from '../api/index.js';
+import useSWRMutation from 'swr/mutation';
+import * as api from '../api/index.js';
 
 export const AuthContext = createContext();
+export const JWT_TOKEN_KEY = 'jwtToken';
 
 export const AuthProvider = ({ children }) => {
-  const { data: opgevraagdeUser, error } = useSWR('users/1', getById);
+  const [token, setToken] = useState(localStorage.getItem(JWT_TOKEN_KEY));
 
-  const [user, setUser] = useState(null);
+  const { trigger: doLogin, error: loginError, isMutating: loginLoading } =
+    useSWRMutation('sessions', api.post);
 
-  if (error) return <div>Failed to load user</div>;
-  if (!opgevraagdeUser) return <div>Loading...</div>;
+  const { data: user, error: userError, loading: userLoading } = useSWR(
+    token ? 'users/me' : null,
+    api.get,
+  );
 
-  if (user === null) {
-    setUser({
-      userId: opgevraagdeUser.id,
-      name: opgevraagdeUser.name,
-      email: opgevraagdeUser.email,
-      sex: opgevraagdeUser.sec,
-      birthdate: opgevraagdeUser.birthdate,
-      length: opgevraagdeUser.length,
-      weight: opgevraagdeUser.weight,
-    });
-  }
+  const login = useCallback(
+    async (email, password) => {
+      try {
+        const { token } = await doLogin({ email, password });
+        setToken(token);
+        localStorage.setItem(JWT_TOKEN_KEY, token);
+        return true;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    },
+    [doLogin],
+  );
+  const logout = useCallback(() => {
+    setToken(null);
+    localStorage.removeItem(JWT_TOKEN_KEY);
+  }, []);
 
-  const login = (userData) => {
-    setUser(userData);
-  };
-
-  const logout = () => {
-    setUser(null);
-  };
+  const value = useMemo(
+    () => ({
+      user,
+      error: loginError || userError,
+      loading: loginLoading || userLoading,
+      isAuthed: Boolean(token),
+      ready: !userLoading,
+      login,
+      logout,
+    }),
+    [token, user, loginError, loginLoading, userError, userLoading, login,logout],
+  );
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

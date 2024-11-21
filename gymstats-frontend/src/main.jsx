@@ -12,6 +12,9 @@ import WorkoutLarge from './pages/workouts/WorkoutLarge.jsx';
 import AddOrEditExercise from './pages/exercises/AddOrEditExercise.jsx';
 import Layout from './components/Layout.jsx';
 import { AuthProvider } from './contexts/Auth.context.jsx';
+import Login from './components/login.jsx';
+import PrivateRoute from './components/PrivateRoute.jsx';
+import Logout from './pages/logout.jsx';
 
 const router = createBrowserRouter([{
   element: <Layout />, 
@@ -19,13 +22,20 @@ const router = createBrowserRouter([{
     path: '/',
     element: <App />,
   },
-  { path: 'workouts', element: <WorkoutList /> }, 
+  { path: 'workouts',element:<PrivateRoute/>, 
+    children:[{
+      index:true,
+      element: <WorkoutList />,
+    },
+    ]  }, 
   { path: 'exercises', element: <ExercisesList />} , 
   { path: 'exercises/:id', element: <ExercisesLarge />},
   { path: 'exercises/add',    element: <AddOrEditExercise />},
   { path: 'exercises/edit/:id',    element: <AddOrEditExercise />},
   {path: 'workout/:id', element: <WorkoutLarge />},
   { path: 'profile', element: <Profile /> }, 
+  { path: '/login', element: <Login /> }, 
+  { path: '/logout', element: <Logout /> }, 
   { path: '*', element: <NotFound /> } ],
 },
 ]);
