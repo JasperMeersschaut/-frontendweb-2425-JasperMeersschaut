@@ -76,6 +76,12 @@ deleteWorkoutById.validationScheme = {
   },
 };
 
+const getAllMuscleFocuses = async (ctx: KoaContext) => {
+  const muscleFocuses = await workoutService.getAllMuscleFocuses();
+  ctx.body = { items: muscleFocuses };
+};
+getAllMuscleFocuses.validationScheme = null;
+
 export default (parent: KoaRouter) => {
   const router = new Router<GymStatsAppState, GymStatsAppContext>({
     prefix: '/workouts',
@@ -83,6 +89,7 @@ export default (parent: KoaRouter) => {
 
   router.get('/', validate(getAllWorkouts.validationScheme), getAllWorkouts);
   router.post('/', validate(creatWorkout.validationScheme), creatWorkout);
+  router.get('/muscle-focuses', validate(getAllMuscleFocuses.validationScheme), getAllMuscleFocuses);
   router.get('/:id', validate(GetWorkoutById.validationScheme), GetWorkoutById);
   router.put('/:id', validate(updateWorkoutById.validationScheme), updateWorkoutById);
   router.delete('/:id', validate(deleteWorkoutById.validationScheme), deleteWorkoutById);

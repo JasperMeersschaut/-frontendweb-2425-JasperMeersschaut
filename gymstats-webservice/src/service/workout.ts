@@ -74,3 +74,18 @@ export const deleteById = async (id: number): Promise<void> => {
     throw handleDBError(error);
   }
 };
+
+export const getAllMuscleFocuses = async (): Promise<string[]> => {
+  try {
+    const muscleFocuses = await prisma.workout.findMany({
+      select: {
+        muscleFocus: true,
+      },
+      distinct: ['muscleFocus'],
+    });
+    return muscleFocuses.map((workout) => workout.muscleFocus);
+  } catch (error) {
+    throw handleDBError(error);
+  }
+};
+
