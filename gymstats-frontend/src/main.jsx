@@ -28,12 +28,40 @@ const router = createBrowserRouter([{
       element: <WorkoutList />,
     },
     ]  }, 
-  { path: 'exercises', element: <ExercisesList />} , 
-  { path: 'exercises/:id', element: <ExercisesLarge />},
-  { path: 'exercises/add',    element: <AddOrEditExercise />},
-  { path: 'exercises/edit/:id',    element: <AddOrEditExercise />},
-  {path: 'workout/:id', element: <WorkoutLarge />},
-  { path: 'profile', element: <Profile /> }, 
+  { path: 'exercises', element: <PrivateRoute/>,
+    children:[{
+      index:true,
+      element: <ExercisesList />,
+    },
+    ]},
+  
+  { path: 'exercises/:id', element: <PrivateRoute/>
+    ,children:[{
+      index:true,
+      element: <ExercisesLarge />,
+    }]},
+  { path: 'exercises/add',    element:<PrivateRoute/>
+    ,children:[{
+      index:true,
+      element: <AddOrEditExercise />,
+    }]},
+  { path: 'exercises/edit/:id',    element: <PrivateRoute/>
+    ,children:[{
+      index:true,
+      element: <AddOrEditExercise />,
+    }]},
+
+  {path: 'workout/:id', element:<PrivateRoute/>,
+    children:[{
+      index:true,
+      element: <WorkoutLarge />,
+    }]},
+  { path: 'profile', element: <PrivateRoute/>,
+    children:[{
+      index:true,
+      element: <Profile />,
+    }]}, 
+
   { path: '/login', element: <Login /> }, 
   { path: '/logout', element: <Logout /> }, 
   { path: '*', element: <NotFound /> } ],

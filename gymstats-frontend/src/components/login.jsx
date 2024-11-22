@@ -58,10 +58,13 @@ export default function Login() {
           />
           <div className='clearfix'>
             <div className='flex justify-end'>
-              <button type='submit' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+              <button type='submit' className='bg-blue-500 hover:bg-blue-700 
+              text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
                 Sign in
               </button>
-              <button type='button' className='ml-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={handleCancel}>
+              <button type='button' className='ml-4 bg-gray-200 
+              hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 
+              rounded focus:outline-none focus:shadow-outline' onClick={handleCancel}>
                 Cancel
               </button>
             </div>

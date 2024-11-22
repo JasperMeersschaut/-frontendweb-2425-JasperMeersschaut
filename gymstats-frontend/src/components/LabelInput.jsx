@@ -15,8 +15,8 @@ export default function LabelInput({
   const hasError = name in errors;
 
   return (
-    <div className='mb-3'>
-      <label htmlFor={name} className='form-label'>
+    <div className='mb-4'>
+      <label htmlFor={name} className='block text-gray-700 font-bold mb-2'>
         {label}
       </label>
       <input
@@ -24,11 +24,12 @@ export default function LabelInput({
         id={name}
         type={type}
         disabled={isSubmitting}
-        className='form-control'
+        className='shadow appearance-none border rounded w-full py-2 
+        px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
         {...rest}
       />
       {hasError ? (
-        <div className='form-text text-danger' data-cy='label_input_error'>{errors[name].message}</div>
+        <div className='text-red-500 text-xs italic' data-cy='label_input_error'>{errors[name]?.message}</div>
       ) : null}
     </div>
   );
