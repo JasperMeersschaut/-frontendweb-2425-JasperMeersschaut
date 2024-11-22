@@ -1,20 +1,22 @@
 import useSWR from 'swr';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { getAll } from '../../api';
 import ExerciseCard from '../../components/exercises/ExerciseCard.jsx';
 import { Link } from 'react-router-dom';
+import AsyncData from '../../components/AsyncData.jsx';
 
 export default function ExercisesList() {
-  const { data: exercises, error: exercisesError } = useSWR('exercises', getAll);
-  const { data: muscleGroups, error: muscleGroupsError } = useSWR('exercises/muscle-groups', getAll);
+  const { data: exercises = [], isLoading: exercisesLoading, error: exercisesError } = useSWR('exercises', getAll);
+  const { data: muscleGroups, isLoading: muscleGroupsLoading, error: muscleGroupsError } 
+  = useSWR('exercises/muscle-groups', getAll);
   const [selectedMuscleGroup, setSelectedMuscleGroup] = useState('');
-  
+
   useEffect(() => {
     const muscleGroupFilter = sessionStorage.getItem('muscleGroupFilter');
     if (muscleGroupFilter) {
       setSelectedMuscleGroup(muscleGroupFilter);
     }
-  }, []); //Als muscleGroupFilter in de sessionstorage niet leeg is zet hij de filter op de filter in musclestorage
+  }, []);
 
   useEffect(() => {
     sessionStorage.setItem('muscleGroupFilter', selectedMuscleGroup);
@@ -36,19 +38,29 @@ export default function ExercisesList() {
     };
   }, []);
 
-  if (exercisesError) return <div>Failed to load exercises</div>;
-  if (muscleGroupsError) return <div>Failed to load muscle groups</div>;
-  if (!exercises) return <div>Loading...</div>;
-  if (!muscleGroups) return <div>Loading...</div>;
+  const filteredExercises = useMemo(
+    () =>
+      exercises.filter((t) => {
+        return t.muscleGroup.toLowerCase().includes(selectedMuscleGroup.toLocaleLowerCase());
+      }),
+    [exercises, selectedMuscleGroup],
+  );
 
-  const filteredExercises = selectedMuscleGroup
-    ? exercises.filter((exercise) => exercise.muscleGroup === selectedMuscleGroup)
-    : exercises;
+  const sortedExercises = useMemo(
+    () => filteredExercises.sort((a, b) => a.type.localeCompare(b.type)),
+    [filteredExercises],
+  );
 
-  const sortedExercises = filteredExercises.sort((a, b) => a.type.localeCompare(b.type));
+  const handleMuscleGroupChange = useCallback((e) => {
+    setSelectedMuscleGroup(e.target.value);
+  }, []);
+
+  const handleAllMuscleGroups = useCallback(() => {
+    setSelectedMuscleGroup('');
+  }, []);
 
   return (
-    <div className='container mx-auto' >
+    <div className='container mx-auto'>
       <div className='flex justify-end'>
         <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
           Create New Exercise
@@ -57,52 +69,56 @@ export default function ExercisesList() {
       <h1 className="text-3xl font-bold mb-4 mt-3">Exercises</h1>
       <div className="mb-4">
         <h5 className="text-xl font-semibold mb-4">Filter by Muscle Group:</h5>
-        {muscleGroups.map((group) => (
-          <div key={group} className="inline-block mr-3 mt-4 mb-4">
+        <AsyncData loading={muscleGroupsLoading} error={muscleGroupsError}>
+          {muscleGroups && muscleGroups.map((group) => (
+            <div key={group} className="inline-block mr-3 mt-4 mb-4">
+              <input
+                className="hidden"
+                type="radio"
+                name="muscleGroup"
+                id={`muscleGroup-${group}`}
+                value={group}
+                checked={selectedMuscleGroup === group}
+                onChange={handleMuscleGroupChange}
+              />
+              <label
+                className={`cursor-pointer px-4 py-2 rounded ${
+                  selectedMuscleGroup === group ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
+                }`}
+                htmlFor={`muscleGroup-${group}`}
+              >
+                {group}
+              </label>
+            </div>
+          ))}
+          <div className="inline-block">
             <input
               className="hidden"
               type="radio"
               name="muscleGroup"
-              id={`muscleGroup-${group}`}
-              value={group}
-              checked={selectedMuscleGroup === group}
-              onChange={(e) => setSelectedMuscleGroup(e.target.value)}
+              id="muscleGroup-all"
+              value=""
+              checked={selectedMuscleGroup === ''}
+              onChange={handleAllMuscleGroups}
             />
             <label
               className={`cursor-pointer px-4 py-2 rounded ${
-                selectedMuscleGroup === group ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
+                selectedMuscleGroup === '' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
               }`}
-              htmlFor={`muscleGroup-${group}`}
+              htmlFor="muscleGroup-all"
             >
-              {group}
+              All
             </label>
           </div>
-        ))}
-        <div className="inline-block">
-          <input
-            className="hidden"
-            type="radio"
-            name="muscleGroup"
-            id="muscleGroup-all"
-            value=""
-            checked={selectedMuscleGroup === ''}
-            onChange={() => setSelectedMuscleGroup('')}
-          />
-          <label
-            className={`cursor-pointer px-4 py-2 rounded ${
-              selectedMuscleGroup === '' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
-            }`}
-            htmlFor="muscleGroup-all"
-          >
-            All
-          </label>
-        </div>
+        </AsyncData>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {sortedExercises.map((exercise) => (
-          <ExerciseCard key={exercise.id} exercise={exercise} />
-        ))}
+        <AsyncData loading={exercisesLoading} error={exercisesError}>
+          {sortedExercises.map((exercise) => (
+            <ExerciseCard key={exercise.id} exercise={exercise} />
+          ))}
+        </AsyncData>
       </div>
     </div>
   );
-};
+}
