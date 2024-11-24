@@ -27,22 +27,17 @@ getAllUsers.validationScheme = null;
 //getbyid
 const getUserById = async (ctx: KoaContext<GetUserByIdResponse, GetUserRequest>) => {
   const user = await userService.getById(
-    ctx.params.id=='me' ? ctx.state.session.userId : ctx.params.id);
-  
-  const id = Number(ctx.params.id);
-  if (isNaN(id)) {
-    ctx.status = 400;
-    return;
-  }
-  if (user) {
-    ctx.body = user;
-  } else {
-    ctx.status = 404;;
-  }
+    ctx.params.id === 'me' ? ctx.state.session.userId : ctx.params.id,
+  );
+  ctx.status = 200;
+  ctx.body = user;
 };
-getUserById.validationScheme ={
-  params:{
-    id:Joi.  number().integer().positive(),
+getUserById.validationScheme = {
+  params: {
+    id: Joi.alternatives().try(
+      Joi.number().integer().positive(),
+      Joi.string().valid('me'),
+    ),
   },
 };
 
