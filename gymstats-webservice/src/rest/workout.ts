@@ -78,7 +78,8 @@ deleteWorkoutById.validationScheme = {
 };
 
 const getAllMuscleFocuses = async (ctx: KoaContext) => {
-  const muscleFocuses = await workoutService.getAllMuscleFocuses();
+  const userId = ctx.state.session.userId;
+  const muscleFocuses = await workoutService.getAllMuscleFocuses(userId);
   ctx.body = { items: muscleFocuses };
 };
 getAllMuscleFocuses.validationScheme = null;

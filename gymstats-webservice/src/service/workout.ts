@@ -81,9 +81,15 @@ export const deleteById = async (id: number): Promise<void> => {
   }
 };
 
-export const getAllMuscleFocuses = async (): Promise<string[]> => {
+export const getAllMuscleFocuses = async (userId: number): Promise<string[]> => {
   try {
     const muscleFocuses = await prisma.workout.findMany({
+      where: {
+        OR: [
+          { createdBy: null },
+          { createdBy: userId },
+        ],
+      },
       select: {
         muscleFocus: true,
       },
