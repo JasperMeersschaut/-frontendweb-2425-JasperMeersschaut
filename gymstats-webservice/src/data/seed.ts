@@ -323,6 +323,7 @@ async function main() {
         items: {
           connect: [{ id: 21 }, { id: 21 }, { id: 19 },{id:30},{id:28},{id:4},{id:2}],
         },
+        createdBy:null,
       },
     });
     console.log('Created workout: Push');
@@ -335,6 +336,7 @@ async function main() {
         items: {
           connect: [{ id: 16 }, { id: 14 }, { id: 17 }, { id: 1 }, { id: 6 }],
         },
+        createdBy:1,
       },
     });
     console.log('Created workout: Hypertrophy');

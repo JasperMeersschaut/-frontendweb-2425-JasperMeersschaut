@@ -11,9 +11,15 @@ const WORKOUT_SELECT = {
   items: true,
 };
 
-export const getAll = async (): Promise<Workout[]> => {
+export const getAll = async (userId: number): Promise<Workout[]> => {
   try {
     return await prisma.workout.findMany({
+      where: {
+        OR: [
+          { createdBy: null },
+          { createdBy: userId },
+        ],
+      },
       select: WORKOUT_SELECT,
     });
   } catch (error) {

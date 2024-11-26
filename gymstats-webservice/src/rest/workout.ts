@@ -16,10 +16,11 @@ import type { IdParams } from '../types/common';
 
 //getAll
 const getAllWorkouts = async (ctx: KoaContext<GetAllWorkoutsResponse>) => {
-  const workout = await workoutService.getAll();
-  ctx.body = {    items: workout  }; 
+  const userId = ctx.state.session.userId;
+  const workouts = await workoutService.getAll(userId);
+  ctx.body = { items: workouts };
 };
-getAllWorkouts.validationScheme=null;
+getAllWorkouts.validationScheme = null;
 
 //getById
 const GetWorkoutById = async (ctx: KoaContext<GetWorkoutByIdResponse, IdParams>) => {

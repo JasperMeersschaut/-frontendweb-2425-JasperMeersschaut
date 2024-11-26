@@ -1,20 +1,23 @@
-import type { KoaApplication } from '../types/koa';
-import config from 'config';
+import type Koa from 'koa';
 import koaCors from '@koa/cors';
 import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
+import { checkAndParseSession } from '../service/user';
+import type { GymStatsAppState } from '../types/koa';// Adjust the import path as needed
 import { getLogger } from './logging';
-import ServiceError from './serviceError'; 
+import config from 'config';
+import ServiceError from './serviceError';
 
 const NODE_ENV = config.get<string>('env');
-const CORS_ORIGINS = config.get<string[]>('cors.origins'); 
+const CORS_ORIGINS = config.get<string[]>('cors.origins');
 const CORS_MAX_AGE = config.get<number>('cors.maxAge');
-export default function installMiddlewares(app:KoaApplication) {
+
+export default function installMiddlewares(app: Koa<Koa.DefaultState, GymStatsAppState>) {
   app.use(
     koaCors({
       origin: (ctx) => {
         if (CORS_ORIGINS.indexOf(ctx.request.header.origin!) !== -1) {
-          return ctx.request.header.origin!; 
+          return ctx.request.header.origin!;
         }
         return CORS_ORIGINS[0] || '';
       },
@@ -22,7 +25,7 @@ export default function installMiddlewares(app:KoaApplication) {
       maxAge: CORS_MAX_AGE,
     }),
   );
-      
+
   app.use(async (ctx, next) => {
     getLogger().info(`⏩ ${ctx.method} ${ctx.url}`);
 
@@ -43,12 +46,19 @@ export default function installMiddlewares(app:KoaApplication) {
 
   app.use(bodyParser());
   app.use(serve('public'));
+
+  app.use(async (ctx, next) => {
+    const session = await checkAndParseSession(ctx.headers.authorization);
+    ctx.state.session = session;
+    await next();
+  });
+
   app.use(async (ctx, next) => {
     try {
       await next();
     } catch (error: any) {
-      getLogger().error('Error occured while handling a request', { error });
-  
+      getLogger().error('Error occurred while handling a request', { error });
+
       let statusCode = error.status || 500;
       const errorBody = {
         code: error.code || 'INTERNAL_SERVER_ERROR',
@@ -58,39 +68,39 @@ export default function installMiddlewares(app:KoaApplication) {
         details: error.details,
         stack: NODE_ENV !== 'production' ? error.stack : undefined,
       };
-  
+
       if (error instanceof ServiceError) {
         errorBody.message = error.message;
-  
+
         if (error.isNotFound) {
           statusCode = 404;
         }
-  
+
         if (error.isValidationFailed) {
           statusCode = 400;
         }
-  
+
         if (error.isUnauthorized) {
           statusCode = 401;
         }
-  
+
         if (error.isForbidden) {
           statusCode = 403;
         }
-  
+
         if (error.isConflict) {
           statusCode = 409;
         }
       }
-  
+
       ctx.status = statusCode;
       ctx.body = errorBody;
     }
   });
-  
+
   app.use(async (ctx, next) => {
     await next();
-  
+
     if (ctx.status === 404) {
       ctx.status = 404;
       ctx.body = {

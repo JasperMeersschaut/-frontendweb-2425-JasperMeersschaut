@@ -20,6 +20,7 @@ model User {
   roles         Json
 
   userWorkouts UserWorkout[]
+  workouts     Workout[] @relation("UserWorkouts")
 }
 
 model Workout {
@@ -29,6 +30,8 @@ model Workout {
   muscleFocus  String
   items        Exercise[]
   userWorkouts UserWorkout[]
+  createdBy    Int?          @db.UnsignedInt
+  user         User?         @relation("UserWorkouts", fields: [createdBy], references: [id])
 }
 
 model Exercise {
@@ -36,7 +39,6 @@ model Exercise {
   type        String
   muscleGroup String
   workouts    Workout[]
-  // ExerciseDetail   ExerciseDetail[]
 }
 
 model UserWorkout {
@@ -47,17 +49,4 @@ model UserWorkout {
   workoutId Int      @db.UnsignedInt
   date      DateTime @default(now())
   notes     String?
-
-  // exerciseDetails ExerciseDetail[]
 }
-
-// model ExerciseDetail {
-//   id            Int         @id @default(autoincrement()) @db.UnsignedInt
-//   userWorkout   UserWorkout @relation(fields: [userWorkoutId], references: [id])
-//   userWorkoutId Int         @db.UnsignedInt
-//   exercise      Exercise    @relation(fields: [exerciseId], references: [id])
-//   exerciseId    Int         @db.UnsignedInt
-//   reps          Int
-//   sets          Int
-//   weight        Float?
-// }

@@ -10,6 +10,7 @@ import ExercisesList from './pages/exercises/exercisesList.jsx';
 import ExercisesLarge from './pages/exercises/exerciseLarge.jsx';
 import WorkoutLarge from './pages/workouts/WorkoutLarge.jsx';
 import AddOrEditExercise from './pages/exercises/AddOrEditExercise.jsx';
+import AddOrEditWorkout from './pages/workouts/AddOrEditWorkout.jsx';
 import Layout from './components/Layout.jsx';
 import { AuthProvider } from './contexts/Auth.context.jsx';
 import Login from './components/login.jsx';
@@ -55,6 +56,16 @@ const router = createBrowserRouter([{
     children:[{
       index:true,
       element: <WorkoutLarge />,
+    }]},
+  { path: 'workouts/add',    element:<PrivateRoute/>
+    ,children:[{
+      index:true,
+      element: <AddOrEditWorkout />,
+    }]},
+  { path: 'workouts/edit/:id',    element: <PrivateRoute/>
+    ,children:[{
+      index:true,
+      element: <AddOrEditWorkout />,
     }]},
   { path: 'profile', element: <PrivateRoute/>,
     children:[{

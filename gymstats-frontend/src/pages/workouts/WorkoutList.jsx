@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { getAll } from '../../api';
 import WorkoutCard from '../../components/workouts/WorkoutCard.jsx';
 import AsyncData from '../../components/AsyncData.jsx';
+import {Link} from 'react-router-dom';
 
 export default function WorkoutList() {
   const { data: workouts = [], isLoading: workoutsLoading, error: workoutError } = useSWR('workouts', getAll);
@@ -57,6 +58,11 @@ export default function WorkoutList() {
 
   return (
     <div className='container mx-auto'>
+      <div className='flex justify-end'>
+        <Link to="/workouts/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+          Create New Workout
+        </Link>
+      </div>
       <h1 className="text-3xl font-bold mb-4 mt-3 text-center">Workouts</h1>
       <div className="mb-4 flex justify-center">
         <div className="flex flex-col space-y-4 items-center">
