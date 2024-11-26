@@ -47,7 +47,12 @@ export const getById = async (id: number): Promise<Workout> => {
 export const create = async (workout: WorkoutCreateInput): Promise<Workout> => {
   try {
     return await prisma.workout.create({
-      data: workout,
+      data: {
+        ...workout,
+        items: {
+          connect: workout.items.map((item) => ({ id: item.id })),
+        },
+      },
       select: WORKOUT_SELECT,
     });
   } catch (error) {
@@ -61,7 +66,12 @@ export const updateById = async (id: number, changes: WorkoutUpdateInput): Promi
       where: {
         id,
       },
-      data: changes,
+      data: {
+        ...changes,
+        items: {
+          set: changes.items.map((item) => ({ id: item.id })),
+        },
+      },
       select: WORKOUT_SELECT,
     });
   } catch (error) {
@@ -100,4 +110,3 @@ export const getAllMuscleFocuses = async (userId: number): Promise<string[]> => 
     throw handleDBError(error);
   }
 };
-

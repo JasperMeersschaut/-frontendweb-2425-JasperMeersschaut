@@ -25,14 +25,15 @@ export default function AddOrEditExercise() {
     isLoading: muscleFocusLoading,
   } = useSWR('workouts/muscle-focuses', getAll);
 
-  const { data: user } = useSWR('users/me');
+  const { data: user, isLoading:userLoading,error:userError } = useSWR('users/me',getById);
+  console.log('user in addoredit:'+ user);
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">{id ? 'Edit' : 'Add'} Exercise</h1>
       <AsyncData
-        error={workoutError || muscleFocusError || saveError}
-        loading={workoutsLoading || muscleFocusLoading}
+        error={workoutError || muscleFocusError || saveError ||userError}
+        loading={workoutsLoading || muscleFocusLoading ||userLoading}
       >
         <WorkoutForm
           muscleFocuses={muscleFocuses}

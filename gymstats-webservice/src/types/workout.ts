@@ -12,6 +12,7 @@ export interface WorkoutCreateInput {
   duration: number;
   muscleFocus: string;
   createdBy?: number | null;
+  items: { id: number }[];
 }
 
 export interface WorkoutUpdateInput extends WorkoutCreateInput {}

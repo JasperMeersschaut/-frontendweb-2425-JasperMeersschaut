@@ -3,7 +3,7 @@ import koaCors from '@koa/cors';
 import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
 import { checkAndParseSession } from '../service/user';
-import type { GymStatsAppState } from '../types/koa';// Adjust the import path as needed
+import type { GymStatsAppState } from '../types/koa';
 import { getLogger } from './logging';
 import config from 'config';
 import ServiceError from './serviceError';
@@ -110,3 +110,4 @@ export default function installMiddlewares(app: Koa<Koa.DefaultState, GymStatsAp
     }
   });
 }
+

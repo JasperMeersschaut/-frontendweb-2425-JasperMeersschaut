@@ -44,11 +44,15 @@ export const creatWorkout = async (ctx: KoaContext<CreateWorkoutResponse, void, 
   ctx.status = 201;
   ctx.body = workout;
 };
-creatWorkout.validationScheme={
-  body:{
+creatWorkout.validationScheme = {
+  body: {
     type: Joi.string().min(1).max(50).required(),
     duration: Joi.number().integer().positive().required(),
     muscleFocus: Joi.string().min(1).max(50).required(),
+    createdBy : Joi.number().integer().positive().required(),
+    items: Joi.array().items(Joi.object({
+      id: Joi.number().integer().positive().required(),
+    })).required(),
   },
 };
 
@@ -65,6 +69,10 @@ updateWorkoutById.validationScheme = {
     type: Joi.string().min(1).max(50).required(),
     duration: Joi.number().integer().positive().required(),
     muscleFocus: Joi.string().min(1).max(50).required(),
+    createdBy : Joi.number().integer().positive().required(),
+    items: Joi.array().items(Joi.object({
+      id: Joi.number().integer().positive().required(),
+    })).required(),
   },
 };
 
