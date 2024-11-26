@@ -63,7 +63,8 @@ updateWorkoutById.validationScheme = {
   },
   body: {
     type: Joi.string().min(1).max(50).required(),
-    muscleGroup: Joi.string().min(1).max(50).required(),
+    duration: Joi.number().integer().positive().required(),
+    muscleFocus: Joi.string().min(1).max(50).required(),
   },
 };
 

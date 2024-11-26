@@ -339,7 +339,30 @@ async function main() {
         createdBy:1,
       },
     });
-    console.log('Created workout: Hypertrophy');
+    console.log('Created workout: Pull');
+    const workout3 = await prisma.workout.create({
+      data: {
+        type: 'Workout3',
+        duration: 250,
+        muscleFocus: 'Lower Body',
+        items: {
+          connect: [{ id: 16 }, { id: 14 }, { id: 17 }, { id: 1 }, { id: 6 }],
+        },
+        createdBy:2,
+      },
+    });
+
+    const workout4 = await prisma.workout.create({
+      data: {
+        type: 'lopen',
+        duration: 15,
+        muscleFocus: 'Cardiovascular',
+        items: {
+          connect: [{ id: 11 }, { id: 6 }],
+        },
+        createdBy:null,
+      },
+    });
 
     console.log('Creating user workouts...');
     // Create User Workouts
