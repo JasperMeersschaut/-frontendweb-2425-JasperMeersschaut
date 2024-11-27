@@ -15,7 +15,7 @@ const EMPTY_WORKOUT = {
   items: [],
 };
 
-export default function WorkoutForm({ muscleFocuses = [], workout = EMPTY_WORKOUT, saveWorkout, userId }) {
+export default function WorkoutForm({ muscleFocuses = [], workout = EMPTY_WORKOUT, saveWorkout }) {
   const validationRules = {
     type: {
       required: 'Type is required',
@@ -40,7 +40,6 @@ export default function WorkoutForm({ muscleFocuses = [], workout = EMPTY_WORKOU
       type: workout?.type,
       muscleFocus: workout?.muscleFocus,
       duration: workout?.duration,
-      createdBy: workout?.createdBy,
     },
   });
 
@@ -55,7 +54,6 @@ export default function WorkoutForm({ muscleFocuses = [], workout = EMPTY_WORKOU
       await saveWorkout({
         id: workout?.id,
         ...values,
-        createdBy: userId,
         items: selectedExercises.map((id) => ({ id })), // Include the selected exercises
       });
       navigate('/workouts');

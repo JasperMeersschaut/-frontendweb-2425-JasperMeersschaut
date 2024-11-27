@@ -15,10 +15,9 @@ export interface WorkoutCreateInput {
   items: { id: number }[];
 }
 
-export interface WorkoutUpdateInput extends WorkoutCreateInput {}
-
-export interface CreateWorkoutRequest extends WorkoutCreateInput {}
-export interface UpdateWorkoutRequest extends WorkoutUpdateInput {}
+export interface WorkoutUpdateInput extends Omit<WorkoutCreateInput, 'createdBy'> {}
+export interface CreateWorkoutRequest extends Omit<WorkoutCreateInput, 'createdBy'> {}
+export interface UpdateWorkoutRequest extends Omit<WorkoutCreateInput, 'createdBy'> {}
 
 export interface GetAllWorkoutsResponse extends ListResponse<Workout> {}
 export interface GetAllWorkoutsFromUserResponse extends GetAllWorkoutsResponse {}

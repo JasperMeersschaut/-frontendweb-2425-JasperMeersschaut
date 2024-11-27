@@ -27,11 +27,15 @@ export const getAll = async (userId: number): Promise<Workout[]> => {
   }
 };
 
-export const getById = async (id: number): Promise<Workout> => {
+export const getById = async (id: number, userId: number): Promise<Workout> => {
   try {
-    const workout = await prisma.workout.findUnique({
+    const workout = await prisma.workout.findFirst({
       where: {
         id,
+        OR: [
+          { createdBy: null },
+          { createdBy: userId },
+        ],
       },
       select: WORKOUT_SELECT,
     });
@@ -60,11 +64,12 @@ export const create = async (workout: WorkoutCreateInput): Promise<Workout> => {
   }
 };
 
-export const updateById = async (id: number, changes: WorkoutUpdateInput): Promise<Workout> => {
-  try {
+export const updateById = async (id: number, userId: number, changes: WorkoutUpdateInput): Promise<Workout> => {
+  try { //TODO: fix update
     return await prisma.workout.update({
       where: {
         id,
+        createdBy: userId,
       },
       data: {
         ...changes,
@@ -79,11 +84,11 @@ export const updateById = async (id: number, changes: WorkoutUpdateInput): Promi
   }
 };
 
-export const deleteById = async (id: number): Promise<void> => {
+export const deleteById = async (id: number, userId:number): Promise<void> => {
   try {
     await prisma.workout.delete({
       where: {
-        id,
+        id,createdBy: userId,
       },
     });
   } catch (error) {

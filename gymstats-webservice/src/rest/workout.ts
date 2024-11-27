@@ -13,6 +13,7 @@ import type {
   GetAllWorkoutsResponse,
 } from '../types/workout';
 import type { IdParams } from '../types/common'; 
+import { requireAuthentication } from '../core/auth';
 
 //getAll
 const getAllWorkouts = async (ctx: KoaContext<GetAllWorkoutsResponse>) => {
@@ -24,8 +25,8 @@ getAllWorkouts.validationScheme = null;
 
 //getById
 const GetWorkoutById = async (ctx: KoaContext<GetWorkoutByIdResponse, IdParams>) => {
-  const id = Number(ctx.params.id);
-  const exercise = await workoutService.getById(id);
+  const id = ctx.params.id;
+  const exercise = await workoutService.getById(id, ctx.state.session.userId);
   if (exercise) {
     ctx.body = exercise;
   } else {
@@ -39,28 +40,36 @@ GetWorkoutById.validationScheme = {
 };
 
 //createWorkout
-export const creatWorkout = async (ctx: KoaContext<CreateWorkoutResponse, void, CreateWorkoutRequest>) => {
-  const workout = await workoutService.create(ctx.request.body);
+// Create Workout
+export const createWorkout = async (ctx: KoaContext<CreateWorkoutResponse, void, CreateWorkoutRequest>) => {
+  const workout = await workoutService.create({
+    ...ctx.request.body,
+    createdBy: ctx.state.session.userId,
+  });
   ctx.status = 201;
   ctx.body = workout;
 };
-creatWorkout.validationScheme = {
+createWorkout.validationScheme = {
   body: {
     type: Joi.string().min(1).max(50).required(),
     duration: Joi.number().integer().positive().required(),
     muscleFocus: Joi.string().min(1).max(50).required(),
-    createdBy : Joi.number().integer().positive().required(),
     items: Joi.array().items(Joi.object({
       id: Joi.number().integer().positive().required(),
     })).required(),
   },
 };
 
-//updateWorkoutById
+// Update Workout
 export const updateWorkoutById = async (ctx: KoaContext<UpdateWorkoutResponse, IdParams, UpdateWorkoutRequest>) => {
-  const user = await workoutService.updateById((Number(ctx.params.id)), ctx.request.body);
-  ctx.body = user;
+  const userId = ctx.state.session.userId;
+  const workoutData = {
+    ...ctx.request.body,
+  };
+  const workout = await workoutService.updateById(Number(ctx.params.id), userId, workoutData);
+  ctx.body = workout;
 };
+
 updateWorkoutById.validationScheme = {
   params: {
     id: Joi.number().integer().positive().required(),
@@ -69,15 +78,13 @@ updateWorkoutById.validationScheme = {
     type: Joi.string().min(1).max(50).required(),
     duration: Joi.number().integer().positive().required(),
     muscleFocus: Joi.string().min(1).max(50).required(),
-    createdBy : Joi.number().integer().positive().required(),
     items: Joi.array().items(Joi.object({
       id: Joi.number().integer().positive().required(),
     })).required(),
   },
 };
-
 export const deleteWorkoutById = async (ctx: KoaContext<void, IdParams>) => {
-  await workoutService.deleteById(Number(ctx.params.id));
+  await workoutService.deleteById(Number(ctx.params.id), ctx.state.session.userId);
   ctx.status = 204;
 };
 deleteWorkoutById.validationScheme = {
@@ -98,8 +105,10 @@ export default (parent: KoaRouter) => {
     prefix: '/workouts',
   });
 
+  router.use(requireAuthentication);
+
   router.get('/', validate(getAllWorkouts.validationScheme), getAllWorkouts);
-  router.post('/', validate(creatWorkout.validationScheme), creatWorkout);
+  router.post('/', validate(createWorkout.validationScheme), createWorkout);
   router.get('/muscle-focuses', validate(getAllMuscleFocuses.validationScheme), getAllMuscleFocuses);
   router.get('/:id', validate(GetWorkoutById.validationScheme), GetWorkoutById);
   router.put('/:id', validate(updateWorkoutById.validationScheme), updateWorkoutById);

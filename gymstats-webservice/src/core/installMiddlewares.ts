@@ -1,9 +1,7 @@
-import type Koa from 'koa';
 import koaCors from '@koa/cors';
 import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
-import { checkAndParseSession } from '../service/user';
-import type { GymStatsAppState } from '../types/koa';
+import type { KoaApplication } from '../types/koa';
 import { getLogger } from './logging';
 import config from 'config';
 import ServiceError from './serviceError';
@@ -12,7 +10,7 @@ const NODE_ENV = config.get<string>('env');
 const CORS_ORIGINS = config.get<string[]>('cors.origins');
 const CORS_MAX_AGE = config.get<number>('cors.maxAge');
 
-export default function installMiddlewares(app: Koa<Koa.DefaultState, GymStatsAppState>) {
+export default function installMiddlewares(app: KoaApplication) {
   app.use(
     koaCors({
       origin: (ctx) => {
@@ -47,11 +45,6 @@ export default function installMiddlewares(app: Koa<Koa.DefaultState, GymStatsAp
   app.use(bodyParser());
   app.use(serve('public'));
 
-  app.use(async (ctx, next) => {
-    const session = await checkAndParseSession(ctx.headers.authorization);
-    ctx.state.session = session;
-    await next();
-  });
 
   app.use(async (ctx, next) => {
     try {
@@ -110,4 +103,3 @@ export default function installMiddlewares(app: Koa<Koa.DefaultState, GymStatsAp
     }
   });
 }
-
