@@ -7,6 +7,7 @@ export default {
     maxAge: 3 * 60 * 60,
   },
   auth: {
+    maxDelay: 5000,
     jwt: {
       audience: 'budget.hogent.be',
       issuer: 'budget.hogent.be',

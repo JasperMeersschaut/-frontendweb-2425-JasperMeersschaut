@@ -10,6 +10,7 @@ import type {
   GymStatsAppContext,
 } from '../types/koa';
 import type { LoginResponse, LoginRequest } from '../types/user';
+import { authDelay } from '../core/auth';
 
 const login = async (ctx: KoaContext<LoginResponse, void, LoginRequest>) => {
   const { email, password } = ctx.request.body;
@@ -30,7 +31,7 @@ export default function installSessionRouter(parent: KoaRouter) {
     prefix: '/sessions',
   });
 
-  router.post('/', validate(login.validationScheme), login);
+  router.post('/',authDelay, validate(login.validationScheme), login);
 
   parent.use(router.routes()).use(router.allowedMethods());
 }
