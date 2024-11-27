@@ -3,8 +3,6 @@ import type { User, UserCreateInput, UserUpdateInput,PublicUser } from '../types
 import ServiceError from '../core/serviceError';
 import handleDBError from './_handleDBError';
 import { hashPassword, verifyPassword } from '../core/password';
-import { generateJWT } from '../core/jwt';
-import config from 'config'; 
 import jwt from 'jsonwebtoken';
 import { getLogger } from '../core/logging'; 
 import { generateJWT, verifyJWT } from '../core/jwt'; 
@@ -77,7 +75,7 @@ export const getById = async (id: number): Promise<PublicUser> => {
 export const register = async ({name,lastName,email,sex,password,birthdate,length,weight}:UserCreateInput): 
 Promise<string> => {
   const passwordHash = await hashPassword(password);
-  user =  prisma.user.create({
+  const user = await prisma.user.create({
     data: {name,lastName,email,sex,birthdate,length,weight,password_hash:passwordHash,roles:['user']}});
   return await generateJWT(user);
 };
