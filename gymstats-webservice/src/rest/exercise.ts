@@ -84,7 +84,7 @@ export default (parent: KoaRouter) => {
   const router = new Router<GymStatsAppState, GymStatsAppContext>({
     prefix: '/exercises',
   });
-  router.use(requireAuthentication); //authenticatie op alle routes
+  router.use(requireAuthentication);
 
   router.get('/', validate(getAllExercises.validationScheme), getAllExercises);
   router.get('/muscle-groups', validate(getAllMuscleGroups.validationScheme), getAllMuscleGroups);

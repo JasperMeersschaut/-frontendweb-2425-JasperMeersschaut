@@ -5,13 +5,13 @@ import { initializeData, shutdownData } from './data';
 import type { GymStatsAppState, GymStatsAppContext, KoaApplication } from './types/koa';
 import installMiddlewares from './core/installMiddlewares';
 
-interface server{
+export interface Server{
   getApp()  : KoaApplication,
   start(): Promise<void>,
   stop(): Promise<void>
 }
 
-export default async function createServer(): Promise<server> {
+export default async function createServer(): Promise<Server> {
   const app = new Koa<GymStatsAppState, GymStatsAppContext>();
   installMiddlewares(app);
   await initializeData(); 

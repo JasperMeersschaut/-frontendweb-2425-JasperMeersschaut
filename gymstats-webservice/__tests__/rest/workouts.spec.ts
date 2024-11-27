@@ -2,7 +2,6 @@ import supertest from 'supertest';
 import createServer from '../../src/createServer'; 
 import type { Server } from '../../src/createServer';
 
-// 👇 2
 describe('Workout', () => {
 let server:Server;
 let request: supertest.Agent;
