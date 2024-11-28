@@ -24,7 +24,7 @@ export default function Navbar() {
           </NavLink>
         </div>
         <div className="my-2 sm:my-0 sm:mx-3">
-          <NavLink className="text-lg font-medium" to="/profile">
+          <NavLink className="text-lg font-medium" to="/profile" data-cy='profile_btn'>
             Profile
           </NavLink>
         </div>
@@ -33,7 +33,7 @@ export default function Navbar() {
           isAuthed ? (
             // 👇 3
             <div className='nav-item my-2 mx-sm-3 my-sm-0'>
-              <Link className='nav-link' to='/logout'>
+              <Link className='nav-link' to='/logout' data-cy='logout_btn'>
                 Logout
               </Link>
             </div>

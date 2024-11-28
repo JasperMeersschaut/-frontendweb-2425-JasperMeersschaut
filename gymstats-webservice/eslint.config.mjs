@@ -2,10 +2,12 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import stylistic from '@stylistic/eslint-plugin';
 import jest from 'eslint-plugin-jest';
+import pluginCypress from 'eslint-plugin-cypress/flat';
 
 export default tseslint.config(
   eslint.configs.recommended, 
   ...tseslint.configs.recommended,
+  pluginCypress.configs.recommended,
   {
     // 👇 3
     files: ['**/*.ts', '**/*.spec.ts'],
@@ -41,7 +43,6 @@ export default tseslint.config(
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
     },
-    files: ['**/*.spec.ts'],
     plugins: { jest },
   },
 );

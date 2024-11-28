@@ -49,22 +49,24 @@ export default function Login() {
             name='email'
             placeholder='your@email.com'
             validationRules={validationRules.email}
+            data-cy='email_input'
           />
           <LabelInput
             label='Password'
             type='password'
             name='password'
             validationRules={validationRules.password}
+            data-cy='password_input'
           />
           <div className='clearfix'>
             <div className='flex justify-end'>
               <button type='submit' className='bg-blue-500 hover:bg-blue-700 
-              text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+              text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' data-cy='submit_btn'>
                 Sign in
               </button>
               <button type='button' className='ml-4 bg-gray-200 
               hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 
-              rounded focus:outline-none focus:shadow-outline' onClick={handleCancel}>
+              rounded focus:outline-none focus:shadow-outline' onClick={handleCancel} >
                 Cancel
               </button>
             </div>
