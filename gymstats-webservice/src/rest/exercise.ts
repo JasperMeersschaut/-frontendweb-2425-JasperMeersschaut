@@ -13,7 +13,8 @@ import type {
   GetAllExercisesResponse,
 } from '../types/exercise';
 import type { IdParams } from '../types/common';
-import { requireAuthentication } from '../core/auth';
+import { requireAuthentication,makeRequireRole } from '../core/auth';
+import roles from '../core/roles';
 
 //getAll
 const getAllExercises = async (ctx: KoaContext<GetAllExercisesResponse>) => {
@@ -88,12 +89,14 @@ export default (parent: KoaRouter) => {
   });
   router.use(requireAuthentication);
 
+  const requireAdmin=makeRequireRole(roles.ADMIN);
+
   router.get('/', validate(getAllExercises.validationScheme), getAllExercises);
   router.get('/muscle-groups', validate(getAllMuscleGroups.validationScheme), getAllMuscleGroups);
-  router.post('/', validate(createExercise.validationScheme), createExercise);
+  router.post('/', requireAdmin, validate(createExercise.validationScheme), createExercise);
   router.get('/:id', validate(getExerciseById.validationScheme), getExerciseById);
-  router.put('/:id', validate(updateExerciseById.validationScheme), updateExerciseById);
-  router.delete('/:id', validate(deleteExerciseById.validationScheme), deleteExerciseById);
+  router.put('/:id', requireAdmin, validate(updateExerciseById.validationScheme), updateExerciseById);
+  router.delete('/:id', requireAdmin,validate(deleteExerciseById.validationScheme), deleteExerciseById);
 
   parent.use(router.routes()).use(router.allowedMethods());
 };

@@ -14,7 +14,7 @@ import type {
   GetUserRequest,
 } from '../types/user';
 import type { IdParams } from '../types/common'; 
-import { requireAuthentication, makeRequireRole } from '../core/auth'; // 👈 2
+import { requireAuthentication, makeRequireRole } from '../core/auth';
 import roles from '../core/roles';
 
 //getAll
@@ -98,7 +98,7 @@ export default (parent: KoaRouter) => {
 
   const requireAdmin=makeRequireRole(roles.ADMIN);
 
-  router.get('/', requireAuthentication,validate(getAllUsers.validationScheme),getAllUsers);
+  router.get('/', requireAdmin, requireAuthentication,validate(getAllUsers.validationScheme),getAllUsers);
   router.post('/', validate(createUser.validationScheme), createUser);
   router.get('/:id', requireAuthentication, validate(getUserById.validationScheme),getUserById) ;
   router.put('/:id', requireAuthentication,validate(updateUserById.validationScheme), updateUserById);

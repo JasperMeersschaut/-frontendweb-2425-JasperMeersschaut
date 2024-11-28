@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { getAll } from '../../api';
+import { getAll,getById } from '../../api';
 import ExerciseCard from '../../components/exercises/ExerciseCard.jsx';
 import { Link } from 'react-router-dom';
 import AsyncData from '../../components/AsyncData.jsx';
@@ -10,6 +10,7 @@ export default function ExercisesList() {
   const { data: muscleGroups, isLoading: muscleGroupsLoading, error: muscleGroupsError } 
   = useSWR('exercises/muscle-groups', getAll);
   const [selectedMuscleGroup, setSelectedMuscleGroup] = useState('');
+  const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
 
   useEffect(() => {
     const muscleGroupFilter = sessionStorage.getItem('muscleGroupFilter');
@@ -61,11 +62,15 @@ export default function ExercisesList() {
 
   return (
     <div className='container mx-auto'>
-      <div className='flex justify-end'>
-        <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
-          Create New Exercise
-        </Link>
-      </div>
+      <AsyncData loading={userLoading} error={userError}>
+        {user && user.roles.includes('admin') &&(
+          <div className='flex justify-end'>
+            <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+              Create New Exercise
+            </Link>
+          </div>
+        )}
+      </AsyncData>
       <h1 className="text-3xl font-bold mb-4 mt-3">Exercises</h1>
       <div className="mb-4">
         <h5 className="text-xl font-semibold mb-4">Filter by Muscle Group:</h5>

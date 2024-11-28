@@ -52,9 +52,8 @@ export const checkRole = (role: string, roles: string[]): void => {
     );
   }
 };
-
-const makeExposedUser=({id,name,lastName,email,sex,birthdate,length,weight}:User):PublicUser => {
-  return {id,name,lastName,email,sex,birthdate,length,weight};
+const makeExposedUser=({id,name,lastName,email,sex,birthdate,length,weight,roles}:User):PublicUser => {
+  return {id,name,lastName,email,sex,birthdate,length,weight,roles};
 };
 
 export const getAll = async (): Promise<PublicUser[]> => {
