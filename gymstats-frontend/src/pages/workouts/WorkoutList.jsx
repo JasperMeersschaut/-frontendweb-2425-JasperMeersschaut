@@ -1,14 +1,20 @@
 import useSWR from 'swr';
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { getAll } from '../../api';
+import { getAll, deleteById,getById } from '../../api';
 import WorkoutCard from '../../components/workouts/WorkoutCard.jsx';
 import AsyncData from '../../components/AsyncData.jsx';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import useSWRMutation from 'swr/mutation';
+import Error from '../../components/Error.jsx';
 
 export default function WorkoutList() {
   const { data: workouts = [], isLoading: workoutsLoading, error: workoutError } = useSWR('workouts', getAll);
   const { data: muscleFocuses, isLoading: muscleFocusesLoading, error: muscleFocusesError } 
   = useSWR('workouts/muscle-focuses', getAll);
+  const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
+  const { trigger: deleteWorkout, error: deleteError } = useSWRMutation('workouts', deleteById);
+  const currentUserId = user?.id;
+
   const [minDuration, setMinDuration] = useState('');
   const [maxDuration, setMaxDuration] = useState('');
   const [selectedMuscleFocus, setSelectedMuscleFocus] = useState('');
@@ -44,6 +50,11 @@ export default function WorkoutList() {
     [workouts, minDuration, maxDuration, selectedMuscleFocus],
   );
 
+  const handleDeleteWorkout = useCallback(async (id) => {
+    await deleteWorkout(id);
+    alert('Workout is removed');
+  }, [deleteWorkout]);
+
   const handleMinDurationChange = useCallback((e) => {
     setMinDuration(e.target.value);
   }, []);
@@ -58,6 +69,7 @@ export default function WorkoutList() {
 
   return (
     <div className='container mx-auto'>
+      <Error error={deleteError} />
       <div className='flex justify-end'>
         <Link to="/workouts/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
           Create New Workout
@@ -100,9 +112,10 @@ export default function WorkoutList() {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <AsyncData loading={workoutsLoading} error={workoutError}>
+        <AsyncData loading={workoutsLoading || userLoading} error={workoutError || userError}>
           {filteredWorkouts.map((workout) => (
-            <WorkoutCard key={workout.id} workout={workout} />
+            <WorkoutCard key={workout.id} workout={workout} 
+              onDelete={handleDeleteWorkout} currentUserId={currentUserId} />
           ))}
         </AsyncData>
       </div>

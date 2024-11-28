@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5';
 
-export default function WorkoutCard({ workout }) {
+export default function WorkoutCard({ workout, onDelete, currentUserId }) {
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -10,6 +11,12 @@ export default function WorkoutCard({ workout }) {
   };
 
   const shuffledExercises = shuffleArray([...workout.items]).slice(0, 4); // Neemt elke keer een willekeurige image
+
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete(workout.id);
+    }
+  };
 
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden p-4">
@@ -31,6 +38,16 @@ export default function WorkoutCard({ workout }) {
           </div>
         </div>
       </Link>
+      {workout.createdBy === currentUserId && (
+        <div className="flex justify-end mt-4">
+          <Link to={`/workouts/edit/${workout.id}`} className="btn btn-light" data-cy="workout_edit_btn">
+            <IoPencilOutline />
+          </Link>
+          <button className="btn btn-primary ml-2" onClick={handleDelete} data-cy="workout_remove_btn">
+            <IoTrashOutline />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

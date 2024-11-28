@@ -9,6 +9,7 @@ const WORKOUT_SELECT = {
   duration: true,
   muscleFocus: true,
   items: true,
+  createdBy: true,
 };
 
 export const getAll = async (userId: number): Promise<Workout[]> => {

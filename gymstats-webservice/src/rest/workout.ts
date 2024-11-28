@@ -83,11 +83,11 @@ updateWorkoutById.validationScheme = {
     })).required(),
   },
 };
-export const deleteWorkoutById = async (ctx: KoaContext<void, IdParams>) => {
-  await workoutService.deleteById(Number(ctx.params.id), ctx.state.session.userId);
+export const deleteWorkout = async (ctx: KoaContext<void, IdParams>) => {
+  await workoutService.deleteById(ctx.params.id, ctx.state.session.userId);
   ctx.status = 204;
 };
-deleteWorkoutById.validationScheme = {
+deleteWorkout.validationScheme = {
   params: {
     id: Joi.number().integer().positive(),
   },
@@ -112,7 +112,7 @@ export default (parent: KoaRouter) => {
   router.get('/muscle-focuses', validate(getAllMuscleFocuses.validationScheme), getAllMuscleFocuses);
   router.get('/:id', validate(GetWorkoutById.validationScheme), GetWorkoutById);
   router.put('/:id', validate(updateWorkoutById.validationScheme), updateWorkoutById);
-  router.delete('/:id', validate(deleteWorkoutById.validationScheme), deleteWorkoutById);
+  router.delete('/:id', validate(deleteWorkout.validationScheme), deleteWorkout);
 
   parent.use(router.routes()).use(router.allowedMethods());
 };
