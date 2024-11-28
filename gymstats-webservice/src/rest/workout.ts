@@ -66,7 +66,7 @@ export const updateWorkoutById = async (ctx: KoaContext<UpdateWorkoutResponse, I
   const workoutData = {
     ...ctx.request.body,
   };
-  const workout = await workoutService.updateById(Number(ctx.params.id), userId, workoutData);
+  const workout = await workoutService.updateById(ctx.params.id, userId, workoutData);
   ctx.body = workout;
 };
 

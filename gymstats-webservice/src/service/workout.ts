@@ -65,7 +65,7 @@ export const create = async (workout: WorkoutCreateInput): Promise<Workout> => {
 };
 
 export const updateById = async (id: number, userId: number, changes: WorkoutUpdateInput): Promise<Workout> => {
-  try { //TODO: fix update
+  try { 
     return await prisma.workout.update({
       where: {
         id,
