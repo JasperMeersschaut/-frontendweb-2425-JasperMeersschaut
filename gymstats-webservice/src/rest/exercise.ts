@@ -47,6 +47,7 @@ createExercise.validationScheme={
   body:{
     type: Joi.string().min(1).max(50).required(),
     muscleGroup: Joi.string().min(1).max(50).required(),
+    description: Joi.string().min(1).max(500),
   },
 };
 
@@ -61,6 +62,7 @@ updateExerciseById.validationScheme = {
   body: {
     type: Joi.string().min(1).max(50).required(),
     muscleGroup: Joi.string().min(1).max(50).required(),
+    description : Joi.string().min(1).max(500),
   },
 };
 

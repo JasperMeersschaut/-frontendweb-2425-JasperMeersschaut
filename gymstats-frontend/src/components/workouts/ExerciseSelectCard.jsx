@@ -23,9 +23,11 @@ export default function ExerciseSelectCard({ exercise, isSelected, onSelect }) {
           <h5>{exercise.type}</h5>
           <p className="text-gray-700">Muscle Group: {exercise.muscleGroup}</p>
         </div>
-        <p className="text-gray-600">
-          <LoremIpsum p={1} avgSentencesPerParagraph={2} />
-        </p>
+        {exercise.description ? (
+          <p>{exercise.description}</p>
+        ) : (
+          <LoremIpsum p={1} />
+        )}
       </div>
     </div>
   );

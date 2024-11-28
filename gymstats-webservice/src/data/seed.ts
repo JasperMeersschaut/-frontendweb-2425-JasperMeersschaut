@@ -7,279 +7,280 @@ async function main() {
   try {
     const passwordHash = await hashPassword('12345678');
     console.log('Creating exercises...');
-    // Create Exercises
-    // arm exercises
-    console.log('Creating arm exercises...');
+   
 
     const alternatingHammerCurl = await prisma.exercise.create({
       data: {
         id: 1,
         type: 'Alternating Hammer Curl',
         muscleGroup: 'Arms',
+        description: 'An effective exercise for targeting the brachialis and brachioradialis muscles. It involves alternating curls with a hammer grip.',
       },
     });
-    console.log('Created exercise: Alternating Hammer Curl');
 
     const barbelSkullcrusher = await prisma.exercise.create({
       data: {
         id: 2,
         type: 'Barbell Skullcrusher',
         muscleGroup: 'Arms',
+        description: 'A tricep exercise performed with a barbell, focusing on the long head of the triceps. It is done lying on a bench and lowering the barbell to the forehead.',
       },
     });
-    console.log('Created exercise: Barbell Skullcrusher');
 
     const cableHammerCurl = await prisma.exercise.create({
       data: {
         id: 3,
         type: 'Cable Hammer Curl',
         muscleGroup: 'Arms',
+        description: 'A variation of the hammer curl using a cable machine. It targets the brachialis and brachioradialis muscles.',
       },
     });
-    console.log('Created exercise: Cable Hammer Curl');
 
     const dumbellSingleArmTricepExtension = await prisma.exercise.create({
       data: {
         id: 4,
         type: 'Dumbell Single Arm Tricep Extension',
         muscleGroup: 'Arms',
+        description: 'An isolation exercise for the triceps, performed with a dumbbell. It involves extending the arm overhead and lowering the dumbbell behind the head.',
       },
     });
-    console.log('Created exercise: Dumbell Single Arm Tricep Extension');
 
     const ezBarBicepCurl = await prisma.exercise.create({
       data: {
         id: 5,
         type: 'EZ-Bar Bicep Curl',
         muscleGroup: 'Arms',
+        description: 'A bicep exercise performed with an EZ-bar, which allows for a more comfortable grip. It targets the biceps brachii.',
       },
     });
-    console.log('Created exercise: EZ-Bar Bicep Curl');
 
     const ezBarPreacherCurl = await prisma.exercise.create({
       data: {
         id: 6,
         type: 'EZ-Bar Preacher Curl',
         muscleGroup: 'Arms',
+        description: 'A bicep exercise performed on a preacher bench with an EZ-bar. It isolates the biceps and reduces momentum.',
       },
     });
-    console.log('Created exercise: EZ-Bar Preacher Curl');
 
     const hammerCurl = await prisma.exercise.create({
       data: {
         id: 7,
         type: 'Hammer Curl',
         muscleGroup: 'Arms',
+        description: 'A bicep exercise that targets the brachialis and brachioradialis muscles. It is performed with a neutral grip.',
       },
     });
-    console.log('Created exercise: Hammer Curl');
 
     const seatedDumbellBicepCurl = await prisma.exercise.create({
       data: {
         id: 8,
         type: 'Seated Dumbell Bicep Curl',
         muscleGroup: 'Arms',
+        description: 'A bicep exercise performed while seated, which helps to isolate the biceps and reduce momentum.',
       },
     });
-    console.log('Created exercise: Seated Dumbell Bicep Curl');
-    console.log('Created arm exercises');
-    console.log('Creating back exercises...');
+
     // back exercises
     const assistedPullup = await prisma.exercise.create({
       data: {
         id: 9,
         type: 'Assisted Pull-up',
         muscleGroup: 'Back',
+        description: 'A back exercise performed with assistance to help complete pull-ups. It targets the latissimus dorsi and other back muscles.',
       },
     });
-    console.log('Created exercise: Assisted Pull-up');
 
     const barbelBentOverRow = await prisma.exercise.create({
       data: {
         id: 10,
         type: 'Barbell Bent Over Row',
         muscleGroup: 'Back',
+        description: 'A compound exercise that targets the back muscles, including the latissimus dorsi and rhomboids. It is performed with a barbell.',
       },
     });
-    console.log('Created exercise: Barbell Bent Over Row');
 
     const barbellDeadlift = await prisma.exercise.create({
       data: {
         id: 11,
         type: 'Barbell Deadlift',
         muscleGroup: 'Back',
+        description: 'A full-body exercise that primarily targets the back, glutes, and hamstrings. It is performed with a barbell.',
       },
     });
-    console.log('Created exercise: Barbell Deadlift');
 
     const cableRearDeltFly = await prisma.exercise.create({
       data: {
         id: 12,
         type: 'Cable Rear Delt Fly',
         muscleGroup: 'Back',
+        description: 'An isolation exercise for the rear deltoids, performed with a cable machine. It helps to improve shoulder stability and posture.',
       },
     });
-    console.log('Created exercise: Cable Rear Delt Fly');
 
     const dumbellSingleArmRows = await prisma.exercise.create({
       data: {
         id: 13,
         type: 'Dumbell Single Arm Rows',
         muscleGroup: 'Back',
+        description: 'A unilateral exercise that targets the back muscles, including the latissimus dorsi and rhomboids. It is performed with a dumbbell.',
       },
     });
-    console.log('Created exercise: Dumbell Single Arm Rows');
 
     const latPulldown = await prisma.exercise.create({
       data: {
         id: 14,
         type: 'Lat Pulldown',
         muscleGroup: 'Back',
+        description: 'A back exercise performed on a lat pulldown machine. It targets the latissimus dorsi and other upper back muscles.',
       },
     });
-    console.log('Created exercise: Lat Pulldown');
 
     const pullUp = await prisma.exercise.create({
       data: {
         id: 15,
         type: 'Pull-up',
         muscleGroup: 'Back',
+        description: 'A bodyweight exercise that targets the back muscles, including the latissimus dorsi and rhomboids. It is performed by pulling up to a bar.',
       },
     });
-    console.log('Created exercise: Pull-up');
 
     const seatedCableRow = await prisma.exercise.create({
       data: {
         id: 16,
         type: 'Seated Cable Row',
         muscleGroup: 'Back',
+        description: 'A back exercise performed on a cable machine. It targets the latissimus dorsi, rhomboids, and other back muscles.',
       },
     });
-    console.log('Created exercise: Seated Cable Row');
 
     const seatedRearDeltFly = await prisma.exercise.create({
       data: {
         id: 17,
         type: 'Seated Rear Delt Fly',
         muscleGroup: 'Back',
+        description: 'An isolation exercise for the rear deltoids, performed while seated. It helps to improve shoulder stability and posture.',
       },
     });
-    console.log('Created exercise: Seated Rear Delt Fly');
-    console.log('Created back exercises');
-    console.log('Creating chest exercises...');
+  
     // chest exercises
     const benchPress = await prisma.exercise.create({
       data: {
         id: 18,
         type: 'Bench Press',
         muscleGroup: 'Chest',
+        description: 'A compound exercise that targets the chest muscles, including the pectoralis major. It is performed with a barbell or dumbbells.',
       },
     });
-    console.log('Created exercise: Bench Press');
 
     const highCableChestFly = await prisma.exercise.create({
       data: {
         id: 19,
         type: 'High Cable Chest Fly',
         muscleGroup: 'Chest',
+        description: 'An isolation exercise for the chest, performed on a cable machine. It targets the upper portion of the pectoralis major.',
       },
     });
-    console.log('Created exercise: High Cable Chest Fly');
 
     const dumbellChestFly = await prisma.exercise.create({
       data: {
         id: 20,
         type: 'Dumbell Chest Fly',
         muscleGroup: 'Chest',
+        description: 'An isolation exercise for the chest, performed with dumbbells. It targets the pectoralis major and helps to improve chest definition.',
       },
     });
-    console.log('Created exercise: Dumbell Chest Fly');
 
     const dumbellInclineBenchPress = await prisma.exercise.create({
       data: {
         id: 21,
         type: 'Dumbell Incline Bench Press',
         muscleGroup: 'Chest',
+        description: 'A compound exercise that targets the upper chest muscles. It is performed with dumbbells on an incline bench.',
       },
     });
-    console.log('Created exercise: Dumbell Incline Bench Press');
 
     const dumbellInclineChestFly = await prisma.exercise.create({
       data: {
         id: 22,
         type: 'Dumbell Incline Chest Fly',
         muscleGroup: 'Chest',
+        description: 'An isolation exercise for the upper chest, performed with dumbbells on an incline bench. It targets the upper portion of the pectoralis major.',
       },
     });
-    console.log('Created exercise: Dumbell Incline Chest Fly');
-    console.log('Created chest exercises');
-    console.log('Creating shoulder exercises...');
+ 
     // shoulder exercises
     const barbelOverheadPress = await prisma.exercise.create({
       data: {
         id: 23,
         type: 'Barbell Overhead Press',
         muscleGroup: 'Shoulders',
+        description: 'A compound exercise that targets the shoulder muscles, including the deltoids. It is performed with a barbell.',
       },
     });
-    console.log('Created exercise: Barbell Overhead Press');
     const battleRopeSlam = await prisma.exercise.create({
       data: {
         id: 24,
         type: 'Battle Rope Slam',
         muscleGroup: 'Shoulders',
+        description: 'A dynamic exercise that targets the shoulders and core muscles. It is performed with battle ropes.',
       },
     });
-    console.log('Created exercise: Battle Rope Slam');
+
     const cableFacePull = await prisma.exercise.create({
       data: {
         id: 25,
         type: 'Cable Face Pull',
         muscleGroup: 'Shoulders',
+        description: 'An isolation exercise for the rear deltoids, performed on a cable machine. It helps to improve shoulder stability and posture.',
       },
     });
-    console.log('Created exercise: Cable Face Pull');
+
     const cableFrontDeltRaise = await prisma.exercise.create({
       data: {
         id: 26,
         type: 'Cable Front Delt Raise',
         muscleGroup: 'Shoulders',
+        description: 'An isolation exercise for the front deltoids, performed on a cable machine. It helps to improve shoulder strength and definition.',
       },
     });
-    console.log('Created exercise: Cable Front Delt Raise');
+   
     const cableUprightRow = await prisma.exercise.create({
       data: {
         id: 27,
         type: 'Cable Upright Row',
         muscleGroup: 'Shoulders',
+        description: 'A compound exercise that targets the shoulder muscles, including the deltoids and trapezius. It is performed on a cable machine.',
       },
     });
-    console.log('Created exercise: Cable Upright Row');
+  
     const dumbellLateralRaise = await prisma.exercise.create({
       data: {
         id: 28,
         type: 'Dumbell Lateral Raise',
         muscleGroup: 'Shoulders',
+        description: 'An isolation exercise for the lateral deltoids, performed with dumbbells. It helps to improve shoulder width and definition.',
       },
     });
-    console.log('Created exercise: Dumbell Lateral Raise');
+    
     const rearDeltPecDeckFly = await prisma.exercise.create({
       data: {
         id: 29,
         type: 'Rear Delt Pec Deck Fly',
         muscleGroup: 'Shoulders',
+        description: 'An isolation exercise for the rear deltoids, performed on a pec deck machine. It helps to improve shoulder stability and posture.',
       },
     });
-    console.log('Created exercise: Rear Delt Pec Deck Fly');
+   
     const seatedDumbellShoulderPress = await prisma.exercise.create({
       data: {
         id: 30,
         type: 'Seated Dumbell Shoulder Press',
         muscleGroup: 'Shoulders',
+        description: 'A compound exercise that targets the shoulder muscles, including the deltoids. It is performed with dumbbells while seated.',
       },
     });
-    console.log('Created exercise: Seated Dumbell Shoulder Press');
-    console.log('Created shoulder exercises');
+    console.log('Created exercises');
     
     console.log('Creating users...');
     // Create Users
@@ -296,7 +297,6 @@ async function main() {
         roles:JSON.stringify([Role.ADMIN, Role.USER]),
       },
     });
-    console.log('Created user: Jasper Meersschaut');
 
     const user2 = await prisma.user.create({
       data: {
@@ -311,7 +311,7 @@ async function main() {
         roles: JSON.stringify([ Role.USER]),
       },
     });
-    console.log('Created user: Marie Dubois');
+    console.log('Created users');
 
     console.log('Creating workouts...');
     // Create Workouts
@@ -326,7 +326,6 @@ async function main() {
         createdBy:null,
       },
     });
-    console.log('Created workout: Push');
 
     const workout2 = await prisma.workout.create({
       data: {
@@ -339,7 +338,7 @@ async function main() {
         createdBy:1,
       },
     });
-    console.log('Created workout: Pull');
+
     const workout3 = await prisma.workout.create({
       data: {
         type: 'Workout3',
@@ -384,9 +383,7 @@ async function main() {
         notes: 'Felt strong today!',
       },
     });
-    console.log('Created user workout for Marie Dubois');
-
-    console.log('Creating exercise details...');
+    console.log('Created user workout ');
 
     console.log('Seeding completed successfully.');
   } catch (error) {

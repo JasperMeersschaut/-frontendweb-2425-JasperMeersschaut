@@ -16,9 +16,11 @@ export default function ExerciseDetails({ exercise }) {
         </div>
         <div className="w-full md:w-2/3 md:pl-4">
           <h5 className="text-2xl font-semibold mb-2">Description</h5>
-          <p className="text-gray-700">
+          {exercise.description ? (
+            <p>{exercise.description}</p>
+          ) : (
             <LoremIpsum p={1} />
-          </p>
+          )}
         </div>
       </div>
       <div className="mt-4">

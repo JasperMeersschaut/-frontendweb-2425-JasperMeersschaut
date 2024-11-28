@@ -3,10 +3,12 @@ import type { Entity,ListResponse  } from './common';
 export interface Exercise extends Entity {
   type: string;
   muscleGroup: string;
+  description?: string;
 }
 export interface ExerciseCreateInput {
   type: string;
   muscleGroup: string;
+  description?: string;
 }
   
 export interface ExerciseUpdateInput extends ExerciseCreateInput {}

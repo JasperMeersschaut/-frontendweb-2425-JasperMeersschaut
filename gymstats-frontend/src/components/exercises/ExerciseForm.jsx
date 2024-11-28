@@ -66,6 +66,15 @@ export default function ExerciseForm({ muscleGroups = [], exercise = EMPTY_EXERC
             validationRules={validationRules.muscleGroup}
           />
          
+          <div className='mb-4'>
+            <LabelInput
+              label='Description'
+              type='textarea'
+              name='description'
+              placeholder='Description'
+            />
+          </div>
+
         </div>
         <div className='flex justify-end'>
           <button

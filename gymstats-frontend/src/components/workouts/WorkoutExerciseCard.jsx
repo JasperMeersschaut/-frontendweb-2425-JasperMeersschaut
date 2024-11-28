@@ -23,9 +23,11 @@ export default function WorkoutExerciseCard({ exercise }) {
           </Link>
           <p className="text-gray-700">Muscle Group: {exercise.muscleGroup}</p>
         </div>
-        <p className="text-gray-600">
-          <LoremIpsum p={1} avgSentencesPerParagraph={2} />
-        </p>
+        {exercise.description ? (
+          <p>{exercise.description}</p>
+        ) : (
+          <LoremIpsum p={1} />
+        )}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ const EXERCISE_SELECT = {
   id: true,
   type: true,
   muscleGroup: true,
+  description:true,
 };
 
 export const getAll = async (): Promise<Exercise[]> => {

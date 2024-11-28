@@ -38,6 +38,7 @@ model Exercise {
   id          Int       @id @default(autoincrement()) @db.UnsignedInt
   type        String
   muscleGroup String
+  description String? 
   workouts    Workout[]
 }
 
