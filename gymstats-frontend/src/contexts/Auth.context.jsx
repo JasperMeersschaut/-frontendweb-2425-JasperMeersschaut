@@ -14,8 +14,19 @@ export const JWT_TOKEN_KEY = 'jwtToken';
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem(JWT_TOKEN_KEY));
 
-  const { trigger: doLogin, error: loginError, isMutating: loginLoading } =
-    useSWRMutation('sessions', api.post);
+  const { trigger: doLogin, error: loginError, isMutating: loginLoading, 
+  } = useSWRMutation('sessions', api.post);
+
+  const {trigger: doRegister, error: registerError, isMutating: registerLoading,  
+  } = useSWRMutation('users', api.post);
+
+  const setSession = useCallback(
+    (token) => {
+      setToken(token);
+      localStorage.setItem(JWT_TOKEN_KEY, token);
+    },
+    [],
+  );
 
   const { data: user, error: userError, loading: userLoading } = useSWR(
     token ? 'users/me' : null,
@@ -34,8 +45,23 @@ export const AuthProvider = ({ children }) => {
         return false;
       }
     },
-    [doLogin],
+    [doLogin,setSession],
   );
+
+  const register = useCallback(
+    async (data) => {
+      try {
+        const { token } = await doRegister(data);
+        setSession(token);
+        return true;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    },
+    [doRegister, setSession],
+  );
+
   const logout = useCallback(() => {
     setToken(null);
     localStorage.removeItem(JWT_TOKEN_KEY);
@@ -44,14 +70,15 @@ export const AuthProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       user,
-      error: loginError || userError,
-      loading: loginLoading || userLoading,
+      error: loginError || userError ||registerError,
+      loading: loginLoading || userLoading ||registerLoading,
       isAuthed: Boolean(token),
       ready: !userLoading,
       login,
       logout,
+      register,
     }),
-    [token, user, loginError, loginLoading, userError, userLoading, login,logout],
+    [token, user, loginError, loginLoading, userError, userLoading, login,logout,register],
   );
 
   return (

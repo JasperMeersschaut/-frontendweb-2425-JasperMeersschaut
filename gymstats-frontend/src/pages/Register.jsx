@@ -1,0 +1,183 @@
+import { useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FormProvider, useForm } from 'react-hook-form';
+import LabelInput from '../components/LabelInput';
+import { useAuth } from '../contexts/auth';
+import Error from '../components/Error';
+
+export default function Register() {
+  const { error, loading, register } = useAuth();
+  const navigate = useNavigate();
+  const methods = useForm();
+  const { getValues, handleSubmit, reset } = methods;
+  const {isAuthed} = useAuth();
+
+  useEffect(() => {
+    if (isAuthed) {
+      navigate('/');
+    }
+  }, [isAuthed, navigate]);
+
+  const handleCancel = useCallback(() => {
+    reset();
+  }, [reset]);
+
+  const handleRegister = useCallback(
+    async ({ name, lastName, email, sex, password, birthdate, length, weight }) => {
+      const loggedIn = await register({ name, lastName, email, sex, password, birthdate, length, weight });
+
+      if (loggedIn) {
+        navigate({
+          pathname: '/',
+          replace: true,
+        });
+      }
+    },
+    [register, navigate],
+  );
+
+  const validationRules = {
+    name: { required: 'Name is required' },
+    lastName: { required: 'Last Name is required' },
+    email: {
+      required: 'Email is required',
+      pattern: {
+        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        message: 'Invalid email address',
+      },
+    },
+    sex: { required: 'Sex is required' },
+    password: {
+      required: 'Password is required',
+      minLength: {
+        value: 8,
+        message: 'Password must be at least 8 characters long',
+      },
+    },
+    confirmPassword: {
+      required: 'Password confirmation is required',
+      validate: (value) => {
+        const password = getValues('password');
+        return password === value || 'Passwords do not match';
+      },
+    },
+    birthdate: {
+      required: 'Birthdate is required',
+      validate: (value) => {
+        const today = new Date();
+        const birthdate = new Date(value);
+        return birthdate <= today || 'Birthdate cannot be in the future';
+      },
+    },
+    length: {
+      required: 'Length is required',
+      validate: (value) => value > 0 || 'Length must be a positive number',
+    },
+    weight: {
+      required: 'Weight is required',
+      validate: (value) => value > 0 || 'Weight must be a positive number',
+    },
+  };
+
+  return (
+    <FormProvider {...methods}>
+      <div className="container mx-auto p-4">
+        <form
+          className="flex flex-col space-y-4"
+          onSubmit={handleSubmit(handleRegister)}
+        >
+          <h1 className="text-3xl font-bold mb-4">Register</h1>
+
+          {error && <Error error={error} />}
+
+          <LabelInput
+            label="Name"
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            validationRules={validationRules.name}
+          />
+
+          <LabelInput
+            label="Last Name"
+            type="text"
+            name="lastName"
+            placeholder="Your Last Name"
+            validationRules={validationRules.lastName}
+          />
+
+          <LabelInput
+            label="Email"
+            type="text"
+            name="email"
+            placeholder="your@email.com"
+            validationRules={validationRules.email}
+          />
+
+          <LabelInput
+            label="Sex"
+            type="text"
+            name="sex"
+            placeholder="Your Sex"
+            validationRules={validationRules.sex}
+          />
+
+          <LabelInput
+            label="Password"
+            type="password"
+            name="password"
+            validationRules={validationRules.password}
+          />
+
+          <LabelInput
+            label="Confirm password"
+            type="password"
+            name="confirmPassword"
+            validationRules={validationRules.confirmPassword}
+          />
+
+          <LabelInput
+            label="Birthdate"
+            type="date"
+            name="birthdate"
+            validationRules={validationRules.birthdate}
+          />
+
+          <LabelInput
+            label="Length (cm)"
+            type="number"
+            name="length"
+            placeholder="Your Length in cm"
+            validationRules={validationRules.length}
+          />
+
+          <LabelInput
+            label="Weight (kg)"
+            type="number"
+            name="weight"
+            placeholder="Your Weight in kg"
+            validationRules={validationRules.weight}
+          />
+
+          <div className="flex justify-end space-x-4">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              disabled={loading}
+            >
+              Register
+            </button>
+
+            <button
+              type="button"
+              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </FormProvider>
+  );
+}
