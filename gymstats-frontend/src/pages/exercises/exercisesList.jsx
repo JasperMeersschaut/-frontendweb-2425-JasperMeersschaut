@@ -1,9 +1,11 @@
 import useSWR from 'swr';
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { getAll,getById } from '../../api';
+import { getAll,getById,deleteById } from '../../api';
 import ExerciseCard from '../../components/exercises/ExerciseCard.jsx';
 import { Link } from 'react-router-dom';
 import AsyncData from '../../components/AsyncData.jsx';
+import useSWRMutation from 'swr/mutation';
+import Error from '../../components/Error.jsx';
 
 export default function ExercisesList() {
   const { data: exercises = [], isLoading: exercisesLoading, error: exercisesError } = useSWR('exercises', getAll);
@@ -11,6 +13,7 @@ export default function ExercisesList() {
   = useSWR('exercises/muscle-groups', getAll);
   const [selectedMuscleGroup, setSelectedMuscleGroup] = useState('');
   const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
+  const { trigger: deleteExercise, error: deleteError } = useSWRMutation('exercises', deleteById);
 
   useEffect(() => {
     const muscleGroupFilter = sessionStorage.getItem('muscleGroupFilter');
@@ -60,8 +63,16 @@ export default function ExercisesList() {
     setSelectedMuscleGroup('');
   }, []);
 
+  const handleDeleteExercise = async (id) => {
+    await deleteExercise(id);
+    alert('Exercise deleted successfully');
+  };
+
+  const currentUserRoles = user?.roles || [];
+
   return (
     <div className='container mx-auto'>
+      <Error error={deleteError} />
       <AsyncData loading={userLoading} error={userError}>
         {user && user.roles.includes('admin') &&(
           <div className='flex justify-end'>
@@ -118,9 +129,9 @@ export default function ExercisesList() {
         </AsyncData>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <AsyncData loading={exercisesLoading} error={exercisesError}>
+        <AsyncData loading={exercisesLoading ||userLoading} error={exercisesError ||userError}>
           {sortedExercises.map((exercise) => (
-            <ExerciseCard key={exercise.id} exercise={exercise} />
+            <ExerciseCard key={exercise.id} exercise={exercise} onDelete={handleDeleteExercise} currentUserRoles={currentUserRoles}/>
           ))}
         </AsyncData>
       </div>

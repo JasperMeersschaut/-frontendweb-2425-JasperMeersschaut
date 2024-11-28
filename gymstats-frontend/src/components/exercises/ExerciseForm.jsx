@@ -7,6 +7,7 @@ const EMPTY_EXERCISE = {
   id: undefined,
   type: '',
   muscleGroup: '',
+  description:'',
 };
 
 export default function ExerciseForm({ muscleGroups = [], exercise = EMPTY_EXERCISE, saveExercise }) {
@@ -25,6 +26,7 @@ export default function ExerciseForm({ muscleGroups = [], exercise = EMPTY_EXERC
     defaultValues: {
       type: exercise?.type,
       muscleGroup: exercise?.muscleGroup,
+      description: exercise?.description,
     },
   });
 

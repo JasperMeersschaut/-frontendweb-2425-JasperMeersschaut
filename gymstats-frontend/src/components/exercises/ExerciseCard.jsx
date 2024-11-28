@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom';
+import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5';
 
-export default function ExerciseCard({ exercise }) {
+export default function ExerciseCard({ exercise, onDelete, currentUserRoles }) {
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete(exercise.id);
+    }
+  };
+
   return (
     <div className="p-4">
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -17,6 +24,16 @@ export default function ExerciseCard({ exercise }) {
             <h5>{exercise.type}</h5>
           </Link>
           <p className="text-gray-700">{exercise.muscleGroup}</p>
+          {currentUserRoles.includes('admin') && (
+            <div className="flex justify-end mt-4">
+              <Link to={`/exercises/edit/${exercise.id}`} className="btn btn-light" data-cy="exercise_edit_btn">
+                <IoPencilOutline />
+              </Link>
+              <button className="btn btn-primary ml-2" onClick={handleDelete} data-cy="exercise_remove_btn">
+                <IoTrashOutline />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
