@@ -26,10 +26,12 @@
     "@prisma/client": "^5.19.1",
     "argon2": "^0.41.1",
     "config": "^3.3.12",
+    "helmet": "^8.0.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "koa": "^2.15.3",
     "koa-bodyparser": "^4.4.1",
+    "koa-helmet": "^8.0.1",
     "koa-static": "^5.0.0",
     "prisma": "^5.19.1",
     "winston": "^3.15.0"

@@ -5,6 +5,7 @@ import type { KoaApplication } from '../types/koa';
 import { getLogger } from './logging';
 import config from 'config';
 import ServiceError from './serviceError';
+import koaHelmet from 'koa-helmet';
 
 const NODE_ENV = config.get<string>('env');
 const CORS_ORIGINS = config.get<string[]>('cors.origins');
@@ -43,6 +44,7 @@ export default function installMiddlewares(app: KoaApplication) {
   });
 
   app.use(bodyParser());
+  app.use(koaHelmet());
   app.use(serve('public'));
 
 
