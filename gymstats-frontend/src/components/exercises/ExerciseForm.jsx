@@ -18,6 +18,9 @@ export default function ExerciseForm({ muscleGroups = [], exercise = EMPTY_EXERC
     muscleGroup: {
       required: 'Muscle Group is required',
     },
+    description: {
+      required: 'Description is required',
+    },
   };
   const navigate = useNavigate();
 
@@ -56,6 +59,7 @@ export default function ExerciseForm({ muscleGroups = [], exercise = EMPTY_EXERC
             name='type'
             placeholder='Type'
             validationRules={validationRules.type}
+            data-cy='type_input'
           />
         </div>
 
@@ -66,6 +70,7 @@ export default function ExerciseForm({ muscleGroups = [], exercise = EMPTY_EXERC
             placeholder='-- Select a Muscle Group --'
             items={muscleGroups}
             validationRules={validationRules.muscleGroup}
+            data-cy='muscle_group_input'
           />
          
           <div className='mb-4'>
@@ -74,6 +79,8 @@ export default function ExerciseForm({ muscleGroups = [], exercise = EMPTY_EXERC
               type='textarea'
               name='description'
               placeholder='Description'
+              validationRules={validationRules.description}
+              data-cy='description_input'
             />
           </div>
 
@@ -83,8 +90,8 @@ export default function ExerciseForm({ muscleGroups = [], exercise = EMPTY_EXERC
             type='submit'
             className='bg-blue-500 hover:bg-blue-700 
             text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-            data-cy='submit_exercise'
             disabled={isSubmitting}
+            data-cy='submit_exercise'
           >
             {exercise?.id ? 'Save Exercise' : 'Add Exercise'}
           </button>

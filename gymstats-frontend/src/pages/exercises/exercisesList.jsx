@@ -76,7 +76,8 @@ export default function ExercisesList() {
       <AsyncData loading={userLoading} error={userError}>
         {user && user.roles.includes('admin') &&(
           <div className='flex justify-end'>
-            <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+            <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded" 
+              data-cy='create_exercises_btn'>
               Create New Exercise
             </Link>
           </div>
