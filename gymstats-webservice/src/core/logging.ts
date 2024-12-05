@@ -7,9 +7,7 @@ const NODE_ENV = config.get<string>('env');
 const LOG_LEVEL = config.get<string>('log.level');
 const LOG_DISABLED = config.get<boolean>('log.disabled');
 
-// 👇 1
 const loggerFormat = () => {
-  // 👇 2
   const formatMessage = ({
     level,
     message,
@@ -19,21 +17,20 @@ const loggerFormat = () => {
     return `${timestamp} | ${level} | ${message} | ${JSON.stringify(rest)}`;
   };
 
-  // 👇 3
   const formatError = ({
-    error: { stack },
+    error,
     ...rest
-  }: winston.Logform.TransformableInfo) =>
-    `${formatMessage(rest)}\n\n${stack}\n`;
+  }: winston.Logform.TransformableInfo) => {
+    const { stack } = error as { stack: string };
+    return `${formatMessage(rest)}\n\n${stack}\n`;
+  };
 
-  // 👇 4
   const format = (info: winston.Logform.TransformableInfo) => {
-    // 👇 5
     if (info?.['error'] instanceof Error) {
       return formatError(info);
     }
 
-    return formatMessage(info); // 👈 6
+    return formatMessage(info); 
   };
 
   return combine(colorize(), timestamp(), printf(format));
