@@ -15,7 +15,7 @@ const config: Config = {
     './src/service/**/*.ts',
     './src/rest/**/*.ts',
   ],
-  coverageDirectory: '__tests__/coverage'
+  coverageDirectory: '__tests__/coverage',
 };
 
 export default config;

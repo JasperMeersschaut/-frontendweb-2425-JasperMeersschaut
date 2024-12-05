@@ -4,6 +4,9 @@ import installRest from './rest';
 import { initializeData, shutdownData } from './data';
 import type { GymStatsAppState, GymStatsAppContext, KoaApplication } from './types/koa';
 import installMiddlewares from './core/installMiddlewares';
+import config from 'config';
+
+const PORT = config.get<number>('port');
 
 export interface Server{
   getApp()  : KoaApplication,
@@ -24,8 +27,8 @@ export default async function createServer(): Promise<Server> {
     },
     start(){
       return new Promise<void>((resolve) => {
-        app.listen(9000, () => {
-          getLogger().info('🚀 Server listening on http://127.0.0.1:9000');
+        app.listen(PORT, () => {
+          getLogger().info(`🚀 Server listening on http://localhost:${PORT}`);
         });
         resolve();
       });

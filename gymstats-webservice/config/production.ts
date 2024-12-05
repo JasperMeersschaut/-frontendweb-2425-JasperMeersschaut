@@ -1,24 +1,10 @@
 export default {
-  log: {
-    level: 'info',
-    disabled: false,
-  },  cors: {
-    origins: ['http://localhost:5173'], 
-    maxAge: 3 * 60 * 60,
+  cors: {
+    origins: ['https://frontendweb-budget-dna5.onrender.com'],
   },
   auth: {
-    maxDelay: 5000,
     jwt: {
-      audience: 'budget.hogent.be',
-      issuer: 'budget.hogent.be',
-      expirationInterval: 60 * 60, // s (1 hour)
-      secret:
-        'eenveeltemoeilijksecretdatniemandooitzalradenandersisdesitegehacked',
-    },
-    argon: {
-      hashLength: 32,
-      timeCost: 6,
-      memoryCost: 2 ** 17,
+      expirationInterval: 7 * 24 * 60 * 60, // s (7 days)
     },
   },
 };
