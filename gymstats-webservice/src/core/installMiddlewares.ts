@@ -1,6 +1,8 @@
 import koaCors from '@koa/cors';
 import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
+import mount from 'koa-mount';
+import path from 'path';
 import type { KoaApplication } from '../types/koa';
 import { getLogger } from './logging';
 import config from 'config';
@@ -51,7 +53,16 @@ export default function installMiddlewares(app: KoaApplication) {
     }),
   );
 
-  app.use(serve('public'));
+  // Serve static files from the 'public/images' directory under the '/api/public/images' path
+  app.use(mount('/api/public/images', serve(path.join(__dirname, '..', 'public', 'images'))));
+
+  // Serve static files from the 'public/images' directory under the '/api/images' path
+
+  // Add middleware to set Cross-Origin-Resource-Policy header
+  app.use(async (ctx, next) => {
+    ctx.set('Cross-Origin-Resource-Policy', 'cross-origin');
+    await next();
+  });
 
   app.use(async (ctx, next) => {
     try {

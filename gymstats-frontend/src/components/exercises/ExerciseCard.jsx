@@ -20,7 +20,7 @@ export default function ExerciseCard({ exercise, onDelete, currentUserRoles }) {
             src={`${baseURL}/images/exercises/${exercise.id}.jpg`}
             className="w-full h-48 object-contain"
             alt={exercise.name}
-            onError={(e) => (e.target.src = 'http://localhost:9000/images/exercises/default.jpg')}
+            onError={(e) => (e.target.src = `${baseURL}/images/exercises/default.jpg`)}
           />
         </Link>
         <div className="p-4">
