@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5';
+import { axios } from './index';
 
 export default function ExerciseCard({ exercise, onDelete, currentUserRoles }) {
+
+  const baseURL = axios.defaults.baseURL;
+
   const handleDelete = () => {
     if (onDelete) {
       onDelete(exercise.id);
@@ -13,7 +17,7 @@ export default function ExerciseCard({ exercise, onDelete, currentUserRoles }) {
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         <Link to={`/exercises/${exercise.id}`}>
           <img
-            src={`http://localhost:9000/images/exercises/${exercise.id}.jpg`}
+            src={`${baseURL}/images/exercises/${exercise.id}.jpg`}
             className="w-full h-48 object-contain"
             alt={exercise.name}
             onError={(e) => (e.target.src = 'http://localhost:9000/images/exercises/default.jpg')}

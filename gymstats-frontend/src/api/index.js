@@ -1,10 +1,11 @@
 import axiosRoot from 'axios';
 import { JWT_TOKEN_KEY } from '../contexts/Auth.context.jsx';
 
-const baseUrl = 'http://localhost:9000/api'; 
 const bmiURL = 'https://smart-body-mass-index-calculator-bmi.p.rapidapi.com';
 
-const axios = axiosRoot.create({baseURL:baseUrl});
+export const axios = axiosRoot.create({
+  baseURL: import.meta.env.VITE_API_URL,
+});
 
 axios.interceptors.request.use((config)=>{
   const token = localStorage.getItem(JWT_TOKEN_KEY);
