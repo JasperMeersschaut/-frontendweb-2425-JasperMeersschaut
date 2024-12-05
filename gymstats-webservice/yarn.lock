@@ -1221,7 +1221,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stylistic/eslint-plugin@npm:^2.9.0":
+"@stylistic/eslint-plugin@npm:^2.11.0":
   version: 2.11.0
   resolution: "@stylistic/eslint-plugin@npm:2.11.0"
   dependencies:
@@ -6175,7 +6175,7 @@ __metadata:
     "@koa/cors": "npm:^5.0.0"
     "@koa/router": "npm:^13.1.0"
     "@prisma/client": "npm:^5.19.1"
-    "@stylistic/eslint-plugin": "npm:^2.9.0"
+    "@stylistic/eslint-plugin": "npm:^2.11.0"
     "@types/config": "npm:^3.3.5"
     "@types/jest": "npm:^29.5.14"
     "@types/jsonwebtoken": "npm:^9"
