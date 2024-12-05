@@ -11,6 +11,11 @@ const config: Config = {
     '**/__tests__/**/?(*.)+(spec|test).[jt]s?(x)',
   ],
   preset: 'ts-jest',
+  collectCoverageFrom: [
+    './src/service/**/*.ts',
+    './src/rest/**/*.ts',
+  ],
+  coverageDirectory: '__tests__/coverage'
 };
 
 export default config;
