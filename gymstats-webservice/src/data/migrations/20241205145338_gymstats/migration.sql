@@ -8,8 +8,10 @@ CREATE TABLE `User` (
     `birthdate` DATETIME(0) NOT NULL,
     `length` INTEGER NOT NULL,
     `weight` DOUBLE NOT NULL,
+    `password_hash` VARCHAR(255) NOT NULL,
+    `roles` JSON NOT NULL,
 
-    UNIQUE INDEX `User_email_key`(`email`),
+    UNIQUE INDEX `idx_user_email_unique`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -19,6 +21,7 @@ CREATE TABLE `Workout` (
     `type` VARCHAR(191) NOT NULL,
     `duration` INTEGER NOT NULL,
     `muscleFocus` VARCHAR(191) NOT NULL,
+    `createdBy` INTEGER UNSIGNED NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -28,6 +31,7 @@ CREATE TABLE `Exercise` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `type` VARCHAR(191) NOT NULL,
     `muscleGroup` VARCHAR(191) NOT NULL,
+    `description` VARCHAR(191) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -51,6 +55,9 @@ CREATE TABLE `_ExerciseToWorkout` (
     UNIQUE INDEX `_ExerciseToWorkout_AB_unique`(`A`, `B`),
     INDEX `_ExerciseToWorkout_B_index`(`B`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `Workout` ADD CONSTRAINT `Workout_createdBy_fkey` FOREIGN KEY (`createdBy`) REFERENCES `User`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `UserWorkout` ADD CONSTRAINT `UserWorkout_id_fkey` FOREIGN KEY (`id`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
