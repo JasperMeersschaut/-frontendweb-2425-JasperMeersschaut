@@ -1496,15 +1496,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/koa-mount@npm:^4":
-  version: 4.0.5
-  resolution: "@types/koa-mount@npm:4.0.5"
-  dependencies:
-    "@types/koa": "npm:*"
-  checksum: 10c0/59b52515f3f65c6f6103f8d65b81cfe8ed9c79458951b1d8b34865fa3307b62591edff27606760097d28b56ddcc7b1d54d5052095739a8e18258cc850b2390c4
-  languageName: node
-  linkType: hard
-
 "@types/koa-send@npm:*":
   version: 4.1.6
   resolution: "@types/koa-send@npm:4.1.6"
@@ -2480,7 +2471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4":
+"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4":
   version: 4.3.7
   resolution: "debug@npm:4.3.7"
   dependencies:
@@ -4486,16 +4477,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"koa-mount@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "koa-mount@npm:4.0.0"
-  dependencies:
-    debug: "npm:^4.0.1"
-    koa-compose: "npm:^4.1.0"
-  checksum: 10c0/6c0d20644bcfb6114b66af5f7dd3dc51c36ef190cbb18a9e3e0d18a82f71a62e2fb84b43ff6ab89a90f9b01689121f074c4e6602206f84ba8a042bd05c92add1
-  languageName: node
-  linkType: hard
-
 "koa-send@npm:^5.0.0":
   version: 5.0.1
   resolution: "koa-send@npm:5.0.1"
@@ -6200,7 +6181,6 @@ __metadata:
     "@types/jsonwebtoken": "npm:^9"
     "@types/koa": "npm:^2.15.0"
     "@types/koa-bodyparser": "npm:^4.3.12"
-    "@types/koa-mount": "npm:^4"
     "@types/koa-static": "npm:^4.0.4"
     "@types/koa__cors": "npm:^5.0.0"
     "@types/koa__router": "npm:^12.0.4"
@@ -6218,7 +6198,6 @@ __metadata:
     koa: "npm:^2.15.3"
     koa-bodyparser: "npm:^4.4.1"
     koa-helmet: "npm:^8.0.1"
-    koa-mount: "npm:^4.0.0"
     koa-static: "npm:^5.0.0"
     prisma: "npm:^5.19.1"
     supertest: "npm:^7.0.0"
