@@ -5,6 +5,7 @@ const bmiURL = 'https://smart-body-mass-index-calculator-bmi.p.rapidapi.com';
 
 export const axios = axiosRoot.create({
   baseURL: import.meta.env.VITE_API_URL,
+  contentURL: import.meta.env.VITE_CONTENT_URL,
 });
 
 axios.interceptors.request.use((config)=>{

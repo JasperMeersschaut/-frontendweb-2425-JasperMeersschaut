@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5';
+import { axios } from '../../api/index.js';
+
+const contentURL = axios.defaults.contentURL;
 
 export default function WorkoutCard({ workout, onDelete, currentUserId }) {
   const shuffleArray = (array) => {
@@ -29,10 +32,10 @@ export default function WorkoutCard({ workout, onDelete, currentUserId }) {
             {shuffledExercises.map((exercise) => (
               <img
                 key={exercise.id}
-                src={`http://localhost:9000/images/exercises/${exercise.id}.jpg`}
+                src={`${contentURL}/images/exercises/${exercise.id}.jpg`}
                 className="w-24 h-24 object-contain border border-black"
                 alt={exercise.type}
-                onError={(e) => (e.target.src = 'http://localhost:9000/images/exercises/default.jpg')}
+                onError={(e) => (e.target.src = `${contentURL}/images/exercises/default.jpg`)}
               />
             ))}
           </div>

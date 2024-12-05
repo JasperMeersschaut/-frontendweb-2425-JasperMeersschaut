@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { getBmi, getById } from '../../api/index.js';
+import { getBmi, getById, axios } from '../../api/index.js';
 import useSWR from 'swr';
 import AsyncData from '../../components/AsyncData.jsx';
+
+const contentURL = axios.defaults.contentURL;
 
 export default function Profile() {
   const [bmiData, setBmiData] = useState(null);
@@ -25,7 +27,7 @@ export default function Profile() {
   }, [user]);
 
   const handleImageError = (e) => {
-    e.target.src = 'http://localhost:9000/images/profilePictures/0.jpg';
+    e.target.src = `${contentURL}/images/profilePictures/0.jpg`;
   };
 
   const getBmiColorClass = (category) => {
@@ -48,7 +50,7 @@ export default function Profile() {
           <>
             <div className="profile-picture mb-4">
               <img
-                src={`http://localhost:9000/images/profilePictures/${user.id}.jpg`}
+                src={`${contentURL}/images/profilePictures/${user.id}.jpg`}
                 alt="Profile Picture"
                 className="rounded-full w-36 h-36"
                 onError={handleImageError}

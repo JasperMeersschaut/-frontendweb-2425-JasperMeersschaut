@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import LoremIpsum from 'react-lorem-ipsum';
+import { axios } from '../../api/index.js';
+
+const contentURL = axios.defaults.contentURL;
 
 export default function WorkoutExerciseCard({ exercise }) {
   if (!exercise) return <div>Loading...</div>;
@@ -9,10 +12,10 @@ export default function WorkoutExerciseCard({ exercise }) {
       <div className="w-full sm:w-1/4 h-48 sm:h-full">
         <Link to={`/exercises/${exercise.id}`}>
           <img
-            src={`http://localhost:9000/images/exercises/${exercise.id}.jpg`}
+            src={`${contentURL}/images/exercises/${exercise.id}.jpg`}
             className="w-full h-full object-contain border border-gray-300"
             alt={exercise.type}
-            onError={(e) => (e.target.src = 'http://localhost:9000/images/exercises/default.jpg')}
+            onError={(e) => (e.target.src = `${contentURL}/images/exercises/default.jpg`)}
           />
         </Link>
       </div>

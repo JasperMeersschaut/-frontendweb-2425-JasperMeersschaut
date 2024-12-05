@@ -4,7 +4,7 @@ import { axios } from '../../api/index.js';
 
 export default function ExerciseCard({ exercise, onDelete, currentUserRoles }) {
 
-  const baseURL = axios.defaults.baseURL;
+  const contentURL = axios.defaults.contentURL;
 
   const handleDelete = () => {
     if (onDelete) {
@@ -17,10 +17,10 @@ export default function ExerciseCard({ exercise, onDelete, currentUserRoles }) {
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         <Link to={`/exercises/${exercise.id}`}>
           <img
-            src={`${baseURL}/images/exercises/${exercise.id}.jpg`}
+            src={`${contentURL}/images/exercises/${exercise.id}.jpg`}
             className="w-full h-48 object-contain"
             alt={exercise.name}
-            onError={(e) => (e.target.src = 'http://localhost:9000/images/exercises/default.jpg')}
+            onError={(e) => (e.target.src = `${contentURL}/images/exercises/default.jpg`)}
           />
         </Link>
         <div className="p-4">
