@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5';
-import { axios } from './index';
+import { axios } from '../../api/index.js';
 
 export default function ExerciseCard({ exercise, onDelete, currentUserRoles }) {
 
