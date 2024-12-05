@@ -44,9 +44,14 @@ export default function installMiddlewares(app: KoaApplication) {
   });
 
   app.use(bodyParser());
-  app.use(koaHelmet());
-  app.use(serve('public'));
 
+  app.use(
+    koaHelmet({
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
+    }),
+  );
+
+  app.use(serve('public'));
 
   app.use(async (ctx, next) => {
     try {
