@@ -1,6 +1,6 @@
 export default {
   cors: {
-    origins: ['https://webservices-jaspermeersschaut.onrender.com'],
+    origins: ['https://frontendweb-jaspermeersschaut.onrender.com'],
   },
   auth: {
     jwt: {
