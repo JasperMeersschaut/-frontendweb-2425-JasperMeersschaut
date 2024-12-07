@@ -15,12 +15,7 @@ export default function Login() {
   const { login, error } = useAuth();
   const navigate = useNavigate();
   const { search } = useLocation();
-  const methods = useForm({
-    defaultValues: {
-      email: 'meersschaut.jasper@gmail.com',
-      password: '12345678',
-    },
-  });
+  const methods = useForm();
   const { reset, handleSubmit } = methods;
   const handleLogin = useCallback(
     async ({ email, password }) => {
