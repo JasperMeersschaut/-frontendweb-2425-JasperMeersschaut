@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5';
 import { axios } from '../../api/index.js';
 
-export default function ExerciseCard({ exercise, onDelete, currentUserRoles }) {
+export default function ExerciseCard({ exercise, onDelete, currentUserRoles, homepage }) {
 
   const contentURL = axios.defaults.contentURL;
 
@@ -28,7 +28,7 @@ export default function ExerciseCard({ exercise, onDelete, currentUserRoles }) {
             <h5>{exercise.type}</h5>
           </Link>
           <p className="text-gray-700">{exercise.muscleGroup}</p>
-          {currentUserRoles.includes('admin') && (
+          {currentUserRoles.includes('admin') && !homepage && (
             <div className="flex justify-end mt-4">
               <Link to={`/exercises/edit/${exercise.id}`} className="btn btn-light" data-cy="exercise_edit_btn">
                 <IoPencilOutline />

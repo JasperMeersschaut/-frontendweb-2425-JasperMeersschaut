@@ -4,7 +4,7 @@ import { axios } from '../../api/index.js';
 
 const contentURL = axios.defaults.contentURL;
 
-export default function WorkoutCard({ workout, onDelete,user }) {
+export default function WorkoutCard({ workout, onDelete,user, homepage }) {
 
   const currentUserId = user.id;
   const currentUserRoles = user.roles;
@@ -46,7 +46,7 @@ export default function WorkoutCard({ workout, onDelete,user }) {
           </div>
         </div>
       </Link>
-      {canEdit && (
+      {canEdit &&!homepage && (
         <div className="flex justify-end mt-4">
           <Link to={`/workouts/edit/${workout.id}`} className="btn btn-light" data-cy="workout_edit_btn">
             <IoPencilOutline />
