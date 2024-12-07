@@ -22,9 +22,11 @@ import ProfileSettings from './pages/profile/ProfileSettings.jsx';
 const router = createBrowserRouter([{
   element: <Layout />, 
   children: [ {
-    path: '/',
-    element: <App />,
-  },
+    path: '/',element:<PrivateRoute/>, 
+    children:[{
+      element: <App />,
+    },
+    ]},
   { path: 'workouts',element:<PrivateRoute/>, 
     children:[{
       index:true,
