@@ -13,7 +13,6 @@ export default function WorkoutList() {
   = useSWR('workouts/muscle-focuses', getAll);
   const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
   const { trigger: deleteWorkout, error: deleteError } = useSWRMutation('workouts', deleteById);
-  const currentUserId = user?.id;
 
   const [minDuration, setMinDuration] = useState('');
   const [maxDuration, setMaxDuration] = useState('');
@@ -115,7 +114,7 @@ export default function WorkoutList() {
         <AsyncData loading={workoutsLoading || userLoading} error={workoutError || userError}>
           {filteredWorkouts.map((workout) => (
             <WorkoutCard key={workout.id} workout={workout} 
-              onDelete={handleDeleteWorkout} currentUserId={currentUserId} />
+              onDelete={handleDeleteWorkout} user={user} />
           ))}
         </AsyncData>
       </div>

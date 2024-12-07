@@ -39,13 +39,15 @@ GetWorkoutById.validationScheme = {
   },
 };
 
-//createWorkout
-// Create Workout
 export const createWorkout = async (ctx: KoaContext<CreateWorkoutResponse, void, CreateWorkoutRequest>) => {
+  const { userId, roles } = ctx.state.session;
+  const isAdmin = roles.includes('admin');
+
   const workout = await workoutService.create({
     ...ctx.request.body,
-    createdBy: ctx.state.session.userId,
+    createdBy: isAdmin ? null : userId,
   });
+
   ctx.status = 201;
   ctx.body = workout;
 };
@@ -69,7 +71,6 @@ export const updateWorkoutById = async (ctx: KoaContext<UpdateWorkoutResponse, I
   const workout = await workoutService.updateById(ctx.params.id, userId, workoutData);
   ctx.body = workout;
 };
-
 updateWorkoutById.validationScheme = {
   params: {
     id: Joi.number().integer().positive().required(),

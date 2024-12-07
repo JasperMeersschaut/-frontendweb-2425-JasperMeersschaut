@@ -4,7 +4,11 @@ import { axios } from '../../api/index.js';
 
 const contentURL = axios.defaults.contentURL;
 
-export default function WorkoutCard({ workout, onDelete, currentUserId }) {
+export default function WorkoutCard({ workout, onDelete,user }) {
+
+  const currentUserId = user.id;
+  const currentUserRoles = user.roles;
+
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -20,6 +24,7 @@ export default function WorkoutCard({ workout, onDelete, currentUserId }) {
       onDelete(workout.id);
     }
   };
+  const canEdit = currentUserId === workout.createdBy || currentUserRoles.includes('admin');
 
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden p-4">
@@ -41,7 +46,7 @@ export default function WorkoutCard({ workout, onDelete, currentUserId }) {
           </div>
         </div>
       </Link>
-      {workout.createdBy === currentUserId && (
+      {canEdit && (
         <div className="flex justify-end mt-4">
           <Link to={`/workouts/edit/${workout.id}`} className="btn btn-light" data-cy="workout_edit_btn">
             <IoPencilOutline />
