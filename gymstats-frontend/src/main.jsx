@@ -17,6 +17,7 @@ import Login from './components/login.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import Logout from './pages/logout.jsx';
 import Register from './pages/Register.jsx';
+import ProfileSettings from './pages/profile/ProfileSettings.jsx';
 
 const router = createBrowserRouter([{
   element: <Layout />, 
@@ -73,6 +74,11 @@ const router = createBrowserRouter([{
       index:true,
       element: <Profile />,
     }]}, 
+  {path: 'profileSettings', element: <PrivateRoute/>,
+    children:[{
+      index:true,
+      element: <ProfileSettings />,
+    }]},
 
   { path: '/login', element: <Login /> }, 
   { path: '/logout', element: <Logout /> },

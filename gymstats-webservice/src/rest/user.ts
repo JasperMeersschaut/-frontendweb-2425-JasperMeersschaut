@@ -77,7 +77,6 @@ updateUserById.validationScheme = {
     birthdate: Joi.date().iso().less('now').required(),
     length: Joi.number().integer().positive().required(),
     weight: Joi.number().positive().required(),
-    password: Joi.string().min(8).required(),
   },
 };
 

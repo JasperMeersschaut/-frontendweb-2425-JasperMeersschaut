@@ -82,8 +82,8 @@ export default function Profile() {
         <NavLink className="btn bg-gray-200 border rounded mb-2 p-2 w-full" to="/workouts">
           My Workouts
         </NavLink>
-        <NavLink className="btn bg-gray-200 border rounded mb-2 p-2 w-full" to="/stats">
-          My Stats
+        <NavLink className="btn bg-gray-200 border rounded mb-2 p-2 w-full" to="/ProfileSettings">
+          Profile Settings
         </NavLink>
         <NavLink className="btn bg-gray-200 border rounded mb-2 p-2 w-full" to="/logout">
           Logout

@@ -26,7 +26,8 @@ export interface UserCreateInput {
 export interface PublicUser extends Pick<User, 'id' | 'name' | 'lastName' |'email'
 |'sex'|'birthdate'|'length'|'weight'|'roles'> {}
 //in cursus kan je geen wachtwoord updaten
-export interface UserUpdateInput extends Pick<UserCreateInput, 'name' | 'email'> {} 
+export interface UserUpdateInput extends Pick<UserCreateInput, 'name' | 'lastName' |'email'
+|'sex'|'birthdate'|'length'|'weight'> {} 
 
 export interface CreateUserRequest extends UserCreateInput {
   name: string;
