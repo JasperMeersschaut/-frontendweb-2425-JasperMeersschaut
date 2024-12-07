@@ -21,71 +21,72 @@ import ProfileSettings from './pages/profile/ProfileSettings.jsx';
 
 const router = createBrowserRouter([{
   element: <Layout />, 
-  children: [ {
-    path: '/',element:<PrivateRoute/>, 
-    children:[{
-      element: <App />,
-    },
-    ]},
-  { path: 'workouts',element:<PrivateRoute/>, 
-    children:[{
-      index:true,
-      element: <WorkoutList />,
-    },
-    ]  }, 
-  { path: 'exercises', element: <PrivateRoute/>,
-    children:[{
-      index:true,
-      element: <ExercisesList />,
-    },
-    ]},
+  children: [ 
+    { path: '/',element:<PrivateRoute/>, 
+      children:[{
+        index:true,
+        element: <App />,
+      },
+      ]  }, 
+    { path: 'workouts',element:<PrivateRoute/>, 
+      children:[{
+        index:true,
+        element: <WorkoutList />,
+      },
+      ]  }, 
+    { path: 'exercises', element: <PrivateRoute/>,
+      children:[{
+        index:true,
+        element: <ExercisesList />,
+      },
+      ]},
   
-  { path: 'exercises/:id', element: <PrivateRoute/>
-    ,children:[{
-      index:true,
-      element: <ExercisesLarge />,
-    }]},
-  { path: 'exercises/add',    element:<PrivateRoute/>
-    ,children:[{
-      index:true,
-      element: <AddOrEditExercise />,
-    }]},
-  { path: 'exercises/edit/:id',    element: <PrivateRoute/>
-    ,children:[{
-      index:true,
-      element: <AddOrEditExercise />,
-    }]},
+    { path: 'exercises/:id', element: <PrivateRoute/>
+      ,children:[{
+        index:true,
+        element: <ExercisesLarge />,
+      }]},
+    { path: 'exercises/add',    element:<PrivateRoute/>
+      ,children:[{
+        index:true,
+        element: <AddOrEditExercise />,
+      }]},
+    { path: 'exercises/edit/:id',    element: <PrivateRoute/>
+      ,children:[{
+        index:true,
+        element: <AddOrEditExercise />,
+      }]},
 
-  {path: 'workout/:id', element:<PrivateRoute/>,
-    children:[{
-      index:true,
-      element: <WorkoutLarge />,
-    }]},
-  { path: 'workouts/add',    element:<PrivateRoute/>
-    ,children:[{
-      index:true,
-      element: <AddOrEditWorkout />,
-    }]},
-  { path: 'workouts/edit/:id',    element: <PrivateRoute/>
-    ,children:[{
-      index:true,
-      element: <AddOrEditWorkout />,
-    }]},
-  { path: 'profile', element: <PrivateRoute/>,
-    children:[{
-      index:true,
-      element: <Profile />,
-    }]}, 
-  {path: 'profileSettings', element: <PrivateRoute/>,
-    children:[{
-      index:true,
-      element: <ProfileSettings />,
-    }]},
+    {path: 'workout/:id', element:<PrivateRoute/>,
+      children:[{
+        index:true,
+        element: <WorkoutLarge />,
+      }]},
+    { path: 'workouts/add',    element:<PrivateRoute/>
+      ,children:[{
+        index:true,
+        element: <AddOrEditWorkout />,
+      }]},
+    { path: 'workouts/edit/:id',    element: <PrivateRoute/>
+      ,children:[{
+        index:true,
+        element: <AddOrEditWorkout />,
+      }]},
+    { path: 'profile', element: <PrivateRoute/>,
+      children:[{
+        index:true,
+        element: <Profile />,
+      }]}, 
+    {path: 'profileSettings', element: <PrivateRoute/>,
+      children:[{
+        index:true,
+        element: <ProfileSettings />,
+      }]},
 
-  { path: '/login', element: <Login /> }, 
-  { path: '/logout', element: <Logout /> },
-  {    path: '/register',    element: <Register />  }, 
-  { path: '*', element: <NotFound /> } ],
+    { path: '/login', element: <Login /> }, 
+    { path: '/logout', element: <Logout /> },
+    {    path: '/register',    element: <Register />  }, 
+    { path: '*', element: <NotFound /> } ],
 },
 ]);
 
