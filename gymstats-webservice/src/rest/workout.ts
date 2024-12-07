@@ -86,7 +86,9 @@ updateWorkoutById.validationScheme = {
   },
 };
 export const deleteWorkout = async (ctx: KoaContext<void, IdParams>) => {
-  await workoutService.deleteById(ctx.params.id, ctx.state.session.userId);
+  const isAdmin =  ctx.state.session.roles.includes('admin');
+  
+  await workoutService.deleteById(ctx.params.id, ctx.state.session.userId,isAdmin);
   ctx.status = 204;
 };
 deleteWorkout.validationScheme = {

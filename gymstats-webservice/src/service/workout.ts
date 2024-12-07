@@ -87,11 +87,12 @@ export const updateById = async (id: number, userId: number, changes: WorkoutUpd
   }
 };
 
-export const deleteById = async (id: number, userId:number): Promise<void> => {
+export const deleteById = async (id: number, userId:number, isAdmin: boolean): Promise<void> => {
   try {
     await prisma.workout.delete({
       where: {
-        id,createdBy: userId,
+        id,
+        ...(isAdmin ? {} : { createdBy: userId }), 
       },
     });
   } catch (error) {
