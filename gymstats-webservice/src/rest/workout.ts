@@ -65,10 +65,11 @@ createWorkout.validationScheme = {
 // Update Workout
 export const updateWorkoutById = async (ctx: KoaContext<UpdateWorkoutResponse, IdParams, UpdateWorkoutRequest>) => {
   const userId = ctx.state.session.userId;
+  const isAdmin =  ctx.state.session.roles.includes('admin');
   const workoutData = {
     ...ctx.request.body,
   };
-  const workout = await workoutService.updateById(ctx.params.id, userId, workoutData);
+  const workout = await workoutService.updateById(ctx.params.id, userId, workoutData, isAdmin);
   ctx.body = workout;
 };
 updateWorkoutById.validationScheme = {
