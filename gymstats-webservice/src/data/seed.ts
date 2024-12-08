@@ -225,7 +225,6 @@ async function main() {
     console.log('Created exercises');
 
     console.log('Creating users...');
-    // Create Users
     await prisma.user.createMany({
       data: [
         {
@@ -257,7 +256,6 @@ async function main() {
     console.log('Created users');
 
     console.log('Creating workouts...');
-    // Create Workouts
     await prisma.workout.createMany({
       data: [
         {
@@ -291,7 +289,6 @@ async function main() {
       ],
     });
 
-    // Connect exercises to workouts
     await prisma.workout.update({
       where: { id: 1 },
       data: {

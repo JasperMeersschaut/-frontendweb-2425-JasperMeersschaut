@@ -1,13 +1,10 @@
-// src/components/PrivateRoute.jsx
-import { Navigate, Outlet, useLocation } from 'react-router-dom'; // 👈 3 en 4
-import { useAuth } from '../contexts/auth'; // 👈 2
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/auth';
 
-// 👇 1
 export default function PrivateRoute() {
-  const { ready, isAuthed } = useAuth(); // 👈 2
-  const { pathname } = useLocation(); // 👈 4
+  const { ready, isAuthed } = useAuth();
+  const { pathname } = useLocation();
 
-  // 👇 2
   if (!ready) {
     return (
       <div className='container'>
@@ -24,10 +21,9 @@ export default function PrivateRoute() {
     );
   }
 
-  // 👇 3
   if (isAuthed) {
     return <Outlet />;
   }
 
-  return <Navigate replace to={`/login?redirect=${pathname}`} />; // 👈 4
+  return <Navigate replace to={`/login?redirect=${pathname}`} />;
 }

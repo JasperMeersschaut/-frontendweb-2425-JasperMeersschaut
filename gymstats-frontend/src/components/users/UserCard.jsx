@@ -20,7 +20,6 @@ export default function UserCard({ user, onDelete, onUpdateRoles }) {
     console.log('isAdmin', isAdmin);
     console.log('user.roles', user.roles);
     
-    // Ensure user.roles is an array
     const currentRoles = typeof user.roles === 'string' ? JSON.parse(user.roles) : user.roles;
     
     const updatedRoles = isAdmin ? currentRoles.filter((role) => role !== 'admin') : [...currentRoles, 'admin'];

@@ -1,4 +1,3 @@
-// src/core/logging.ts
 import config from 'config';
 import winston from 'winston';
 const { combine, timestamp, colorize, printf } = winston.format;
@@ -36,7 +35,6 @@ const loggerFormat = () => {
   return combine(colorize(), timestamp(), printf(format));
 };
 
-// 👇 7
 const rootLogger: winston.Logger = winston.createLogger({
   level: LOG_LEVEL,
   format: loggerFormat(),

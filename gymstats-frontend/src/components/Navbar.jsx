@@ -29,16 +29,13 @@ export default function Navbar() {
           </NavLink>
         </div>
         {
-          // 👇 2
           isAuthed ? (
-            // 👇 3
             <div className='nav-item my-2 mx-sm-3 my-sm-0'>
               <Link className='nav-link' to='/logout' data-cy='logout_btn'>
                 Logout
               </Link>
             </div>
           ) : (
-            // 👇 4
             <div className='nav-item my-2 mx-sm-3 my-sm-0'>
               <Link className='nav-link' to='/login'>
                 Login

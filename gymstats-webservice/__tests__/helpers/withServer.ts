@@ -1,9 +1,9 @@
-import supertest from 'supertest'; // 👈 1
-import type { Server } from '../../src/createServer'; // 👈 2
-import createServer from '../../src/createServer'; // 👈 3
-import { prisma } from '../../src/data'; // 👈 4
-import { hashPassword } from '../../src/core/password'; // 👈 4
-import Role from '../../src/core/roles'; // 👈 4
+import supertest from 'supertest';
+import type { Server } from '../../src/createServer';
+import createServer from '../../src/createServer';
+import { prisma } from '../../src/data';
+import { hashPassword } from '../../src/core/password';
+import Role from '../../src/core/roles';
 
 export function withServer(setter:(r:supertest.Agent)=>void):void{
   let server:Server;

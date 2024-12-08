@@ -1,16 +1,13 @@
-// src/pages/Logout.jsx
-import { useEffect } from 'react'; // 👈 1
-import { useAuth } from '../contexts/auth'; // 👈 1
+import { useEffect } from 'react'; 
+import { useAuth } from '../contexts/auth';
 
 export default function Logout() {
-  const { isAuthed, logout } = useAuth(); // 👈 1
+  const { isAuthed, logout } = useAuth();
 
-  // 👇 1
   useEffect(() => {
     logout();
   }, [logout]);
 
-  // 👇 2
   if (isAuthed) {
     return (
       <div className='container'>
@@ -23,7 +20,6 @@ export default function Logout() {
     );
   }
 
-  // 👇 3
   return (
     <div className='container'>
       <div className='row'>

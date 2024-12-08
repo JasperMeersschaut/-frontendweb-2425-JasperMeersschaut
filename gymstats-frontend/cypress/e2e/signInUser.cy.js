@@ -18,7 +18,6 @@ describe('User Registration and Login', () => {
     cy.get('body').click(0, 0);
     cy.get('[data-cy=submit_btn]').click();
   
-    // Wait for user data to be fetched
     cy.wait('@getUser');
   
     // Sign in
