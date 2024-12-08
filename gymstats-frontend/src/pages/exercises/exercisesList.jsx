@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { getAll,getById,deleteById } from '../../api';
+import { getAll, getById, deleteById } from '../../api';
 import ExerciseCard from '../../components/exercises/ExerciseCard.jsx';
 import { Link } from 'react-router-dom';
 import AsyncData from '../../components/AsyncData.jsx';
@@ -9,8 +9,7 @@ import Error from '../../components/Error.jsx';
 
 export default function ExercisesList() {
   const { data: exercises = [], isLoading: exercisesLoading, error: exercisesError } = useSWR('exercises', getAll);
-  const { data: muscleGroups, isLoading: muscleGroupsLoading, error: muscleGroupsError } 
-  = useSWR('exercises/muscle-groups', getAll);
+  const { data: muscleGroups, isLoading: muscleGroupsLoading, error: muscleGroupsError } = useSWR('exercises/muscle-groups', getAll);
   const [selectedMuscleGroup, setSelectedMuscleGroup] = useState('');
   const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
   const { trigger: deleteExercise, error: deleteError } = useSWRMutation('exercises', deleteById);
@@ -71,13 +70,12 @@ export default function ExercisesList() {
   const currentUserRoles = user?.roles || [];
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto' data-cy='exercises_list'>
       <Error error={deleteError} />
       <AsyncData loading={userLoading} error={userError}>
-        {user && user.roles.includes('admin') &&(
+        {user && user.roles.includes('admin') && (
           <div className='flex justify-end'>
-            <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded" 
-              data-cy='create_exercises_btn'>
+            <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded" data-cy='create_exercises_btn'>
               Create New Exercise
             </Link>
           </div>
@@ -97,12 +95,12 @@ export default function ExercisesList() {
                 value={group}
                 checked={selectedMuscleGroup === group}
                 onChange={handleMuscleGroupChange}
+                data-cy={'muscle_group'}
               />
               <label
-                className={`cursor-pointer px-4 py-2 rounded ${
-                  selectedMuscleGroup === group ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
-                }`}
+                className={`cursor-pointer px-4 py-2 rounded ${selectedMuscleGroup === group ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
                 htmlFor={`muscleGroup-${group}`}
+                data-cy={'muscle_group_label'}
               >
                 {group}
               </label>
@@ -117,22 +115,24 @@ export default function ExercisesList() {
               value=""
               checked={selectedMuscleGroup === ''}
               onChange={handleAllMuscleGroups}
+              data-cy='muscle_group_all'
             />
             <label
               className={`cursor-pointer px-4 py-2 rounded ${
                 selectedMuscleGroup === '' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
               }`}
               htmlFor="muscleGroup-all"
+              data-cy='muscle_group_label_all'
             >
               All
             </label>
           </div>
         </AsyncData>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <AsyncData loading={exercisesLoading ||userLoading} error={exercisesError ||userError}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" data-cy='exercise_list'>
+        <AsyncData loading={exercisesLoading || userLoading} error={exercisesError || userError}>
           {sortedExercises.map((exercise) => (
-            <ExerciseCard key={exercise.id} exercise={exercise} onDelete={handleDeleteExercise} currentUserRoles={currentUserRoles}/>
+            <ExerciseCard key={exercise.id} exercise={exercise} onDelete={handleDeleteExercise} currentUserRoles={currentUserRoles} data-cy={`exercise_card_${exercise.id}`} />
           ))}
         </AsyncData>
       </div>
