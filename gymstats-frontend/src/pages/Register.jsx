@@ -78,7 +78,7 @@ export default function Register() {
       validate: (value) => value > 0 || 'Weight must be a positive number',
     },
   };
-
+  //TODO: fix error
   return (
     <FormProvider {...methods}>
       <div className="container mx-auto p-4">
@@ -96,6 +96,7 @@ export default function Register() {
             name="name"
             placeholder="Your Name"
             validationRules={validationRules.name}
+            data-cy="name_input"
           />
 
           <LabelInput
@@ -104,6 +105,7 @@ export default function Register() {
             name="lastName"
             placeholder="Your Last Name"
             validationRules={validationRules.lastName}
+            data-cy="lastName_input"
           />
 
           <LabelInput
@@ -112,6 +114,7 @@ export default function Register() {
             name="email"
             placeholder="your@email.com"
             validationRules={validationRules.email}
+            data-cy="email_input"
           />
 
           <LabelInput
@@ -120,6 +123,7 @@ export default function Register() {
             name="sex"
             placeholder="Your Sex"
             validationRules={validationRules.sex}
+            data-cy="sex_input"
           />
 
           <LabelInput
@@ -127,6 +131,7 @@ export default function Register() {
             type="password"
             name="password"
             validationRules={validationRules.password}
+            data-cy="password_input"
           />
 
           <LabelInput
@@ -134,6 +139,7 @@ export default function Register() {
             type="password"
             name="confirmPassword"
             validationRules={validationRules.confirmPassword}
+            data-cy="confirmPassword_input"
           />
 
           <LabelInput
@@ -141,6 +147,7 @@ export default function Register() {
             type="date"
             name="birthdate"
             validationRules={validationRules.birthdate}
+            data-cy="birthdate_input"
           />
 
           <LabelInput
@@ -149,6 +156,7 @@ export default function Register() {
             name="length"
             placeholder="Your Length in cm"
             validationRules={validationRules.length}
+            data-cy="length_input"
           />
 
           <LabelInput
@@ -157,6 +165,7 @@ export default function Register() {
             name="weight"
             placeholder="Your Weight in kg"
             validationRules={validationRules.weight}
+            data-cy="weight_input"
           />
 
           <div className="flex justify-end space-x-4">
@@ -164,6 +173,7 @@ export default function Register() {
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               disabled={loading}
+              data-cy="submit_btn"
             >
               Register
             </button>
@@ -172,6 +182,7 @@ export default function Register() {
               type="button"
               className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               onClick={handleCancel}
+              data-cy="cancel_btn"
             >
               Cancel
             </button>

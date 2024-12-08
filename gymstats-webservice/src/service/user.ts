@@ -1,4 +1,4 @@
-import { prisma } from '../data'; //TODO: nachecken of alles klopt
+import { prisma } from '../data';
 import type { User, UserCreateInput, UserUpdateInput,PublicUser } from '../types/user';
 import ServiceError from '../core/serviceError';
 import handleDBError from './_handleDBError';
@@ -74,9 +74,17 @@ export const getById = async (id: number): Promise<PublicUser> => {
 export const register = async ({name,lastName,email,sex,password,birthdate,length,weight}:UserCreateInput): 
 Promise<string> => {
   const passwordHash = await hashPassword(password);
-  const user = await prisma.user.create({
-    data: {name,lastName,email,sex,birthdate,length,weight,password_hash:passwordHash,roles:['user']}});
-  return await generateJWT(user);
+  try {
+    const user = await prisma.user.create({
+      data: {name,lastName,email,sex,birthdate,length,weight,password_hash:passwordHash,roles:['user']},
+    });
+    return await generateJWT(user);
+  } catch (error) {
+    if (error) {
+      handleDBError(error);
+    }
+    throw error;
+  }
 };
 
 export const updateById = async (id: number, changes: UserUpdateInput): Promise<PublicUser> => {
