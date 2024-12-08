@@ -5,9 +5,16 @@ import { FormProvider } from 'react-hook-form';
 import { useAuth } from '../contexts/auth.js';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Error from './Error.jsx';
+import { NavLink } from 'react-router-dom';
 
 const validationRules = {
-  email: { required: 'Email is required' },
+  email: {
+    required: 'Email is required',
+    pattern: {
+      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+      message: 'Invalid email address',
+    },
+  },
   password: { required: 'Password is required' },
 };
 
@@ -53,15 +60,25 @@ export default function Login() {
             validationRules={validationRules.password}
             data-cy='password_input'
           />
-          <div className='clearfix'>
-            <div className='flex justify-end'>
-              <button type='submit' className='bg-blue-500 hover:bg-blue-700 
-              text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' data-cy='submit_btn'>
+          <div className="flex justify-between items-center">
+            <NavLink className="text-blue-800 mb-2 p-2" to="/register">
+              New here? Sign up!
+            </NavLink>
+            <div className="flex items-center">
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white
+                 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                data-cy="submit_btn"
+              >
                 Sign in
               </button>
-              <button type='button' className='ml-4 bg-gray-200 
-              hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 
-              rounded focus:outline-none focus:shadow-outline' onClick={handleCancel} >
+              <button
+                type="button"
+                className="ml-4 bg-gray-200 hover:bg-gray-300 
+                text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={handleCancel}
+              >
                 Cancel
               </button>
             </div>
