@@ -19,6 +19,9 @@ import Logout from './pages/logout.jsx';
 import Register from './pages/Register.jsx';
 import ProfileSettings from './pages/profile/ProfileSettings.jsx';
 import UserConfiguration from './pages/UserConfiguration.jsx';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 const router = createBrowserRouter([{
   element: <Layout />, 

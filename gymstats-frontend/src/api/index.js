@@ -69,3 +69,8 @@ export const post=async(url,{arg})=>{
 export const deleteById = async (url, { arg: id }) => {
   await axios.delete(`${url}/${id}`);
 };
+
+export const updateRoleById = async (url, { arg: body }) => {
+  const { id, roles } = body;
+  await axios.put(`${url}/${id}/roles`, { roles });
+};
