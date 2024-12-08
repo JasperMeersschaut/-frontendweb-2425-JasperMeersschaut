@@ -1,4 +1,5 @@
 import { prisma } from '../data';
+import { prisma } from '../data';
 import type { User, UserCreateInput, UserUpdateInput,PublicUser } from '../types/user';
 import ServiceError from '../core/serviceError';
 import handleDBError from './_handleDBError';
@@ -7,6 +8,7 @@ import jwt from 'jsonwebtoken';
 import { getLogger } from '../core/logging'; 
 import { generateJWT, verifyJWT } from '../core/jwt'; 
 import type { SessionInfo } from '../types/auth';
+import Role from '../core/roles';
 
 export const checkAndParseSession = async (
   authHeader?: string,
@@ -57,8 +59,10 @@ const makeExposedUser=({id,name,lastName,email,sex,birthdate,length,weight,roles
 };
 
 export const getAll = async (): Promise<PublicUser[]> => {
+ 
   const users = await prisma.user.findMany();
   return users.map(makeExposedUser);
+ 
 };
 
 export const getById = async (id: number): Promise<PublicUser> => {
@@ -76,7 +80,8 @@ Promise<string> => {
   const passwordHash = await hashPassword(password);
   try {
     const user = await prisma.user.create({
-      data: {name,lastName,email,sex,birthdate,length,weight,password_hash:passwordHash,roles:['user']},
+      data: {name,lastName,email,sex,birthdate,length,weight,password_hash:passwordHash
+        ,roles: JSON.stringify([Role.USER])},
     });
     return await generateJWT(user);
   } catch (error) {
