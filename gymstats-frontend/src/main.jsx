@@ -18,6 +18,7 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 import Logout from './pages/logout.jsx';
 import Register from './pages/Register.jsx';
 import ProfileSettings from './pages/profile/ProfileSettings.jsx';
+import UserConfiguration from './pages/UserConfiguration.jsx';
 
 const router = createBrowserRouter([{
   element: <Layout />, 
@@ -82,6 +83,11 @@ const router = createBrowserRouter([{
         index:true,
         element: <ProfileSettings />,
       }]},
+    {
+      path: 'user-configuration',
+      element: <PrivateRoute roles={['admin']} />,
+      children: [{ index: true, element: <UserConfiguration /> }],
+    },
 
     { path: '/login', element: <Login /> }, 
     { path: '/logout', element: <Logout /> },

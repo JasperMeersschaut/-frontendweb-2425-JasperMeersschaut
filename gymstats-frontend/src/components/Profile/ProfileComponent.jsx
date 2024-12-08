@@ -50,6 +50,11 @@ const ProfileComponent = ({ user, bmiData, contentURL, handleImageError }) => {
         <NavLink className="btn bg-gray-200 border rounded mb-2 p-2 w-full" to="/ProfileSettings">
           Profile Settings
         </NavLink>
+        {user?.roles.includes('admin') && (
+          <NavLink className="btn bg-gray-200 border rounded mb-2 p-2 w-full" to="/user-configuration" data-cy="user_configuration_btn">
+            User Configuration
+          </NavLink>
+        )}
         <NavLink className="btn bg-gray-200 border rounded mb-2 p-2 w-full" to="/logout">
           Logout
         </NavLink>
