@@ -1,5 +1,4 @@
 import { prisma } from '../data';
-import { prisma } from '../data';
 import type { User, UserCreateInput, UserUpdateInput,PublicUser } from '../types/user';
 import ServiceError from '../core/serviceError';
 import handleDBError from './_handleDBError';
@@ -9,6 +8,7 @@ import { getLogger } from '../core/logging';
 import { generateJWT, verifyJWT } from '../core/jwt'; 
 import type { SessionInfo } from '../types/auth';
 import Role from '../core/roles';
+import type { JsonValue } from '@prisma/client/runtime/library';
 
 export const checkAndParseSession = async (
   authHeader?: string,
@@ -97,6 +97,18 @@ export const updateById = async (id: number, changes: UserUpdateInput): Promise<
     const user = await prisma.user.update({
       where: { id },
       data: changes,
+    });
+    return makeExposedUser(user);
+  } catch (error) {
+    throw handleDBError(error);
+  }
+};
+
+export const updateRolesById = async (id: number, roles: JsonValue): Promise<PublicUser> => {
+  try {
+    const user = await prisma.user.update({
+      where: { id },
+      data: { roles: JSON.stringify(roles) },
     });
     return makeExposedUser(user);
   } catch (error) {

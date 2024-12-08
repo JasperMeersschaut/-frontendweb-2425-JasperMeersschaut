@@ -16,6 +16,7 @@ import type {
 import type { IdParams } from '../types/common'; 
 import { requireAuthentication, makeRequireRole } from '../core/auth';
 import Role from '../core/roles';
+import { updateRolesById } from '../service/user';
 
 //getAll
 const getAllUsers = async (ctx: KoaContext<GetAllUsersResponse>) => {
@@ -80,6 +81,19 @@ updateUserById.validationScheme = {
   },
 };
 
+export const updateUserRoleById = async (ctx: KoaContext<UpdateUserResponse, IdParams, UpdateUserRequest>) => {
+  const user = await updateRolesById(ctx.params.id, ctx.request.body.roles);
+  ctx.body = user;
+};
+updateUserRoleById.validationScheme = {
+  params: {
+    id: Joi.number().integer().positive().required(),
+  },
+  body: {
+    roles: Joi.array().items(Joi.string().valid('user', 'admin')).required(),
+  },
+};
+
 // Delete user 
 const deleteUserById = async (ctx: KoaContext<void, IdParams>) => {
   await userService.deleteById(ctx.params.id);
@@ -101,6 +115,7 @@ export default (parent: KoaRouter) => {
   router.post('/', validate(createUser.validationScheme), createUser);
   router.get('/:id', requireAuthentication, validate(getUserById.validationScheme),getUserById) ;
   router.put('/:id', requireAuthentication,validate(updateUserById.validationScheme), updateUserById);
+  router.put('/:id/roles', requireAuthentication,validate(updateUserRoleById.validationScheme), updateUserRoleById);
   router.delete('/:id', requireAuthentication, validate(deleteUserById.validationScheme), deleteUserById);
 
   parent.use(router.routes()).use(router.allowedMethods());

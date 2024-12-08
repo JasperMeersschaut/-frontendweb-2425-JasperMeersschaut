@@ -22,6 +22,7 @@ export interface UserCreateInput {
   length: number;
   weight: number;
   password: string;
+  roles:Prisma.JsonValue;
 }
 export interface PublicUser extends Pick<User, 'id' | 'name' | 'lastName' |'email'
 |'sex'|'birthdate'|'length'|'weight'|'roles'> {}
@@ -39,7 +40,7 @@ export interface CreateUserRequest extends UserCreateInput {
   length: number;
 }
 export interface UpdateUserRequest extends Pick<CreateUserRequest, 'name' | 'lastName' |'email'
-|'sex'|'birthdate'|'length'|'weight'> {}
+|'sex'|'birthdate'|'length'|'weight' | 'roles' > {}
 
 export interface GetAllUsersResponse extends ListResponse<PublicUser> {}
 export interface GetUserByIdResponse extends PublicUser {}
