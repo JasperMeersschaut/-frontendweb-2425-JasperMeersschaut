@@ -1,4 +1,3 @@
-import Error from '../components/Error.jsx';
 import UserList from '../components/users/UserList.jsx';
 const UserConfiguration = () => {
 
