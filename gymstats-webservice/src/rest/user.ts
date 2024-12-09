@@ -1,3 +1,4 @@
+import type { Next } from 'koa';
 import Router from '@koa/router';
 import * as userService from '../service/user';
 import type { GymStatsAppContext, GymStatsAppState } from '../types/koa';
@@ -17,6 +18,21 @@ import type { IdParams } from '../types/common';
 import { requireAuthentication, makeRequireRole } from '../core/auth';
 import Role from '../core/roles';
 import { updateRolesById } from '../service/user';
+
+const checkUserId = (ctx: KoaContext<unknown, GetUserRequest>, next: Next) => {
+  const { userId, roles } = ctx.state.session;
+  const { id } = ctx.params;
+
+  // You can only get our own data unless you're an admin
+  if (id !== 'me' && id !== userId && !roles.includes(Role.ADMIN)) {
+    return ctx.throw(
+      403,
+      'You are not allowed to view this user\'s information',
+      { code: 'FORBIDDEN' },
+    );
+  }
+  return next();
+};
 
 //getAll
 const getAllUsers = async (ctx: KoaContext<GetAllUsersResponse>) => {
@@ -113,10 +129,11 @@ export default (parent: KoaRouter) => {
 
   router.get('/', requireAuthentication, requireAdmin, validate(getAllUsers.validationScheme), getAllUsers);
   router.post('/', validate(createUser.validationScheme), createUser);
-  router.get('/:id', requireAuthentication, validate(getUserById.validationScheme),getUserById) ;
-  router.put('/:id', requireAuthentication,validate(updateUserById.validationScheme), updateUserById);
-  router.put('/:id/roles', requireAuthentication,validate(updateUserRoleById.validationScheme), updateUserRoleById);
-  router.delete('/:id', requireAuthentication, validate(deleteUserById.validationScheme), deleteUserById);
+  router.get('/:id', requireAuthentication, validate(getUserById.validationScheme),checkUserId,getUserById) ;
+  router.put('/:id', requireAuthentication,validate(updateUserById.validationScheme),checkUserId, updateUserById);
+  router.put('/:id/roles', requireAuthentication,validate(updateUserRoleById.validationScheme),checkUserId
+    , updateUserRoleById);
+  router.delete('/:id', requireAuthentication, validate(deleteUserById.validationScheme),checkUserId, deleteUserById);
 
   parent.use(router.routes()).use(router.allowedMethods());
 };
