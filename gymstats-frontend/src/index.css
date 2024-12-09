@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  padding: 50px;
-  overflow-y: scroll;
-}
+
 .modal {
   position: absolute;
   top: 50%;
