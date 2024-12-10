@@ -109,7 +109,6 @@ export default function Register() {
       },
     },
   };
-  //TODO: fix error
   return (
     <FormProvider {...methods}>
       <div className="container mx-auto p-4">
