@@ -71,8 +71,8 @@ createUser.validationScheme={
     email: Joi.string().email().required(),
     sex: Joi.string().valid('Male', 'Female').required(),
     birthdate: Joi.date().iso().less('now').required(),
-    length: Joi.number().integer().positive().required(),
-    weight: Joi.number().positive().required(),
+    length: Joi.number().integer().positive().required().less(300),
+    weight: Joi.number().positive().required().less(300),
     password: Joi.string().min(8).required(),
   },
 };
@@ -92,8 +92,8 @@ updateUserById.validationScheme = {
     email: Joi.string().email().required(),
     sex: Joi.string().valid('Male', 'Female').required(),
     birthdate: Joi.date().iso().less('now').required(),
-    length: Joi.number().integer().positive().required(),
-    weight: Joi.number().positive().required(),
+    length: Joi.number().integer().positive().required().less(300),
+    weight: Joi.number().positive().required().less(300),
   },
 };
 

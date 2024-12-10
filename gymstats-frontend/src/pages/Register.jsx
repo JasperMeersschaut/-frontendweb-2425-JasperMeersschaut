@@ -37,8 +37,28 @@ export default function Register() {
   );
 
   const validationRules = {
-    name: { required: 'Name is required' },
-    lastName: { required: 'Last Name is required' },
+    name: {
+      required: 'Name is required',
+      minLength: {
+        value: 1,
+        message: 'Name must be at least 1 character long',
+      },
+      maxLength: {
+        value: 50,
+        message: 'Name must be at most 50 characters long',
+      },
+    },
+    lastName: {
+      required: 'Last Name is required',
+      minLength: {
+        value: 1,
+        message: 'Last Name must be at least 1 character long',
+      },
+      maxLength: {
+        value: 50,
+        message: 'Last Name must be at most 50 characters long',
+      },
+    },
     email: {
       required: 'Email is required',
       pattern: {
@@ -46,7 +66,10 @@ export default function Register() {
         message: 'Invalid email address',
       },
     },
-    sex: { required: 'Sex is required' },
+    sex: {
+      required: 'Sex is required',
+      validate: (value) => ['Male', 'Female'].includes(value) || 'Should be Male or Female',
+    },
     password: {
       required: 'Password is required',
       minLength: {
@@ -71,11 +94,19 @@ export default function Register() {
     },
     length: {
       required: 'Length is required',
-      validate: (value) => value > 0 || 'Length must be a positive number',
+      validate: (value) => {
+        if (value <= 0) return 'Length must be a positive number';
+        if (value >= 300) return 'Length must be less than 300 cm';
+        return true;
+      },
     },
     weight: {
       required: 'Weight is required',
-      validate: (value) => value > 0 || 'Weight must be a positive number',
+      validate: (value) => {
+        if (value <= 0) return 'Weight must be a positive number';
+        if (value >= 300) return 'Weight must be less than 300 kg';
+        return true;
+      },
     },
   };
   //TODO: fix error
@@ -87,8 +118,7 @@ export default function Register() {
           onSubmit={handleSubmit(handleRegister)}
         >
           <h1 className="text-3xl font-bold mb-4">Register</h1>
-
-          {error && <Error error={error} />}
+          <Error error={error} />
 
           <LabelInput
             label="Name"
