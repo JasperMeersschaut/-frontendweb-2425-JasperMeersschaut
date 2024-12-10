@@ -46,7 +46,6 @@ const getUserById = async (ctx: KoaContext<GetUserByIdResponse, GetUserRequest>)
   const user = await userService.getById(
     ctx.params.id === 'me' ? ctx.state.session.userId : ctx.params.id,
   );
-  ctx.status = 200;
   ctx.body = user;
 };
 getUserById.validationScheme = {
@@ -71,8 +70,8 @@ createUser.validationScheme={
     email: Joi.string().email().required(),
     sex: Joi.string().valid('Male', 'Female').required(),
     birthdate: Joi.date().iso().less('now').required(),
-    length: Joi.number().integer().positive().required(),
-    weight: Joi.number().positive().required(),
+    length: Joi.number().integer().positive().required().less(300),
+    weight: Joi.number().positive().required().less(300),
     password: Joi.string().min(8).required(),
   },
 };
@@ -92,8 +91,8 @@ updateUserById.validationScheme = {
     email: Joi.string().email().required(),
     sex: Joi.string().valid('Male', 'Female').required(),
     birthdate: Joi.date().iso().less('now').required(),
-    length: Joi.number().integer().positive().required(),
-    weight: Joi.number().positive().required(),
+    length: Joi.number().integer().positive().required().less(300),
+    weight: Joi.number().positive().required().less(300),
   },
 };
 

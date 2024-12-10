@@ -19,15 +19,53 @@ export default function WorkoutForm({ muscleFocuses = [], workout = EMPTY_WORKOU
   const validationRules = {
     type: {
       required: 'Type is required',
+      minLength: {
+        value: 1,
+        message: 'Type must be at least 1 character',
+      },
+      maxLength: {
+        value: 50,
+        message: 'Type must be at most 50 characters',
+      },
     },
     muscleFocus: {
       required: 'Muscle Focus is required',
+      minLength: {
+        value: 1,
+        message: 'Muscle Focus must be at least 1 character',
+      },
+      maxLength: {
+        value: 50,
+        message: 'Muscle Focus must be at most 50 characters',
+      },
     },
     duration: {
       required: 'Duration is required',
-      min: {
-        value: 1,
-        message: 'Duration must be at least 1 minute',
+      validate: (value) => {
+        if (!Number.isInteger(value)) {
+          return 'Duration must be an integer';
+        }
+        if (value < 1) {
+          return 'Duration must be at least 1 minute';
+        }
+        if (value > 1000) {
+          return 'Duration must be at most 1000 minutes';
+        }
+        return true;
+      },
+    },
+    items: {
+      required: 'Items are required',
+      validate: (items) => {
+        if (!Array.isArray(items)) {
+          return 'Items must be an array';
+        }
+        for (const item of items) {
+          if (typeof item.id !== 'number' || item.id <= 0) {
+            return 'Each item must have a positive integer id';
+          }
+        }
+        return true;
       },
     },
   };
