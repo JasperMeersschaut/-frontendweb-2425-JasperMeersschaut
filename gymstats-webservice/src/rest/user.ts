@@ -46,7 +46,6 @@ const getUserById = async (ctx: KoaContext<GetUserByIdResponse, GetUserRequest>)
   const user = await userService.getById(
     ctx.params.id === 'me' ? ctx.state.session.userId : ctx.params.id,
   );
-  ctx.status = 200;
   ctx.body = user;
 };
 getUserById.validationScheme = {
