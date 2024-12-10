@@ -1,4 +1,4 @@
-import { prisma } from '../data'; //TODO: nachecken of alles klopt
+import { prisma } from '../data';
 import type { Exercise, ExerciseUpdateInput, ExerciseCreateInput } from '../types/exercise';
 import ServiceError from '../core/serviceError';
 import handleDBError from './_handleDBError';

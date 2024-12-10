@@ -27,15 +27,11 @@ getAllExercises.validationScheme=null;
 const getExerciseById = async (ctx: KoaContext<GetExerciseByIdResponse, IdParams>) => {
   const id = Number(ctx.params.id);
   const exercise = await exerciseService.getById(id);
-  if (exercise) {
-    ctx.body = exercise;
-  } else {
-    ctx.status = 404;
-  }
+  ctx.body = exercise;
 };
 getExerciseById.validationScheme = {
   params: {
-    id: Joi.number().integer().positive(),
+    id: Joi.number().integer().positive().required(),
   },
 };
 
