@@ -3,6 +3,7 @@ import installExerciseRouter from './exercise';
 import installUserRouter from './user';
 import installWorkoutRouter from './workout';
 import installSessionRouter from './session';
+import installBmiRouter from './bmi';
 import type { GymStatsAppContext, GymStatsAppState, KoaApplication } from '../types/koa';
 
 export default (app: KoaApplication) => {
@@ -14,6 +15,7 @@ export default (app: KoaApplication) => {
   installUserRouter(router);
   installWorkoutRouter(router);
   installSessionRouter(router);
+  installBmiRouter(router);
 
   app.use(router.routes()).use(router.allowedMethods());
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { axios } from '../../api/index.js';
+import { axios, fetchBmi } from '../../api/index.js';
 import useSWR from 'swr';
 import AsyncData from '../../components/AsyncData.jsx';
 import ProfileComponent from '../../components/Profile/ProfileComponent.jsx';
@@ -13,9 +13,9 @@ export default function Profile() {
   const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
 
   useEffect(() => {
-    const fetchBmi = async () => {
+    const fetchBmiData = async () => {
       try {
-        const { data } = await axios.get(`/bmi/${user.id}`);
+        const data = await fetchBmi(user.weight, user.length);
         setBmiData(data);
       } catch (error) {
         console.error('Error fetching BMI data:', error);
@@ -23,7 +23,7 @@ export default function Profile() {
     };
 
     if (user) {
-      fetchBmi();
+      fetchBmiData();
     }
   }, [user]);
 
