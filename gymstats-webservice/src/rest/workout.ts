@@ -27,11 +27,7 @@ getAllWorkouts.validationScheme = null;
 const GetWorkoutById = async (ctx: KoaContext<GetWorkoutByIdResponse, IdParams>) => {
   const id = ctx.params.id;
   const exercise = await workoutService.getById(id, ctx.state.session.userId);
-  if (exercise) {
-    ctx.body = exercise;
-  } else {
-    ctx.status = 404;
-  }
+  ctx.body = exercise;
 };
 GetWorkoutById.validationScheme = {
   params: {
@@ -47,14 +43,13 @@ export const createWorkout = async (ctx: KoaContext<CreateWorkoutResponse, void,
     ...ctx.request.body,
     createdBy: isAdmin ? null : userId,
   });
-
   ctx.status = 201;
   ctx.body = workout;
 };
 createWorkout.validationScheme = {
   body: {
     type: Joi.string().min(1).max(50).required(),
-    duration: Joi.number().integer().positive().required(),
+    duration: Joi.number().integer().positive().required().max(1000),
     muscleFocus: Joi.string().min(1).max(50).required(),
     items: Joi.array().items(Joi.object({
       id: Joi.number().integer().positive().required(),
@@ -78,13 +73,14 @@ updateWorkoutById.validationScheme = {
   },
   body: {
     type: Joi.string().min(1).max(50).required(),
-    duration: Joi.number().integer().positive().required(),
+    duration: Joi.number().integer().positive().required().max(1000),
     muscleFocus: Joi.string().min(1).max(50).required(),
     items: Joi.array().items(Joi.object({
       id: Joi.number().integer().positive().required(),
     })).required(),
   },
 };
+
 export const deleteWorkout = async (ctx: KoaContext<void, IdParams>) => {
   const isAdmin =  ctx.state.session.roles.includes('admin');
   
@@ -93,7 +89,7 @@ export const deleteWorkout = async (ctx: KoaContext<void, IdParams>) => {
 };
 deleteWorkout.validationScheme = {
   params: {
-    id: Joi.number().integer().positive(),
+    id: Joi.number().integer().positive().required(),
   },
 };
 

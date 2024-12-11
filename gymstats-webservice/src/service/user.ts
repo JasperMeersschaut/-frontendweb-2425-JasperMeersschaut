@@ -85,10 +85,8 @@ Promise<string> => {
     });
     return await generateJWT(user);
   } catch (error) {
-    if (error) {
-      handleDBError(error);
-    }
-    throw error;
+    throw handleDBError(error);
+    ;
   }
 };
 

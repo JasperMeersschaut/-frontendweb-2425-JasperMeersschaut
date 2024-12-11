@@ -33,7 +33,8 @@ export default function UserCard({ user, onDelete, onUpdateRoles }) {
 
   return (
     <div className="p-4" data-cy={`user_card_${user.id}`}>
-      <div className="bg-white shadow-md rounded-lg overflow-hidden flex items-center justify-between border-2">
+      <div className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col 
+      sm:flex-row items-start sm:items-center justify-between border-2">
         <div className="flex-grow p-4">
           <div className="text-lg font-medium text-black no-underline" data-cy={`user_name_${user.id}`}>
             <h5>{user.name} {user.lastName}</h5>

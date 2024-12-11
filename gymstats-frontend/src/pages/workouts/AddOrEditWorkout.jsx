@@ -5,7 +5,7 @@ import useSWRMutation from 'swr/mutation';
 import WorkoutForm from '../../components/workouts/WorkoutForm.jsx';
 import AsyncData from '../../components/AsyncData.jsx';
 
-export default function AddOrEditExercise() {
+export default function AddOrEditWorkout() {
   const { id } = useParams();
 
   const {
@@ -30,7 +30,7 @@ export default function AddOrEditExercise() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">{id ? 'Edit' : 'Add'} Exercise</h1>
+      <h1 className="text-3xl font-bold mb-4">{id ? 'Edit' : 'Add'} Workout</h1>
       <AsyncData
         error={workoutError || muscleFocusError || saveError ||userError}
         loading={workoutsLoading || muscleFocusLoading ||userLoading}

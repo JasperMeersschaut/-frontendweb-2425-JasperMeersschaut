@@ -1,8 +1,8 @@
 # Dossier
 
-> Duid aan welke vakken je volgt en vermeld voor deze vakken de link naar jouw GitHub repository. In het geval je slechts één vak volgt, verwijder alle inhoud omtrent het andere vak uit dit document.
+<!-- > Duid aan welke vakken je volgt en vermeld voor deze vakken de link naar jouw GitHub repository. In het geval je slechts één vak volgt, verwijder alle inhoud omtrent het andere vak uit dit document.
 > Lees <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet> om te weten hoe een Markdown-bestand opgemaakt moet worden.
-> Verwijder alle instructies (lijnen die starten met >).
+> Verwijder alle instructies (lijnen die starten met >). -->
 
 - Student: Jasper Meersschaut
 - Studentennummer: 202396570
@@ -10,23 +10,29 @@
 - Demo: <DEMO_LINK_HIER>
 - GitHub-repository: [GitHub Repository](https://github.com/HOGENT-frontendweb/frontendweb-2425-JasperMeersschaut)
 - Front-end Web Development
-  - Online versie: <LINK_ONLINE_VERSIE_HIER>
+  - Online versie: https://frontendweb-jaspermeersschaut.onrender.com
 - Web Services:
-  - Online versie: <LINK_ONLINE_VERSIE_HIER>
+  - Online versie: https://webservices-jaspermeersschaut.onrender.com
 
 ## Logingegevens
 
 ### Lokaal
+#### Admin:
+- Gebruikersnaam/e-mailadres: meersschaut.jasper@gmail.com
+- Wachtwoord: 12345678
 
-- Gebruikersnaam/e-mailadres:
-- Wachtwoord:
+#### User:
+- Gebruikersnaam/e-mailadres: marie.dubois@example.com
+- Wachtwoord: 12345678
 
 ### Online
+#### Admin:
+- Gebruikersnaam/e-mailadres: meersschaut.jasper@gmail.com
+- Wachtwoord: 12345678
 
-- Gebruikersnaam/e-mailadres:
-- Wachtwoord:
-
-> Vul eventueel aan met extra accounts voor administrators of andere rollen.
+#### User:
+- Gebruikersnaam/e-mailadres: marie.dubois@example.com
+- Wachtwoord: 12345678
 
 ## Projectbeschrijving
 
@@ -58,20 +64,20 @@ https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2
 #### Componenten
 
 - [ ] heeft meerdere componenten - dom & slim (naast login/register)
-- [ ] applicatie is voldoende complex
+- [x] applicatie is voldoende complex
 - [ ] definieert constanten (variabelen, functies en componenten) buiten de component
 - [ ] minstens één form met meerdere velden met validatie (naast login/register)
 - [ ] login systeem
 
 #### Routing
 
-- [ ] heeft minstens 2 pagina's (naast login/register)
-- [ ] routes worden afgeschermd met authenticatie en autorisatie
+- [x] heeft minstens 2 pagina's (naast login/register)
+- [x] routes worden afgeschermd met authenticatie en autorisatie
 
 #### State management
 
-- [ ] meerdere API calls (naast login/register)
-- [ ] degelijke foutmeldingen indien API-call faalt
+- [x] meerdere API calls (naast login/register)
+- [x] degelijke foutmeldingen indien API-call faalt
 - [ ] gebruikt useState enkel voor lokale state
 - [ ] gebruikt gepast state management voor globale state - indien van toepassing
 
@@ -82,59 +88,59 @@ https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2
 #### Algemeen
 
 - [ ] een aantal niet-triviale én werkende e2e testen
-- [ ] minstens één extra technologie
+- [x] minstens één extra technologie
 - [ ] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
-- [ ] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
+- [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
 - [ ] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
-- [ ] de applicatie draait online
+- [x] de applicatie draait online
 - [ ] duidelijke en volledige README.md
-- [ ] er werden voldoende (kleine) commits gemaakt
-- [ ] volledig en tijdig ingediend dossier
+- [x] er werden voldoende (kleine) commits gemaakt
+- [x] volledig en tijdig ingediend dossier
 
 ### Web Services
 
 #### Datalaag
 
-- [ ] voldoende complex en correct (meer dan één tabel (naast de user tabel), tabellen bevatten meerdere kolommen, 2 een-op-veel of veel-op-veel relaties)
-- [ ] één module beheert de connectie + connectie wordt gesloten bij sluiten server
-- [ ] heeft migraties - indien van toepassing
-- [ ] heeft seeds
+- [x] voldoende complex en correct (meer dan één tabel (naast de user tabel), tabellen bevatten meerdere kolommen, 2 een-op-veel of veel-op-veel relaties)
+- [x] één module beheert de connectie + connectie wordt gesloten bij sluiten server
+- [x] heeft migraties - indien van toepassing
+- [x] heeft seeds
 
 #### Repositorylaag
 
-- [ ] definieert één repository per entiteit - indien van toepassing
-- [ ] mapt OO-rijke data naar relationele tabellen en vice versa - indien van toepassing
+- [x] definieert één repository per entiteit - indien van toepassing
+- [x] mapt OO-rijke data naar relationele tabellen en vice versa - indien van toepassing
 - [ ] er worden kindrelaties opgevraagd (m.b.v. JOINs) - indien van toepassing
 
 #### Servicelaag met een zekere complexiteit
 
-- [ ] bevat alle domeinlogica
-- [ ] er wordt gerelateerde data uit meerdere tabellen opgevraagd
-- [ ] bevat geen services voor entiteiten die geen zin hebben zonder hun ouder (bv. tussentabellen)
-- [ ] bevat geen SQL-queries of databank-gerelateerde code
+- [x] bevat alle domeinlogica
+- [x] er wordt gerelateerde data uit meerdere tabellen opgevraagd
+- [x] bevat geen services voor entiteiten die geen zin hebben zonder hun ouder (bv. tussentabellen)
+- [x] bevat geen SQL-queries of databank-gerelateerde code
 
 #### REST-laag
 
-- [ ] meerdere routes met invoervalidatie
-- [ ] meerdere entiteiten met alle CRUD-operaties
-- [ ] degelijke foutboodschappen
-- [ ] volgt de conventies van een RESTful API
-- [ ] bevat geen domeinlogica
-- [ ] geen API calls voor entiteiten die geen zin hebben zonder hun ouder (bv. tussentabellen)
-- [ ] degelijke autorisatie/authenticatie op alle routes
+- [x] meerdere routes met invoervalidatie
+- [x] meerdere entiteiten met alle CRUD-operaties
+- [x] degelijke foutboodschappen
+- [x] volgt de conventies van een RESTful API
+- [x] bevat geen domeinlogica
+- [x] geen API calls voor entiteiten die geen zin hebben zonder hun ouder (bv. tussentabellen)
+- [x] degelijke autorisatie/authenticatie op alle routes
 
 #### Algemeen
 
-- [ ] er is een minimum aan logging en configuratie voorzien
-- [ ] een aantal niet-triviale én werkende integratietesten (min. 1 entiteit in REST-laag >= 90% coverage, naast de user testen)
-- [ ] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
+- [x] er is een minimum aan logging en configuratie voorzien
+- [x] een aantal niet-triviale én werkende integratietesten (min. 1 entiteit in REST-laag >= 90% coverage, naast de user testen)
+- [x] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
 - [ ] minstens één extra technologie die we niet gezien hebben in de les
-- [ ] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
-- [ ] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
-- [ ] de API draait online
-- [ ] duidelijke en volledige README.md
-- [ ] er werden voldoende (kleine) commits gemaakt
-- [ ] volledig en tijdig ingediend dossier
+- [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
+- [x] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
+- [x] de API draait online
+- [x] duidelijke en volledige README.md
+- [x] er werden voldoende (kleine) commits gemaakt
+- [x] volledig en tijdig ingediend dossier
 
 ## Projectstructuur
 
@@ -142,8 +148,23 @@ https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2
 
 > Hoe heb je jouw applicatie gestructureerd (mappen, design patterns, hiërarchie van componenten, state...)?
 
-### Web Services
+#### mappenStructuur
+gymstats-frontend
 
+### Web Services
+gymstats-webservice/
+- **\_\_tests__/**
+  - **coverage/** -> Bevat de coverage van de testen
+  - **helpers/** -> Bevat helperfuncties voor de testen
+  - rest/ -> **Bevat alle testen van de REST-laag**
+- config/ -> **Bevat de configuratie van de applicatie**
+- public/
+  - images/ -> **Bevat de afbeeldingen die gebruikt worden in de applicatie**
+    - exercises/ -> **Bevat de afbeeldingen van de oefeningen**
+    - users/ -> **Bevat de afbeeldingen van de gebruikers**
+  - videos/ -> **Bevat de video's die gebruikt worden in de applicatie**
+    - exercises/ -> **Bevat de video's van de oefeningen**
+  
 > Hoe heb je jouw applicatie gestructureerd (mappen, design patterns...)?
 
 ## Extra technologie

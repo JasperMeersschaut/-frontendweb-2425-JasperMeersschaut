@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import AsyncData from '../../components/AsyncData.jsx';
 import useSWRMutation from 'swr/mutation';
 import Error from '../../components/Error.jsx';
+import { FiPlus } from 'react-icons/fi';
 
 export default function ExercisesList() {
   const { data: exercises = [], isLoading: exercisesLoading, error: exercisesError } = useSWR('exercises', getAll);
@@ -74,58 +75,59 @@ export default function ExercisesList() {
       <Error error={deleteError} />
       <AsyncData loading={userLoading} error={userError}>
         {user && user.roles.includes('admin') && (
-          <div className='flex justify-end'>
-            <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded" data-cy='create_exercises_btn'>
-              Create New Exercise
+          <div className='flex justify-end mb-4'>
+            <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded flex items-center" data-cy='create_exercises_btn'>
+              <span className="hidden sm:inline">Create New Exercise</span>
+              <FiPlus className="sm:hidden text-2xl" />
             </Link>
           </div>
         )}
       </AsyncData>
-      <h1 className="text-3xl font-bold mb-4 mt-3">Exercises</h1>
-      <div className="mb-4">
+      <h1 className="text-3xl font-bold mb-4 mt-3 text-center">Exercises</h1>
+      <div className="mb-4 text-center">
         <h5 className="text-xl font-semibold mb-4">Filter by Muscle Group:</h5>
         <AsyncData loading={muscleGroupsLoading} error={muscleGroupsError}>
-          {muscleGroups && muscleGroups.map((group) => (
-            <div key={group} className="inline-block mr-3 mt-4 mb-4">
+          <div className="flex flex-wrap justify-center">
+            {muscleGroups && muscleGroups.map((group) => (
+              <div key={group} className="inline-block mr-3 mt-4 mb-4">
+                <input
+                  className="hidden"
+                  type="radio"
+                  name="muscleGroup"
+                  id={`muscleGroup-${group}`}
+                  value={group}
+                  checked={selectedMuscleGroup === group}
+                  onChange={handleMuscleGroupChange}
+                  data-cy={'muscle_group'}
+                />
+                <label
+                  className={`cursor-pointer px-4 py-2 rounded ${selectedMuscleGroup === group ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
+                  htmlFor={`muscleGroup-${group}`}
+                  data-cy={'muscle_group_label'}
+                >
+                  {group}
+                </label>
+              </div>
+            ))}
+            <div className="inline-block mr-3 mt-4 mb-4">
               <input
                 className="hidden"
                 type="radio"
                 name="muscleGroup"
-                id={`muscleGroup-${group}`}
-                value={group}
-                checked={selectedMuscleGroup === group}
-                onChange={handleMuscleGroupChange}
-                data-cy={'muscle_group'}
+                id="muscleGroup-all"
+                value=""
+                checked={selectedMuscleGroup === ''}
+                onChange={handleAllMuscleGroups}
+                data-cy='muscle_group_all'
               />
               <label
-                className={`cursor-pointer px-4 py-2 rounded ${selectedMuscleGroup === group ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
-                htmlFor={`muscleGroup-${group}`}
-                data-cy={'muscle_group_label'}
+                className={`cursor-pointer px-4 py-2 rounded ${selectedMuscleGroup === '' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
+                htmlFor="muscleGroup-all"
+                data-cy='muscle_group_label_all'
               >
-                {group}
+                All
               </label>
             </div>
-          ))}
-          <div className="inline-block">
-            <input
-              className="hidden"
-              type="radio"
-              name="muscleGroup"
-              id="muscleGroup-all"
-              value=""
-              checked={selectedMuscleGroup === ''}
-              onChange={handleAllMuscleGroups}
-              data-cy='muscle_group_all'
-            />
-            <label
-              className={`cursor-pointer px-4 py-2 rounded ${
-                selectedMuscleGroup === '' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
-              }`}
-              htmlFor="muscleGroup-all"
-              data-cy='muscle_group_label_all'
-            >
-              All
-            </label>
           </div>
         </AsyncData>
       </div>
