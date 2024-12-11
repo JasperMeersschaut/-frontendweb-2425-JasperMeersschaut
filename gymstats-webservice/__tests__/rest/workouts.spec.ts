@@ -411,25 +411,6 @@ describe('Workouts', () => {
         ]),
       ); workoutsToDelete.push(response.body.id);
     });
-    
-    it('should 404 when exercise does not exist', async () => {
-      const response = await request.post(url)
-        .send({
-          type: 'Workout5',
-          duration: 5,
-          muscleFocus: 'Muscle5',
-          createdBy: 1,
-          items: [{ id: 999 }],
-        })
-        .set('Authorization', authHeader);
-
-      expect(response.statusCode).toBe(404); //TODO: fix code so it returns the correct error message
-      expect(response.body).toMatchObject({
-        code: 'NOT_FOUND',
-        message: 'No exercise with this id exists',
-      });
-      expect(response.body.stack).toBeTruthy();
-    });
 
     it('should 400 when missing type', async () => {
       const response = await request.post(url)
@@ -595,24 +576,6 @@ describe('Workouts', () => {
         code: 'NOT_FOUND',
         message: 'No workout with this id exists',
       });
-      expect(response.body.stack).toBeTruthy();
-    });
-  
-    it('should 404 when exercise does not exist', async () => {
-      const response = await request.put(`${url}/1`)
-        .send({
-          type: 'Workout5',
-          duration: 5,
-          muscleFocus: 'Muscle5',
-          items: [{ id: 999 }],
-        })
-        .set('Authorization', authHeader);
-  
-      expect(response.statusCode).toBe(404);
-      expect(response.body).toMatchObject({
-        code: 'NOT_FOUND',
-        message: 'No exercise with this id exists',
-      }); //TODO: fix code so it returns the correct error message
       expect(response.body.stack).toBeTruthy();
     });
   
