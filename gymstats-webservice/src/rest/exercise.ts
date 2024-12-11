@@ -16,6 +16,84 @@ import type { IdParams } from '../types/common';
 import { requireAuthentication,makeRequireRole } from '../core/auth';
 import roles from '../core/roles';
 
+/**
+ * @swagger
+ * tags:
+ *   name: Exercises
+ *   description: Represents a gym exercise
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Exercise:
+ *       type: object
+ *       required:
+ *         - id
+ *         - type
+ *         - muscleGroup
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 123
+ *         type:
+ *           type: string
+ *           example: Strength
+ *         muscleGroup:
+ *           type: string
+ *           example: Chest
+ *         description:
+ *           type: string
+ *           example: Bench press exercise
+ *     ExerciseList:
+ *       type: object
+ *       required:
+ *         - items
+ *       properties:
+ *         items:
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/Exercise"
+ *
+ *   requestBodies:
+ *     CreateExerciseRequest:
+ *       description: The exercise info to create
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: "#/components/schemas/Exercise"
+ *     UpdateExerciseRequest:
+ *       description: The exercise info to update
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: "#/components/schemas/Exercise"
+ */
+
+/**
+ * @swagger
+ * /api/exercises:
+ *   get:
+ *     summary: Get all exercises
+ *     tags:
+ *       - Exercises
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of exercises
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ExerciseList"
+ *       400:
+ *         $ref: '#/components/responses/400BadRequest'
+ *       401:
+ *         $ref: '#/components/responses/401Unauthorized'
+ */
 //getAll
 const getAllExercises = async (ctx: KoaContext<GetAllExercisesResponse>) => {
   const exercise = await exerciseService.getAll();
