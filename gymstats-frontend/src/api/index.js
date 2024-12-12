@@ -50,10 +50,3 @@ export const updateRoleById = async (url, { arg: body }) => {
   const { id, roles } = body;
   await axios.put(`${url}/${id}/roles`, { roles });
 };
-
-export const fetchBmi = async (kg, cm) => {
-  const { data } = await axios.get('/bmi', {
-    params: { kg, cm },
-  });
-  return data;
-};

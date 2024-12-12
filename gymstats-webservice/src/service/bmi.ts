@@ -1,14 +1,15 @@
 import axios from 'axios';
 import handleDBError from './_handleDBError';
-
+import * as userservice from './user';
 const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY;
 
-export const getBmi = async (kg: number, cm: number) => {
+export const getBmi = async (userid : number) => {
   try {
+    const user = await userservice.getById(userid);
     const response = await axios.get('https://smart-body-mass-index-calculator-bmi.p.rapidapi.com/api/BMI/metric', {
       params: {
-        kg,
-        cm,
+        kg: user.weight,
+        cm: user.length,
       },
       headers: {
         'x-rapidapi-key': RAPIDAPI_KEY,
