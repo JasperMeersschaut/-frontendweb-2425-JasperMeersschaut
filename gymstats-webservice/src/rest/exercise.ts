@@ -30,24 +30,21 @@ import roles from '../core/roles';
  *     Exercise:
  *       type: object
  *       required:
- *         - id
  *         - type
  *         - muscleGroup
  *       properties:
- *         id:
- *           type: integer
- *           example: 123
  *         type:
- *           type: string
- *           example: Strength
+ *           type: "string"
  *         muscleGroup:
- *           type: string
- *           example: Chest
+ *           type: "string"
  *         description:
- *           type: string
- *           example: Bench press exercise
+ *           type: "string"
+ *       example:
+ *             id: 123
+ *             type: "Exercise1"
+ *             muscleGroup: "Chest"
+ *             description: "Lorem"
  *     ExerciseList:
- *       type: object
  *       required:
  *         - items
  *       properties:
@@ -57,20 +54,23 @@ import roles from '../core/roles';
  *             $ref: "#/components/schemas/Exercise"
  *
  *   requestBodies:
- *     CreateExerciseRequest:
- *       description: The exercise info to create
+ *     Exercise:
+ *       description: The exercise info to save.
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: "#/components/schemas/Exercise"
- *     UpdateExerciseRequest:
- *       description: The exercise info to update
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: "#/components/schemas/Exercise"
+ *             type: object
+ *             properties:
+ *               type:
+ *                 type: string
+ *                 example: "Exercise1"
+ *               muscleGroup:
+ *                 type: string
+ *                 example: "Chest"
+ *               description:
+ *                 type: string
+ *                 example: "Lorem"
  */
 
 /**
@@ -101,6 +101,29 @@ const getAllExercises = async (ctx: KoaContext<GetAllExercisesResponse>) => {
 };
 getAllExercises.validationScheme=null;
 
+/**
+ * @swagger
+ * /api/exercises/{id}:
+ *   get:
+ *     summary: Get an exercise by id
+ *     tags:
+ *       - Exercises
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - $ref: "#/components/parameters/idParam"
+ *     responses:
+ *       200:
+ *         description: The requested exercise
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Exercise"
+ *       400:
+ *         $ref: '#/components/responses/400BadRequest'
+ *       401:
+ *         $ref: '#/components/responses/401Unauthorized'
+ */
 //getById
 const getExerciseById = async (ctx: KoaContext<GetExerciseByIdResponse, IdParams>) => {
   const id = Number(ctx.params.id);
@@ -113,6 +136,32 @@ getExerciseById.validationScheme = {
   },
 };
 
+/**
+ * @swagger
+ * /api/exercises:
+ *   post:
+ *     summary: Create a new exercise
+ *     description: Creates a new exercise for all the user.
+ *     tags:
+ *      - Exercises
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       $ref: "#/components/requestBodies/Exercise"
+ *     responses:
+ *       200:
+ *         description: The created exercise
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Exercise"
+ *       400:
+ *         $ref: '#/components/responses/400BadRequest'
+ *       401:
+ *         $ref: '#/components/responses/401Unauthorized'
+ *       404:
+ *         $ref: '#/components/responses/404NotFound'
+ */
 export const createExercise = async (ctx: KoaContext<CreateExerciseResponse, void, CreateExerciseRequest>) => {
   const exercise = await exerciseService.create(ctx.request.body);
   ctx.status = 201;
@@ -126,6 +175,40 @@ createExercise.validationScheme={
   },
 };
 
+/**
+ * @swagger
+ * /api/exercises/{id}:
+ *   put:
+ *     summary: Update an exercise by id
+ *     tags:
+ *       - Exercises
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - $ref: "#/components/parameters/idParam"
+ *     requestBody:
+ *       $ref: "#/components/requestBodies/Exercise"
+ *     responses:
+ *       200:
+ *         description: The updated exercise
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Exercise"
+ *         examples:
+ *           application/json:
+ *             value:
+ *               id: 123
+ *               type: "Updated Exercise"
+ *               muscleGroup: "Chest"
+ *               description: "Updated description"
+ *       400:
+ *         $ref: '#/components/responses/400BadRequest'
+ *       401:
+ *         $ref: '#/components/responses/401Unauthorized'
+ *       404:
+ *         $ref: '#/components/responses/404NotFound'
+ */
 export const updateExerciseById = async (ctx: KoaContext<UpdateExerciseResponse, IdParams, UpdateExerciseRequest>) => {
   const exercise = await exerciseService.updateById(Number(ctx.params.id), ctx.request.body);
   ctx.body = exercise;
@@ -141,6 +224,27 @@ updateExerciseById.validationScheme = {
   },
 };
 
+/**
+ * @swagger
+ * /api/exercises/{id}:
+ *   delete:
+ *     summary: Delete an exercise by id
+ *     tags:
+ *       - Exercises
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - $ref: "#/components/parameters/idParam"
+ *     responses:
+ *       204:
+ *         description: No content
+ *       400:
+ *         $ref: '#/components/responses/400BadRequest'
+ *       401:
+ *         $ref: '#/components/responses/401Unauthorized'
+ *       404:
+ *         $ref: '#/components/responses/404NotFound'
+ */
 export const deleteExerciseById = async (ctx: KoaContext<void, IdParams>) => {
   await exerciseService.deleteById(Number(ctx.params.id));
   ctx.status = 204;
@@ -151,6 +255,34 @@ deleteExerciseById.validationScheme = {
   },
   
 };
+//TODO: fix docs for musclegroups
+// /** 
+//  * @swagger  
+//  * /api/exercises/muscle-groups:
+//  *   get:
+//  *     summary: Get all muscle groups
+//  *     tags:
+//  *       - Exercises
+//  *     security:
+//  *       - bearerAuth: []
+//  *     responses:
+//  *       200:
+//  *         description: List of muscle groups
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               $ref: "#/components/schemas/MuscleGroupList"
+//  *         examples:
+//  *           application/json:
+//  *             value:
+//  *               items: [
+//  *                 "Chest"
+//  *               ]
+//  *       400:
+//  *         $ref: '#/components/responses/400BadRequest'
+//  *       401:
+//  *         $ref: '#/components/responses/401Unauthorized'
+//  */
 const getAllMuscleGroups = async (ctx: KoaContext) => {
   const muscleGroups = await exerciseService.getAllMuscleGroups();
   ctx.body = { items: muscleGroups };
