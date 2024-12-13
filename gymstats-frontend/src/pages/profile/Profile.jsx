@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { axios } from '../../api/index.js';
 import useSWR from 'swr';
 import AsyncData from '../../components/AsyncData.jsx';
@@ -8,24 +7,9 @@ import { getById } from '../../api/index.js';
 const contentURL = axios.defaults.contentURL;
 
 export default function Profile() {
-  const [bmiData, setBmiData] = useState(null);
 
   const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
-
-  useEffect(() => {
-    const fetchBmi = async () => {
-      try {
-        const { data } = await axios.get(`/bmi/${user.id}`);
-        setBmiData(data);
-      } catch (error) {
-        console.error('Error fetching BMI data:', error);
-      }
-    };
-
-    if (user) {
-      fetchBmi();
-    }
-  }, [user]);
+  const {data:bmiData, isLoading:bmiLoading, error:bmiError} = useSWR('bmi', getById);
 
   const handleImageError = (e) => {
     e.target.src = `${contentURL}/images/profilePictures/0.jpg`;
@@ -34,7 +18,7 @@ export default function Profile() {
   return (
     <>
       <div className="container mx-auto text-center mt-5 flex flex-col items-center">
-        <AsyncData loading={userLoading} error={userError}>
+        <AsyncData loading={userLoading || bmiLoading} error={userError ||bmiError}>
           {user && (
             <ProfileComponent
               user={user}

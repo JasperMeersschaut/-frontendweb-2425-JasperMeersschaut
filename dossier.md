@@ -101,44 +101,44 @@ https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2
 
 #### Datalaag
 
-- [ ] voldoende complex en correct (meer dan één tabel (naast de user tabel), tabellen bevatten meerdere kolommen, 2 een-op-veel of veel-op-veel relaties)
-- [ ] één module beheert de connectie + connectie wordt gesloten bij sluiten server
-- [ ] heeft migraties - indien van toepassing
-- [ ] heeft seeds
+- [x] voldoende complex en correct (meer dan één tabel (naast de user tabel), tabellen bevatten meerdere kolommen, 2 een-op-veel of veel-op-veel relaties)
+- [x] één module beheert de connectie + connectie wordt gesloten bij sluiten server
+- [x] heeft migraties - indien van toepassing
+- [x] heeft seeds
 
 #### Repositorylaag
 
-- [ ] definieert één repository per entiteit - indien van toepassing
-- [ ] mapt OO-rijke data naar relationele tabellen en vice versa - indien van toepassing
+- [x] definieert één repository per entiteit - indien van toepassing
+- [x] mapt OO-rijke data naar relationele tabellen en vice versa - indien van toepassing
 - [ ] er worden kindrelaties opgevraagd (m.b.v. JOINs) - indien van toepassing
 
 #### Servicelaag met een zekere complexiteit
 
-- [ ] bevat alle domeinlogica
-- [ ] er wordt gerelateerde data uit meerdere tabellen opgevraagd
-- [ ] bevat geen services voor entiteiten die geen zin hebben zonder hun ouder (bv. tussentabellen)
-- [ ] bevat geen SQL-queries of databank-gerelateerde code
+- [x] bevat alle domeinlogica
+- [x] er wordt gerelateerde data uit meerdere tabellen opgevraagd
+- [x] bevat geen services voor entiteiten die geen zin hebben zonder hun ouder (bv. tussentabellen)
+- [x] bevat geen SQL-queries of databank-gerelateerde code
 
 #### REST-laag
 
 - [x] meerdere routes met invoervalidatie
 - [x] meerdere entiteiten met alle CRUD-operaties
-- [ ] degelijke foutboodschappen
-- [ ] volgt de conventies van een RESTful API
+- [x] degelijke foutboodschappen
+- [x] volgt de conventies van een RESTful API
 - [x] bevat geen domeinlogica
-- [ ] geen API calls voor entiteiten die geen zin hebben zonder hun ouder (bv. tussentabellen)
-- [ ] degelijke autorisatie/authenticatie op alle routes
+- [x] geen API calls voor entiteiten die geen zin hebben zonder hun ouder (bv. tussentabellen)
+- [x] degelijke autorisatie/authenticatie op alle routes
 
 #### Algemeen
 
-- [ ] er is een minimum aan logging en configuratie voorzien
-- [ ] een aantal niet-triviale én werkende integratietesten (min. 1 entiteit in REST-laag >= 90% coverage, naast de user testen)
-- [ ] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
+- [x] er is een minimum aan logging en configuratie voorzien
+- [x] een aantal niet-triviale én werkende integratietesten (min. 1 entiteit in REST-laag >= 90% coverage, naast de user testen)
+- [x] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
 - [ ] minstens één extra technologie die we niet gezien hebben in de les
 - [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
-- [ ] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
+- [x] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
 - [x] de API draait online
-- [ ] duidelijke en volledige README.md
+- [x] duidelijke en volledige README.md
 - [x] er werden voldoende (kleine) commits gemaakt
 - [x] volledig en tijdig ingediend dossier
 
@@ -148,8 +148,23 @@ https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2
 
 > Hoe heb je jouw applicatie gestructureerd (mappen, design patterns, hiërarchie van componenten, state...)?
 
-### Web Services
+#### mappenStructuur
+gymstats-frontend
 
+### Web Services
+gymstats-webservice/
+- **\_\_tests__/**
+  - **coverage/** -> Bevat de coverage van de testen
+  - **helpers/** -> Bevat helperfuncties voor de testen
+  - rest/ -> **Bevat alle testen van de REST-laag**
+- config/ -> **Bevat de configuratie van de applicatie**
+- public/
+  - images/ -> **Bevat de afbeeldingen die gebruikt worden in de applicatie**
+    - exercises/ -> **Bevat de afbeeldingen van de oefeningen**
+    - users/ -> **Bevat de afbeeldingen van de gebruikers**
+  - videos/ -> **Bevat de video's die gebruikt worden in de applicatie**
+    - exercises/ -> **Bevat de video's van de oefeningen**
+  
 > Hoe heb je jouw applicatie gestructureerd (mappen, design patterns...)?
 
 ## Extra technologie
