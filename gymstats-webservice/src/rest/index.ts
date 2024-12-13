@@ -1,4 +1,5 @@
 import Router from '@koa/router';
+import installHealthRouter from './health';
 import installExerciseRouter from './exercise';
 import installUserRouter from './user';
 import installWorkoutRouter from './workout';
@@ -11,6 +12,7 @@ export default (app: KoaApplication) => {
     prefix: '/api',
   });
 
+  installHealthRouter(router);
   installExerciseRouter(router);
   installUserRouter(router);
   installWorkoutRouter(router);
