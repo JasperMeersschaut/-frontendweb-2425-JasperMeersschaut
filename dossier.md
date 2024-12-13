@@ -7,7 +7,8 @@
 - Student: Jasper Meersschaut
 - Studentennummer: 202396570
 - E-mailadres: [jasper.meersschaut@student.hogent.be](mailto:jasper.meersschaut@student.hogent.be)
-- Demo: <DEMO_LINK_HIER>
+- Demo:
+<!--  TODO: panopto link toevoegen -->
 - GitHub-repository: [GitHub Repository](https://github.com/HOGENT-frontendweb/frontendweb-2425-JasperMeersschaut)
 - Front-end Web Development
   - Online versie: https://frontendweb-jaspermeersschaut.onrender.com
@@ -35,14 +36,62 @@
 - Wachtwoord: 12345678
 
 ## Projectbeschrijving
+> Mijn project heet gymstats. Je kan op mijn website oefeningen bekijken met daarbij de uitleg en een video van de oefening. Je kan ook een profiel aanmaken en je eigen workouts maken met bestaande oefeningen. Er zijn ook standaard workouts voor beginners die niet echt weten hoe een workout in elkaar zit. Je kan ook je BMI berekenen op de profiel pagina.
+### Gebruikers
+- Een user 
+  - kan zich registreren
+  - kan inloggen
+  - kan oefeningen bekijken
+  - kan workouts bekijken
+  - kan zijn eigen workouts maken
+  - kan zijn BMI berekenen
+- Een admin
+  - kan oefeningen toevoegen
+  - kan standaar workouts toevoegen die iedereen kan zien
+  - kan oefeningen en workouts aanpassen
+  - kan oefeningen en workouts verwijderen
+  - kan gebruikers bekijken, rollen aanpassen en verwijderen
 
-> Omschrijf hier duidelijk waarover jouw project gaat. Voeg een domeinmodel (of EERD) toe om jouw entiteiten te verduidelijken.
-https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2EmXPPDPXRkztjE9NVKnAjewL1UnfwNOKqXbgrGQgdmTbcgXo_kmu0pxTSCt5aF-AHTa51lgYk4mTdw8YwAeE1EFR0MmhrQM-oh55MQB9909HBNtGvpJcly_flDvyUDtRVJ82qU_12pjlKtmRwm3z5U2wrxIZ9U8ggK4TgbC3D-sG4EMUS-CiKrMgM_hec4LmKufqZ8M_iDQN6dwo=
+### Oefeningen
+- Een oefening heeft een naam, uitleg, afbeelding en video.
+- Een oefening kan toegevoegd, aangepast en verwijderd worden door een admin.
+
+### Workouts
+- Een workout heeft een naam, beschrijving, lengte, spier focus en een lijst van oefeningen.
+- Een standaard workout kan toegevoegd, aangepast en verwijderd worden door een admin.
+- Een user kan zijn eigen workout maken met bestaande oefeningen.
+
+### Databank
+
+![ERD](./assets/ERD.png)
+
+[Link naar ERD](https://kroki.io/erd/svg/eNplj8EKgzAMhu95Cs8OD77CmBu77DY8yJCuDbZMrSQp6tuvToWBlz_hT778pHoy0gtSZ6BXHUKrWB5Lg51yLTBO8HYk1iiJQ-wbsTCia6zAoJhHT6a2ii2Qb5EBqmJC0o5xvSnzgNAF1i3eyIcBDLImN4jzfVwuPX18kL9dE0j9hit09TowaMIYb85zRGrcAsSPO31Ki_slahkVloeSPMvSZLsOW13NIw9HK0mzLE_2V7791WbD)
+
 
 ## Screenshots
 
-> Voeg enkele (nuttige!) screenshots toe die tonen wat de app doet.
-> Dit is weinig zinvol indien je enkel Web Services volgt, verwijder dan deze sectie.
+### Home
+<img src="./assets/PC/HomePage.png" alt="Home" width="1000" />
+<img src="./assets/GSM/HomePage.png" alt="Home" width="300" />
+
+### Exercises
+<img src="./assets/PC/ExercisePage.png" alt="Exercises" width="1000" />
+<img src="./assets/GSM/ExercisePage.png" alt="Exercises" width="300" />
+
+### Workouts
+<img src="./assets/PC/WorkoutPage.png" alt="Workouts" width="1000" />
+<img src="./assets/PC/WorkoutCreationPage.png" alt="Workouts" width="1000" />
+<img src="./assets/GSM/WorkoutPage.png" alt="Workouts" width="300" />
+
+
+### Profile
+<img src="./assets/PC/ProfilePage.png" alt="Profile" width="1000" />
+<img src="./assets/GSM/HomePage.png" alt="Home" width="300" />
+
+### Navbar
+<img src="./assets/GSM/Navbar.png" alt="Navbar" width="300" />
+
+
 
 ## API calls
 
@@ -134,7 +183,7 @@ https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2
 - [x] er is een minimum aan logging en configuratie voorzien
 - [x] een aantal niet-triviale én werkende integratietesten (min. 1 entiteit in REST-laag >= 90% coverage, naast de user testen)
 - [x] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
-- [ ] minstens één extra technologie die we niet gezien hebben in de les
+- [x] minstens één extra technologie die we niet gezien hebben in de les
 - [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
 - [x] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
 - [x] de API draait online
@@ -171,12 +220,30 @@ gymstats-webservice/
 
 ### Front-end Web Development
 
-> Wat is de extra technologie? Hoe werkt het? Voeg een link naar het npm package toe!
+#### Tailwind CSS
+ Ik heb tailwind gebruikt omdat het me interesant leek. Ik heb al mooie resultaten gezien met tailwind en dit project leek mij een goede reden om het zelf eens te proberen.
 
+ Tailwind is een utility-first CSS framework waarmee je snel en efficiënt stijlen kunt toepassen op je HTML-elementen zonder dat je zelf CSS hoeft te schrijven. 
+
+ **Werking**:
+  - Je voegt de tailwind classes toe aan je HTML-elementen.
+  - Tailwind genereert een CSS-bestand met alle stijlen die je hebt toegevoegd.
+  - Je kan de stijlen van je elementen aanpassen door de tailwind classes aan te passen.
+
+[Tailwind](https://www.npmjs.com/package/tailwindcss)
 ### Web Services
+#### Externe API (RapidAPI)
+Ik heb een externe API gebruikt in mijn project. Deze wordt aangesproken door de backend, de key zit in de .env file. De API die ik gebruik is de "Smart Body Mass Index Calculator (BMI) API". Deze API berekent de BMI van een persoon op basis van zijn lengte en gewicht.
 
-> Wat is de extra technologie? Hoe werkt het? Voeg een link naar het npm package toe!
+**Werking**:
+- Op de profiel pagina wordt er een call gedaan naar de `api/index.ts` file. De lengte en het gewicht van de gebruiker worden meegegeven aan de API.
+- De index.js file roept de backend API aan en geeft de lengte en het gewicht van de gebruiker mee.
+- De backend API doet een call naar de externe API en geeft de lengte en het gewicht van de gebruiker mee.
+- De externe API berekent de BMI van de gebruiker en geeft deze terug aan de backend API.
+- De backend API geeft de BMI van de gebruiker terug aan de index.js file.
+- De index.js file geeft de BMI van de gebruiker terug aan de profiel pagina.
 
+[Smart Body Mass Index Calculator](https://rapidapi.com/andreabaragiola/api/smart-body-mass-index-calculator-bmi)
 ## Gekende bugs
 
 ### Front-end Web Development
