@@ -255,34 +255,33 @@ deleteExerciseById.validationScheme = {
   },
   
 };
-//TODO: fix docs for musclegroups
-// /** 
-//  * @swagger  
-//  * /api/exercises/muscle-groups:
-//  *   get:
-//  *     summary: Get all muscle groups
-//  *     tags:
-//  *       - Exercises
-//  *     security:
-//  *       - bearerAuth: []
-//  *     responses:
-//  *       200:
-//  *         description: List of muscle groups
-//  *         content:
-//  *           application/json:
-//  *             schema:
-//  *               $ref: "#/components/schemas/MuscleGroupList"
-//  *         examples:
-//  *           application/json:
-//  *             value:
-//  *               items: [
-//  *                 "Chest"
-//  *               ]
-//  *       400:
-//  *         $ref: '#/components/responses/400BadRequest'
-//  *       401:
-//  *         $ref: '#/components/responses/401Unauthorized'
-//  */
+/**
+ * @swagger
+ * /api/exercises/muscle-groups:
+ *   get:
+ *     summary: Get all muscle groups
+ *     tags:
+ *       - Exercises
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of muscle groups
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 items:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   example: ["Chest", "Back", "Legs"]
+ *       400:
+ *         $ref: '#/components/responses/400BadRequest'
+ *       401:
+ *         $ref: '#/components/responses/401Unauthorized'
+ */
 const getAllMuscleGroups = async (ctx: KoaContext) => {
   const muscleGroups = await exerciseService.getAllMuscleGroups();
   ctx.body = { items: muscleGroups };
