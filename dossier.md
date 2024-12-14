@@ -95,28 +95,54 @@
 
 ## API calls
 
-> Maak hier een oplijsting van alle API cals in jouw applicatie. Groepeer dit per entiteit. Hieronder een voorbeeld.
-> Dit is weinig zinvol indien je enkel Front-end Web Development volgt, verwijder dan deze sectie.
-> Indien je als extra Swagger koos, dan voeg je hier een link toe naar jouw online documentatie. Swagger geeft nl. exact (en nog veel meer) wat je hieronder moet schrijven.
+> Swagger documentatie: [Swagger](http://localhost:9000/swagger)
 
-### Gebruikers
-
+#### Gebruikers
 - `GET /api/users`: alle gebruikers ophalen
-- `GET /api/users/:id`: gebruiker met een bepaald id ophalen
+- `GET /api/users/{id}`: gebruiker met een bepaald id ophalen of je eigen informatie als je 'me' als id gebruikt
+- `POST /api/users`: een nieuwe gebruiker registreren
+- `PUT /api/users/{id}`: een bestaande gebruiker bijwerken
+- `PUT /api/users/{id}/roles`: gebruikersrollen bijwerken
+- `DELETE /api/users/{id}`: een gebruiker verwijderen op basis van id
+
+#### Sessies
+- `POST /api/sessions`: proberen in te loggen
+
+#### Oefeningen
+- `GET /api/exercises`: alle oefeningen ophalen
+- `GET /api/exercises/{id}`: een oefening ophalen op basis van id
+- `POST /api/exercises`: een nieuwe oefening aanmaken
+- `PUT /api/exercises/{id}`: een oefening bijwerken op basis van id
+- `DELETE /api/exercises/{id}`: een oefening verwijderen op basis van id
+- `GET /api/exercises/muscle-groups`: alle spiergroepen ophalen
+
+#### Workouts
+- `GET /api/workouts`: alle workouts ophalen
+- `GET /api/workouts/{id}`: een workout ophalen op basis van id
+- `POST /api/workouts`: een nieuwe workout aanmaken
+- `PUT /api/workouts/{id}`: een workout bijwerken op basis van id
+- `DELETE /api/workouts/{id}`: een workout verwijderen op basis van id
+- `GET /api/workouts/muscle-focuses`: alle spierfocusgebieden ophalen
+
+#### Health
+- `GET /api/health/ping`: de server pingen
+- `GET /api/health/version`: de versie-informatie van de server ophalen
+
+#### BMI
+- `GET /api/bmi/{userId}`: BMI-gegevens ophalen voor een gebruiker op basis van id
 
 ## Behaalde minimumvereisten
-
-> Duid per vak aan welke minimumvereisten je denkt behaald te hebben
 
 ### Front-end Web Development
 
 #### Componenten
 
-- [ ] heeft meerdere componenten - dom & slim (naast login/register)
+- [x] heeft meerdere componenten - dom & slim (naast login/register)
 - [x] applicatie is voldoende complex
-- [ ] definieert constanten (variabelen, functies en componenten) buiten de component
-- [ ] minstens één form met meerdere velden met validatie (naast login/register)
-- [ ] login systeem
+- [ ] definieert constanten (variabelen, functies en componenten) buiten de component 
+<!-- TODO: nachecken -->
+- [x] minstens één form met meerdere velden met validatie (naast login/register)
+- [x] login systeem
 
 #### Routing
 
@@ -127,18 +153,18 @@
 
 - [x] meerdere API calls (naast login/register)
 - [x] degelijke foutmeldingen indien API-call faalt
-- [ ] gebruikt useState enkel voor lokale state
-- [ ] gebruikt gepast state management voor globale state - indien van toepassing
+- [x] gebruikt useState enkel voor lokale state
+- [x] gebruikt gepast state management voor globale state - indien van toepassing
 
 #### Hooks
 
-- [ ] gebruikt de hooks op de juiste manier
+- [x] gebruikt de hooks op de juiste manier
 
 #### Algemeen
 
 - [ ] een aantal niet-triviale én werkende e2e testen
 - [x] minstens één extra technologie
-- [ ] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
+- [x] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
 - [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
 - [ ] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
 - [x] de applicatie draait online
@@ -159,7 +185,7 @@
 
 - [x] definieert één repository per entiteit - indien van toepassing
 - [x] mapt OO-rijke data naar relationele tabellen en vice versa - indien van toepassing
-- [ ] er worden kindrelaties opgevraagd (m.b.v. JOINs) - indien van toepassing
+- [x] er worden kindrelaties opgevraagd (m.b.v. JOINs) - indien van toepassing
 
 #### Servicelaag met een zekere complexiteit
 
@@ -187,7 +213,7 @@
 - [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
 - [x] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
 - [x] de API draait online
-- [x] duidelijke en volledige README.md
+- [ ] duidelijke en volledige README.md
 - [x] er werden voldoende (kleine) commits gemaakt
 - [x] volledig en tijdig ingediend dossier
 
@@ -201,27 +227,33 @@
 gymstats-frontend
 
 ### Web Services
-gymstats-webservice/
-- **\_\_tests__/**
-  - **coverage/** -> Bevat de coverage van de testen
-  - **helpers/** -> Bevat helperfuncties voor de testen
-  - rest/ -> **Bevat alle testen van de REST-laag**
-- config/ -> **Bevat de configuratie van de applicatie**
-- public/
-  - images/ -> **Bevat de afbeeldingen die gebruikt worden in de applicatie**
-    - exercises/ -> **Bevat de afbeeldingen van de oefeningen**
-    - users/ -> **Bevat de afbeeldingen van de gebruikers**
-  - videos/ -> **Bevat de video's die gebruikt worden in de applicatie**
-    - exercises/ -> **Bevat de video's van de oefeningen**
-  
 > Hoe heb je jouw applicatie gestructureerd (mappen, design patterns...)?
+#### mappenStructuur
+
+gymstats-webservice/
+- **\_\_test\_\_/** -> Bevat de testen 
+- **config/** -> Bevat de configuratie
+- **public/** -> Bevat de statische bestanden
+- **src/** -> Bevat de broncode
+  - **core/** 
+  - **data/**
+  - **rest/** 
+  - **services/** 
+  - **types/** 
+
+#### Design patterns
+
+
+
+
+
 
 ## Extra technologie
 
 ### Front-end Web Development
 
 #### Tailwind CSS
- Ik heb tailwind gebruikt omdat het me interesant leek. Ik heb al mooie resultaten gezien met tailwind en dit project leek mij een goede reden om het zelf eens te proberen.
+ Ik heb tailwind gebruikt omdat het me interesant leek. Ik heb al mooie resultaten gezien met tailwind en dit project leek mij een moment om het zelf eens te proberen.
 
  Tailwind is een utility-first CSS framework waarmee je snel en efficiënt stijlen kunt toepassen op je HTML-elementen zonder dat je zelf CSS hoeft te schrijven. 
 
@@ -247,14 +279,13 @@ Ik heb een externe API gebruikt in mijn project. Deze wordt aangesproken door de
 ## Gekende bugs
 
 ### Front-end Web Development
-
-> Zijn er gekende bugs?
+/
 
 ### Web Services
-
-> Zijn er gekende bugs?
+/
 
 ## Reflectie
 
-> Wat vond je van dit project? Wat heb je geleerd? Wat zou je anders doen? Wat vond je goed? Wat vond je minder goed?
-> Wat zou je aanpassen aan de cursus? Wat zou je behouden? Wat zou je toevoegen?
+Ik vond het een zeer leuk project. De cursus zat goed in elkaar en de lessen waren ook leerzaam. Ik vond het leuk om aan het project te werken en ben blij met het resultaat. Er zijn nog een aantal functionaliteiten dat ik kon toevoegen maar voor het schoolproject aspect heb ik wel genoeg denk ik. 
+
+Het enige waar ik het wat moeilijk mee had was de minimumvereisten/puntenverdeling. Ik vond het soms moeilijk om te weten of ik nu aan een bepaalde vereiste voldeed of niet. Het puntje `definieert constanten (variabelen, functies en componenten) buiten de component` vond ik ook wat vaag. Ik heb geprobeerd om dit te doen maar ik weet niet of ik het juist heb gedaan. En dan vraag ik mij af, als je dan 1 constante niet goed doet verlies je dan al een gewicht op dit punt? Dus dat was soms eens twijfelen.
