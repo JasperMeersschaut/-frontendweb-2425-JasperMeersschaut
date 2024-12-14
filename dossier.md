@@ -7,7 +7,8 @@
 - Student: Jasper Meersschaut
 - Studentennummer: 202396570
 - E-mailadres: [jasper.meersschaut@student.hogent.be](mailto:jasper.meersschaut@student.hogent.be)
-- Demo: <DEMO_LINK_HIER>
+- Demo:
+<!--  TODO: panopto link toevoegen -->
 - GitHub-repository: [GitHub Repository](https://github.com/HOGENT-frontendweb/frontendweb-2425-JasperMeersschaut)
 - Front-end Web Development
   - Online versie: https://frontendweb-jaspermeersschaut.onrender.com
@@ -35,39 +36,113 @@
 - Wachtwoord: 12345678
 
 ## Projectbeschrijving
+> Mijn project heet gymstats. Je kan op mijn website oefeningen bekijken met daarbij de uitleg en een video van de oefening. Je kan ook een profiel aanmaken en je eigen workouts maken met bestaande oefeningen. Er zijn ook standaard workouts voor beginners die niet echt weten hoe een workout in elkaar zit. Je kan ook je BMI berekenen op de profiel pagina.
+### Gebruikers
+- Een user 
+  - kan zich registreren
+  - kan inloggen
+  - kan oefeningen bekijken
+  - kan workouts bekijken
+  - kan zijn eigen workouts maken
+  - kan zijn BMI berekenen
+- Een admin
+  - kan oefeningen toevoegen
+  - kan standaar workouts toevoegen die iedereen kan zien
+  - kan oefeningen en workouts aanpassen
+  - kan oefeningen en workouts verwijderen
+  - kan gebruikers bekijken, rollen aanpassen en verwijderen
 
-> Omschrijf hier duidelijk waarover jouw project gaat. Voeg een domeinmodel (of EERD) toe om jouw entiteiten te verduidelijken.
-https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2EmXPPDPXRkztjE9NVKnAjewL1UnfwNOKqXbgrGQgdmTbcgXo_kmu0pxTSCt5aF-AHTa51lgYk4mTdw8YwAeE1EFR0MmhrQM-oh55MQB9909HBNtGvpJcly_flDvyUDtRVJ82qU_12pjlKtmRwm3z5U2wrxIZ9U8ggK4TgbC3D-sG4EMUS-CiKrMgM_hec4LmKufqZ8M_iDQN6dwo=
+### Oefeningen
+- Een oefening heeft een naam, uitleg, afbeelding en video.
+- Een oefening kan toegevoegd, aangepast en verwijderd worden door een admin.
+
+### Workouts
+- Een workout heeft een naam, beschrijving, lengte, spier focus en een lijst van oefeningen.
+- Een standaard workout kan toegevoegd, aangepast en verwijderd worden door een admin.
+- Een user kan zijn eigen workout maken met bestaande oefeningen.
+
+### Databank
+
+![ERD](./assets/ERD.png)
+
+[Link naar ERD](https://kroki.io/erd/svg/eNplj8EKgzAMhu95Cs8OD77CmBu77DY8yJCuDbZMrSQp6tuvToWBlz_hT778pHoy0gtSZ6BXHUKrWB5Lg51yLTBO8HYk1iiJQ-wbsTCia6zAoJhHT6a2ii2Qb5EBqmJC0o5xvSnzgNAF1i3eyIcBDLImN4jzfVwuPX18kL9dE0j9hit09TowaMIYb85zRGrcAsSPO31Ki_slahkVloeSPMvSZLsOW13NIw9HK0mzLE_2V7791WbD)
+
 
 ## Screenshots
 
-> Voeg enkele (nuttige!) screenshots toe die tonen wat de app doet.
-> Dit is weinig zinvol indien je enkel Web Services volgt, verwijder dan deze sectie.
+### Home
+<img src="./assets/PC/HomePage.png" alt="Home" width="1000" />
+<img src="./assets/GSM/HomePage.png" alt="Home" width="300" />
+
+### Exercises
+<img src="./assets/PC/ExercisePage.png" alt="Exercises" width="1000" />
+<img src="./assets/GSM/ExercisePage.png" alt="Exercises" width="300" />
+
+### Workouts
+<img src="./assets/PC/WorkoutPage.png" alt="Workouts" width="1000" />
+<img src="./assets/PC/WorkoutCreationPage.png" alt="Workouts" width="1000" />
+<img src="./assets/GSM/WorkoutPage.png" alt="Workouts" width="300" />
+
+
+### Profile
+<img src="./assets/PC/ProfilePage.png" alt="Profile" width="1000" />
+<img src="./assets/GSM/HomePage.png" alt="Home" width="300" />
+
+### Navbar
+<img src="./assets/GSM/Navbar.png" alt="Navbar" width="300" />
+
+
 
 ## API calls
 
-> Maak hier een oplijsting van alle API cals in jouw applicatie. Groepeer dit per entiteit. Hieronder een voorbeeld.
-> Dit is weinig zinvol indien je enkel Front-end Web Development volgt, verwijder dan deze sectie.
-> Indien je als extra Swagger koos, dan voeg je hier een link toe naar jouw online documentatie. Swagger geeft nl. exact (en nog veel meer) wat je hieronder moet schrijven.
+> Swagger documentatie: [Swagger](http://localhost:9000/swagger)
 
-### Gebruikers
-
+#### Gebruikers
 - `GET /api/users`: alle gebruikers ophalen
-- `GET /api/users/:id`: gebruiker met een bepaald id ophalen
+- `GET /api/users/{id}`: gebruiker met een bepaald id ophalen of je eigen informatie als je 'me' als id gebruikt
+- `POST /api/users`: een nieuwe gebruiker registreren
+- `PUT /api/users/{id}`: een bestaande gebruiker bijwerken
+- `PUT /api/users/{id}/roles`: gebruikersrollen bijwerken
+- `DELETE /api/users/{id}`: een gebruiker verwijderen op basis van id
+
+#### Sessies
+- `POST /api/sessions`: proberen in te loggen
+
+#### Oefeningen
+- `GET /api/exercises`: alle oefeningen ophalen
+- `GET /api/exercises/{id}`: een oefening ophalen op basis van id
+- `POST /api/exercises`: een nieuwe oefening aanmaken
+- `PUT /api/exercises/{id}`: een oefening bijwerken op basis van id
+- `DELETE /api/exercises/{id}`: een oefening verwijderen op basis van id
+- `GET /api/exercises/muscle-groups`: alle spiergroepen ophalen
+
+#### Workouts
+- `GET /api/workouts`: alle workouts ophalen
+- `GET /api/workouts/{id}`: een workout ophalen op basis van id
+- `POST /api/workouts`: een nieuwe workout aanmaken
+- `PUT /api/workouts/{id}`: een workout bijwerken op basis van id
+- `DELETE /api/workouts/{id}`: een workout verwijderen op basis van id
+- `GET /api/workouts/muscle-focuses`: alle spierfocusgebieden ophalen
+
+#### Health
+- `GET /api/health/ping`: de server pingen
+- `GET /api/health/version`: de versie-informatie van de server ophalen
+
+#### BMI
+- `GET /api/bmi/{userId}`: BMI-gegevens ophalen voor een gebruiker op basis van id
 
 ## Behaalde minimumvereisten
-
-> Duid per vak aan welke minimumvereisten je denkt behaald te hebben
 
 ### Front-end Web Development
 
 #### Componenten
 
-- [ ] heeft meerdere componenten - dom & slim (naast login/register)
+- [x] heeft meerdere componenten - dom & slim (naast login/register)
 - [x] applicatie is voldoende complex
-- [ ] definieert constanten (variabelen, functies en componenten) buiten de component
-- [ ] minstens één form met meerdere velden met validatie (naast login/register)
-- [ ] login systeem
+- [ ] definieert constanten (variabelen, functies en componenten) buiten de component 
+<!-- TODO: nachecken -->
+- [x] minstens één form met meerdere velden met validatie (naast login/register)
+- [x] login systeem
 
 #### Routing
 
@@ -78,22 +153,22 @@ https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2
 
 - [x] meerdere API calls (naast login/register)
 - [x] degelijke foutmeldingen indien API-call faalt
-- [ ] gebruikt useState enkel voor lokale state
-- [ ] gebruikt gepast state management voor globale state - indien van toepassing
+- [x] gebruikt useState enkel voor lokale state
+- [x] gebruikt gepast state management voor globale state - indien van toepassing
 
 #### Hooks
 
-- [ ] gebruikt de hooks op de juiste manier
+- [x] gebruikt de hooks op de juiste manier
 
 #### Algemeen
 
-- [ ] een aantal niet-triviale én werkende e2e testen
+- [x] een aantal niet-triviale én werkende e2e testen
 - [x] minstens één extra technologie
-- [ ] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
+- [x] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
 - [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
 - [ ] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
 - [x] de applicatie draait online
-- [ ] duidelijke en volledige README.md
+- [x] duidelijke en volledige README.md
 - [x] er werden voldoende (kleine) commits gemaakt
 - [x] volledig en tijdig ingediend dossier
 
@@ -110,7 +185,7 @@ https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2
 
 - [x] definieert één repository per entiteit - indien van toepassing
 - [x] mapt OO-rijke data naar relationele tabellen en vice versa - indien van toepassing
-- [ ] er worden kindrelaties opgevraagd (m.b.v. JOINs) - indien van toepassing
+- [x] er worden kindrelaties opgevraagd (m.b.v. JOINs) - indien van toepassing
 
 #### Servicelaag met een zekere complexiteit
 
@@ -134,7 +209,7 @@ https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2
 - [x] er is een minimum aan logging en configuratie voorzien
 - [x] een aantal niet-triviale én werkende integratietesten (min. 1 entiteit in REST-laag >= 90% coverage, naast de user testen)
 - [x] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
-- [ ] minstens één extra technologie die we niet gezien hebben in de les
+- [x] minstens één extra technologie die we niet gezien hebben in de les
 - [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
 - [x] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
 - [x] de API draait online
@@ -152,42 +227,65 @@ https://kroki.io/erd/svg/eNpdj8sOwiAQRff3K1hLWPQL3KhJd90YF40xWMZKbKHySOrfC9Y21Q2
 gymstats-frontend
 
 ### Web Services
-gymstats-webservice/
-- **\_\_tests__/**
-  - **coverage/** -> Bevat de coverage van de testen
-  - **helpers/** -> Bevat helperfuncties voor de testen
-  - rest/ -> **Bevat alle testen van de REST-laag**
-- config/ -> **Bevat de configuratie van de applicatie**
-- public/
-  - images/ -> **Bevat de afbeeldingen die gebruikt worden in de applicatie**
-    - exercises/ -> **Bevat de afbeeldingen van de oefeningen**
-    - users/ -> **Bevat de afbeeldingen van de gebruikers**
-  - videos/ -> **Bevat de video's die gebruikt worden in de applicatie**
-    - exercises/ -> **Bevat de video's van de oefeningen**
-  
 > Hoe heb je jouw applicatie gestructureerd (mappen, design patterns...)?
+#### mappenStructuur
+
+gymstats-webservice/
+- **\_\_test\_\_/** -> Bevat de testen 
+- **config/** -> Bevat de configuratie
+- **public/** -> Bevat de statische bestanden
+- **src/** -> Bevat de broncode
+  - **core/** 
+  - **data/**
+  - **rest/** 
+  - **services/** 
+  - **types/** 
+
+#### Design patterns
+
+
+
+
+
 
 ## Extra technologie
 
 ### Front-end Web Development
 
-> Wat is de extra technologie? Hoe werkt het? Voeg een link naar het npm package toe!
+#### Tailwind CSS
+ Ik heb tailwind gebruikt omdat het me interesant leek. Ik heb al mooie resultaten gezien met tailwind en dit project leek mij een moment om het zelf eens te proberen.
 
+ Tailwind is een utility-first CSS framework waarmee je snel en efficiënt stijlen kunt toepassen op je HTML-elementen zonder dat je zelf CSS hoeft te schrijven. 
+
+ **Werking**:
+  - Je voegt de tailwind classes toe aan je HTML-elementen.
+  - Tailwind genereert een CSS-bestand met alle stijlen die je hebt toegevoegd.
+  - Je kan de stijlen van je elementen aanpassen door de tailwind classes aan te passen.
+
+[Tailwind](https://www.npmjs.com/package/tailwindcss)
 ### Web Services
+#### Externe API (RapidAPI)
+Ik heb een externe API gebruikt in mijn project. Deze wordt aangesproken door de backend, de key zit in de .env file. De API die ik gebruik is de "Smart Body Mass Index Calculator (BMI) API". Deze API berekent de BMI van een persoon op basis van zijn lengte en gewicht.
 
-> Wat is de extra technologie? Hoe werkt het? Voeg een link naar het npm package toe!
+**Werking**:
+- Op de profiel pagina wordt er een call gedaan naar de `api/index.ts` file. De lengte en het gewicht van de gebruiker worden meegegeven aan de API.
+- De index.js file roept de backend API aan en geeft de lengte en het gewicht van de gebruiker mee.
+- De backend API doet een call naar de externe API en geeft de lengte en het gewicht van de gebruiker mee.
+- De externe API berekent de BMI van de gebruiker en geeft deze terug aan de backend API.
+- De backend API geeft de BMI van de gebruiker terug aan de index.js file.
+- De index.js file geeft de BMI van de gebruiker terug aan de profiel pagina.
 
+[Smart Body Mass Index Calculator](https://rapidapi.com/andreabaragiola/api/smart-body-mass-index-calculator-bmi)
 ## Gekende bugs
 
 ### Front-end Web Development
-
-> Zijn er gekende bugs?
+/
 
 ### Web Services
-
-> Zijn er gekende bugs?
+/
 
 ## Reflectie
 
-> Wat vond je van dit project? Wat heb je geleerd? Wat zou je anders doen? Wat vond je goed? Wat vond je minder goed?
-> Wat zou je aanpassen aan de cursus? Wat zou je behouden? Wat zou je toevoegen?
+Ik vond het een zeer leuk project. De cursus zat goed in elkaar en de lessen waren ook leerzaam. Ik vond het leuk om aan het project te werken en ben blij met het resultaat. Er zijn nog een aantal functionaliteiten dat ik kon toevoegen maar voor het schoolproject aspect heb ik wel genoeg denk ik. 
+
+Het enige waar ik het wat moeilijk mee had was de minimumvereisten/puntenverdeling. Ik vond het soms moeilijk om te weten of ik nu aan een bepaalde vereiste voldeed of niet. Het puntje `definieert constanten (variabelen, functies en componenten) buiten de component` vond ik ook wat vaag. Ik heb geprobeerd om dit te doen maar ik weet niet of ik het juist heb gedaan. En dan vraag ik mij af, als je dan 1 constante niet goed doet verlies je dan al een gewicht op dit punt? Dus dat was soms eens twijfelen.
