@@ -32,7 +32,7 @@ function App() {
             </AsyncData>
           </div>
         </div>
-        <div className="lg:col-span-3 p-4 lg:mx-40 xl:mx-60">
+        <div className="hidden lg:block p-4 lg:mx-40 xl:mx-60">
           <h1 className="text-3xl font-bold mb-4 text-center">Exercises</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <AsyncData loading={exercisesLoading || userLoading} error={exercisesError || userError}>
