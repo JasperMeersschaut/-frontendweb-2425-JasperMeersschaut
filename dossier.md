@@ -162,13 +162,13 @@
 
 #### Algemeen
 
-- [ ] een aantal niet-triviale én werkende e2e testen
+- [x] een aantal niet-triviale én werkende e2e testen
 - [x] minstens één extra technologie
 - [x] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
 - [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
 - [ ] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
 - [x] de applicatie draait online
-- [ ] duidelijke en volledige README.md
+- [x] duidelijke en volledige README.md
 - [x] er werden voldoende (kleine) commits gemaakt
 - [x] volledig en tijdig ingediend dossier
 
@@ -213,7 +213,7 @@
 - [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
 - [x] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
 - [x] de API draait online
-- [ ] duidelijke en volledige README.md
+- [x] duidelijke en volledige README.md
 - [x] er werden voldoende (kleine) commits gemaakt
 - [x] volledig en tijdig ingediend dossier
 

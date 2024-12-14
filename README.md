@@ -1,24 +1,23 @@
-# Examenopdracht Front-end Web Development & Web Services
+# Exam Assignment Front-end Web Development & Web Services
 
 - Student: Jasper Meersschaut
-- Studentennummer: 202396570
+- Student number: 202396570
 - E-mailadres: [jasper.meersschaut@student.hogent.be](mailto:jasper.meersschaut@student.hogent.be)
 
-## Vereisten
+## Requirements
 
-Ik verwacht dat volgende software reeds geïnstalleerd is:
-
-- [NodeJS](https://nodejs.org)
-- [Yarn](https://yarnpkg.com)
-- [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
-- [cypress](https://www.cypress.io/) (als je de tests wil uitvoeren)
+- [NodeJS v17 or higher](https://nodejs.org/)
+- [Yarn](https://yarnpkg.com/)
+- [MySQL v8](https://dev.mysql.com/downloads/windows/installer/8.0.html) (no Oracle account needed, click the tiny link below the grey box)
+- [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) (no Oracle account needed, click the tiny link below the grey box)
+- [cypress](https://www.cypress.io/) (if you want to run the tests)
 
 ## Front-end
-## Opstarten
-Install all dependencies using the following command:
+## Setup
+Make sure Corepack is enabled:
+
 ```bash
-cd gymstats-frontend
-yarn install
+corepack enable
 ```
 
 Create a `.env` with the following content and apply to your configuration:
@@ -28,32 +27,59 @@ VITE_API_URL = "http://localhost:9000/api"
 VITE_CONTENT_URL = "http://localhost:9000"
 ```
 
+Install all dependencies using the following command:
+```bash
+cd gymstats-frontend
+yarn install
+```
+
 ## Start the app
 
-Start the app using `yarn dev`. It runs on <http://localhost:5137> by default.
+### Development
+- Make sure a `.env` (see above) is present.
+- Start the app using `yarn dev`. It runs on <http://localhost:5137> by default.
 
-## Testen
-Run the tests using `yarn test`. It will run the cypress tests. 
+### Production
+- Make sure a `.env` (see above) is present.
+- Build the app using `yarn build`. This will generate a `dist` folder with the compiled files.
+- Serve this folder using a static service like Apache, Nginx or others.
+
+### Testing
+Run the tests using `yarn test` and choose `E2E testing` in the Cypress window. It will open a new browser window where you can select which test suite to run.
 
 ## Back-end
 
-## Opstarten
-
-Create a `.env` (development) or `.env.test` (testing) file with the following template.
+## Setup
+### Development
+Create a `.env`  file with the following configuration.
 Complete the environment variables with your secrets, credentials, etc.
 
 ```
 NODE_ENV=development
 DATABASE_URL=mysql://<USERNAME>:<PASSWORD>@localhost:3306/<DATABASE_NAME>
+RAPIDAPI_KEY=<SECRET_KEY>
 ```
+
+> Voor het gemak van de beoordelaar geef ik hier de rapidapi key mee. Deze key is echter niet publiek en hoort niet op github te staan.
+> De key is: `4b560a6094mshec597a6ddb32e21p1b5152jsn8d7fbe2c87fe`
 
 - Enable Corepack: `corepack enable`
 - Install all dependencies: `yarn`
 - Make sure a `.env` exists (see above)
 - Run the migrations: `yarn migrate:dev`
 - Start the development server: `yarn start:dev`
-## Testen
-Create a `.env` (development) or `.env.test` (testing) file with the following template.
+
+### Production
+
+- Enable Corepack: `corepack enable`
+- Install all dependencies: `yarn`
+- Make sure a `.env` exists (see above) or set the environment variables in your production environment
+- Run the migrations: `yarn prisma migrate deploy`
+- Build the project: `yarn build`
+- Start the production server: `node build/src/index.js`
+
+### Testing
+Create `.env.test` file with the following configuration.
 Complete the environment variables with your secrets, credentials, etc.
 
 ```
@@ -62,8 +88,12 @@ DATABASE_URL=mysql://<USERNAME>:<PASSWORD>@localhost:3306/<DATABASE_NAME>
 ```
 - Enable Corepack: `corepack enable`
 - Install all dependencies: `yarn`
-- Make sure a `.env.test` exists (see above)
-- Start the development server: `yarn test`
+- Make sure `.env.test` exists (see above)
+- Run the migrations: `yarn migrate:test`
+- Run the tests: `yarn test`
+- Run the tests with coverage: `yarn test:coverage`
+  - This will generate a coverage report in the `__tests__/coverage` folder.
+  - Open `__tests__/coverage/lcov-report/index.html` in your browser to see the coverage report.
 
 ## Commit naming scheme:
 - **feat:** A new feature
