@@ -1,11 +1,11 @@
 {
   "id": 1,
-  "name": "Jasper",
-  "lastName": "Meersschaut",
-  "email": "meersschaut.jasper@gmail.com",
+  "name": "Test",
+  "lastName": "Testens",
+  "email": "test.testens@gmail.com",
   "sex": "Male",
   "birthdate": "2005-01-16T00:00:00.000Z",
   "length": 177,
   "weight": 73,
-  "roles": ["admin", "user"]
+  "roles": ["user"]
 }
