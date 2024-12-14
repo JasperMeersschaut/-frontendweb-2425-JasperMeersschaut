@@ -9,19 +9,18 @@ const EMPTY_EXERCISE = {
   muscleGroup: '',
   description:'',
 };
-
+const validationRules = {
+  type: {
+    required: 'Type is required',
+  },
+  muscleGroup: {
+    required: 'Muscle Group is required',
+  },
+  description: {
+    required: 'Description is required',
+  },
+};
 export default function ExerciseForm({ muscleGroups = [], exercise = EMPTY_EXERCISE, saveExercise }) {
-  const validationRules = {
-    type: {
-      required: 'Type is required',
-    },
-    muscleGroup: {
-      required: 'Muscle Group is required',
-    },
-    description: {
-      required: 'Description is required',
-    },
-  };
   const navigate = useNavigate();
 
   const methods = useForm({

@@ -4,8 +4,6 @@ import { axios } from '../../api/index.js';
 const contentURL = axios.defaults.contentURL;
 
 export default function ExerciseSelectCard({ exercise, isSelected, onSelect }) {
-  if (!exercise) return <div>Loading...</div>;
-
   return (
     <div
       className={`flex flex-col sm:flex-row mb-4 border rounded p-3 h-auto sm:h-48 cursor-pointer ${

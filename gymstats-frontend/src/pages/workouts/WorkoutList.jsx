@@ -10,7 +10,8 @@ import { FiPlus } from 'react-icons/fi';
 
 export default function WorkoutList() {
   const { data: workouts = [], isLoading: workoutsLoading, error: workoutError } = useSWR('workouts', getAll);
-  const { data: muscleFocuses, isLoading: muscleFocusesLoading, error: muscleFocusesError } = useSWR('workouts/muscle-focuses', getAll);
+  const { data: muscleFocuses, isLoading: muscleFocusesLoading, error: muscleFocusesError } 
+  = useSWR('workouts/muscle-focuses', getAll);
   const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
   const { trigger: deleteWorkout, error: deleteError } = useSWRMutation('workouts', deleteById);
 

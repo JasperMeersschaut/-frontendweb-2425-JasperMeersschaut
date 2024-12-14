@@ -15,61 +15,62 @@ const EMPTY_WORKOUT = {
   items: [],
 };
 
+const validationRules = {
+  type: {
+    required: 'Type is required',
+    minLength: {
+      value: 1,
+      message: 'Type must be at least 1 character',
+    },
+    maxLength: {
+      value: 50,
+      message: 'Type must be at most 50 characters',
+    },
+  },
+  muscleFocus: {
+    required: 'Muscle Focus is required',
+    minLength: {
+      value: 1,
+      message: 'Muscle Focus must be at least 1 character',
+    },
+    maxLength: {
+      value: 50,
+      message: 'Muscle Focus must be at most 50 characters',
+    },
+  },
+  duration: {
+    required: 'Duration is required',
+    validate: (value) => {
+      const intValue = parseInt(value, 10);
+      if (!Number.isInteger(intValue)) {
+        return 'Duration must be an integer';
+      }
+      if (intValue < 1) {
+        return 'Duration must be at least 1 minute';
+      }
+      if (intValue > 1000) {
+        return 'Duration must be at most 1000 minutes';
+      }
+      return true;
+    },
+  },
+  items: {
+    required: 'Items are required',
+    validate: (items) => {
+      if (!Array.isArray(items)) {
+        return 'Items must be an array';
+      }
+      for (const item of items) {
+        if (typeof item.id !== 'number' || item.id <= 0) {
+          return 'Each item must have a positive integer id';
+        }
+      }
+      return true;
+    },
+  },
+};
+
 export default function WorkoutForm({ muscleFocuses = [], workout = EMPTY_WORKOUT, saveWorkout }) {
-  const validationRules = {
-    type: {
-      required: 'Type is required',
-      minLength: {
-        value: 1,
-        message: 'Type must be at least 1 character',
-      },
-      maxLength: {
-        value: 50,
-        message: 'Type must be at most 50 characters',
-      },
-    },
-    muscleFocus: {
-      required: 'Muscle Focus is required',
-      minLength: {
-        value: 1,
-        message: 'Muscle Focus must be at least 1 character',
-      },
-      maxLength: {
-        value: 50,
-        message: 'Muscle Focus must be at most 50 characters',
-      },
-    },
-    duration: {
-      required: 'Duration is required',
-      validate: (value) => {
-        const intValue = parseInt(value, 10);
-        if (!Number.isInteger(intValue)) {
-          return 'Duration must be an integer';
-        }
-        if (intValue < 1) {
-          return 'Duration must be at least 1 minute';
-        }
-        if (intValue > 1000) {
-          return 'Duration must be at most 1000 minutes';
-        }
-        return true;
-      },
-    },
-    items: {
-      required: 'Items are required',
-      validate: (items) => {
-        if (!Array.isArray(items)) {
-          return 'Items must be an array';
-        }
-        for (const item of items) {
-          if (typeof item.id !== 'number' || item.id <= 0) {
-            return 'Each item must have a positive integer id';
-          }
-        }
-        return true;
-      },
-    },
-  };
   const navigate = useNavigate();
   const [selectedExercises, setSelectedExercises] = useState(workout.items.map((item) => item.id) || []);
 
@@ -93,8 +94,8 @@ export default function WorkoutForm({ muscleFocuses = [], workout = EMPTY_WORKOU
       await saveWorkout({
         id: workout?.id,
         ...values,
-        duration: parseInt(values.duration, 10), // Ensure duration is an integer
-        items: selectedExercises.map((id) => ({ id })), // Include the selected exercises
+        duration: parseInt(values.duration, 10), 
+        items: selectedExercises.map((id) => ({ id })),
       });
       navigate('/workouts');
     } catch (error) {

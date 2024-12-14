@@ -1,19 +1,19 @@
 import { NavLink } from 'react-router-dom';
 
-const ProfileComponent = ({ user, bmiData, contentURL, handleImageError }) => {
-  const getBmiColorClass = (category) => {
-    switch (category) {
-      case 'Normal':
-        return 'text-green-500';
-      case 'Overweight':
-        return 'text-red-500';
-      case 'Underweight':
-        return 'text-yellow-500';
-      default:
-        return 'text-gray-600';
-    }
-  };
+const getBmiColorClass = (category) => {
+  switch (category) {
+    case 'Normal':
+      return 'text-green-500';
+    case 'Overweight':
+      return 'text-red-500';
+    case 'Underweight':
+      return 'text-yellow-500';
+    default:
+      return 'text-gray-600';
+  }
+};
 
+const ProfileComponent = ({ user, bmiData, contentURL, handleImageError }) => {
   return (
     <div className="container mx-auto text-center mt-5 flex flex-col items-center">
       <div className="profile-picture mb-4">

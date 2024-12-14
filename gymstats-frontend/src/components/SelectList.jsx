@@ -21,7 +21,8 @@ export default function SelectList({
       <select
         {...register(name, validationRules)}
         id={name}
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+        leading-tight focus:outline-none focus:shadow-outline"
         disabled={isSubmitting}
         {...rest}
       >

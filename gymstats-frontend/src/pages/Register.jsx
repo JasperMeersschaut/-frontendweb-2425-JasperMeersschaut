@@ -200,7 +200,8 @@ export default function Register() {
           <div className="flex justify-end space-x-4">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded 
+              focus:outline-none focus:shadow-outline"
               disabled={loading}
               data-cy="submit_btn"
             >
@@ -209,7 +210,8 @@ export default function Register() {
 
             <button
               type="button"
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded 
+              focus:outline-none focus:shadow-outline"
               onClick={handleCancel}
               data-cy="cancel_btn"
             >

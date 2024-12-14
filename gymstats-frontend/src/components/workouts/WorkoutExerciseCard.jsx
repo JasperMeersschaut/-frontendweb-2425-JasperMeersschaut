@@ -5,8 +5,6 @@ import { axios } from '../../api/index.js';
 const contentURL = axios.defaults.contentURL;
 
 export default function WorkoutExerciseCard({ exercise }) {
-  if (!exercise) return <div>Loading...</div>;
-
   return (
     <div className="flex flex-col sm:flex-row mb-4 border rounded p-3 h-auto sm:h-48">
       <div className="w-full sm:w-1/4 h-48 sm:h-full">

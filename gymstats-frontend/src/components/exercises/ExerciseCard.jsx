@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import { IoPencilOutline, IoTrashOutline } from 'react-icons/io5';
 import { axios } from '../../api/index.js';
 
+const contentURL = axios.defaults.contentURL;
+
 export default function ExerciseCard({ exercise, onDelete, currentUserRoles, homepage }) {
-  const contentURL = axios.defaults.contentURL;
 
   const handleDelete = () => {
     if (onDelete) {
@@ -24,7 +25,8 @@ export default function ExerciseCard({ exercise, onDelete, currentUserRoles, hom
           />
         </Link>
         <div className="p-4">
-          <Link to={`/exercises/${exercise.id}`} className="text-lg font-medium text-black no-underline" data-cy={'exercise_type'}>
+          <Link to={`/exercises/${exercise.id}`} className="text-lg font-medium text-black no-underline" 
+            data-cy={'exercise_type'}>
             <h5>{exercise.type}</h5>
           </Link>
           <p className="text-gray-700" data-cy={'exercise_muscle_group'}>{exercise.muscleGroup}</p>

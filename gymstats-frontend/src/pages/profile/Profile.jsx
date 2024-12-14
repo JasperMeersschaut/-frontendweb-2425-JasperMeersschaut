@@ -6,14 +6,13 @@ import { getById } from '../../api/index.js';
 
 const contentURL = axios.defaults.contentURL;
 
-export default function Profile() {
+const handleImageError = (e) => {
+  e.target.src = `${contentURL}/images/profilePictures/0.jpg`;
+};
 
+export default function Profile() {
   const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
   const {data:bmiData, isLoading:bmiLoading, error:bmiError} = useSWR('bmi', getById);
-
-  const handleImageError = (e) => {
-    e.target.src = `${contentURL}/images/profilePictures/0.jpg`;
-  };
 
   return (
     <>

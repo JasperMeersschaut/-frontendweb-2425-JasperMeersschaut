@@ -7,16 +7,17 @@ import WorkoutCard from './components/workouts/WorkoutCard.jsx';
 import ExerciseCard from './components/exercises/ExerciseCard.jsx';
 import { getById, getAll } from './api/index.js';
 
+const contentURL = axios.defaults.contentURL;
+  
+const handleImageError = (e) => {
+  e.target.src = `${contentURL}/images/profilePictures/0.jpg`;
+};
+
 function App() {
-  const contentURL = axios.defaults.contentURL;
   const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
   const { data: workouts = [], isLoading: workoutsLoading, error: workoutError } = useSWR('workouts', getAll);
   const { data: exercises = [], isLoading: exercisesLoading, error: exercisesError } = useSWR('exercises', getAll);
   const { data: bmiData, isLoading: bmiLoading, error: bmiError } = useSWR('bmi', getById);
-
-  const handleImageError = (e) => {
-    e.target.src = `${contentURL}/images/profilePictures/0.jpg`;
-  };
 
   return (
     <div>
