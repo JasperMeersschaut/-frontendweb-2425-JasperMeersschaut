@@ -37,17 +37,6 @@ CREATE TABLE `Exercise` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `UserWorkout` (
-    `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    `userId` INTEGER UNSIGNED NOT NULL,
-    `workoutId` INTEGER UNSIGNED NOT NULL,
-    `date` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `notes` VARCHAR(191) NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `_ExerciseToWorkout` (
     `A` INTEGER UNSIGNED NOT NULL,
     `B` INTEGER UNSIGNED NOT NULL,
@@ -58,12 +47,6 @@ CREATE TABLE `_ExerciseToWorkout` (
 
 -- AddForeignKey
 ALTER TABLE `Workout` ADD CONSTRAINT `Workout_createdBy_fkey` FOREIGN KEY (`createdBy`) REFERENCES `User`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `UserWorkout` ADD CONSTRAINT `UserWorkout_id_fkey` FOREIGN KEY (`id`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `UserWorkout` ADD CONSTRAINT `UserWorkout_workoutId_fkey` FOREIGN KEY (`workoutId`) REFERENCES `Workout`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `_ExerciseToWorkout` ADD CONSTRAINT `_ExerciseToWorkout_A_fkey` FOREIGN KEY (`A`) REFERENCES `Exercise`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

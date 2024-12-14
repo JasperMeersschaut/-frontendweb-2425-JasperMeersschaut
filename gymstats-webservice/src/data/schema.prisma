@@ -19,7 +19,6 @@ model User {
   password_hash String   @db.VarChar(255)
   roles         Json
 
-  userWorkouts UserWorkout[]
   workouts     Workout[] @relation("UserWorkouts")
 }
 
@@ -29,7 +28,6 @@ model Workout {
   duration     Int
   muscleFocus  String
   items        Exercise[]
-  userWorkouts UserWorkout[]
   createdBy    Int?          @db.UnsignedInt
   user         User?         @relation("UserWorkouts", fields: [createdBy], references: [id])
 }
@@ -40,14 +38,4 @@ model Exercise {
   muscleGroup String
   description String? 
   workouts    Workout[]
-}
-
-model UserWorkout {
-  id        Int      @id @default(autoincrement()) @db.UnsignedInt
-  user      User     @relation(fields: [id], references: [id])
-  userId    Int      @db.UnsignedInt
-  workout   Workout  @relation(fields: [workoutId], references: [id])
-  workoutId Int      @db.UnsignedInt
-  date      DateTime @default(now())
-  notes     String?
 }
