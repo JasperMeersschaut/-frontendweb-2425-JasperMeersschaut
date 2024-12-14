@@ -2,13 +2,13 @@ import { useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import { getById } from '../../api';
 import ExerciseDetails from '../../components/exercises/ExerciseDetails.jsx';
+import AsyncData from '../../components/AsyncData.jsx';
 
 export default function ExerciseLarge() {
   const { id } = useParams();
-  const { data: exercise, error } = useSWR(`exercises/${id}`, getById);
-
-  if (error) return <div>Failed to load exercise details</div>;
-  if (!exercise) return <div>Loading...</div>;
-
-  return <ExerciseDetails exercise={exercise} />;
+  const { data: exercise,isLoading:exerciseLoading, error:exerciseError } = useSWR(`exercises/${id}`, getById);
+  
+  <AsyncData loading={exerciseLoading} error={exerciseError}>
+    return <ExerciseDetails exercise={exercise} />;
+  </AsyncData>;
 }

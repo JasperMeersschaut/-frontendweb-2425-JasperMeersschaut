@@ -8,9 +8,14 @@ import useSWRMutation from 'swr/mutation';
 import Error from '../../components/Error.jsx';
 import { FiPlus } from 'react-icons/fi';
 
+const handleScroll = () => {
+  sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+};
+
 export default function ExercisesList() {
   const { data: exercises = [], isLoading: exercisesLoading, error: exercisesError } = useSWR('exercises', getAll);
-  const { data: muscleGroups, isLoading: muscleGroupsLoading, error: muscleGroupsError } = useSWR('exercises/muscle-groups', getAll);
+  const { data: muscleGroups, isLoading: muscleGroupsLoading, error: muscleGroupsError } 
+  = useSWR('exercises/muscle-groups', getAll);
   const [selectedMuscleGroup, setSelectedMuscleGroup] = useState('');
   const { data: user, isLoading: userLoading, error: userError } = useSWR('users/me', getById);
   const { trigger: deleteExercise, error: deleteError } = useSWRMutation('exercises', deleteById);
@@ -31,10 +36,6 @@ export default function ExercisesList() {
     if (scrollPosition) {
       window.scrollTo(0, parseInt(scrollPosition, 10));
     }
-
-    const handleScroll = () => {
-      sessionStorage.setItem('scrollPosition', window.scrollY.toString());
-    };
 
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -76,7 +77,8 @@ export default function ExercisesList() {
       <AsyncData loading={userLoading} error={userError}>
         {user && user.roles.includes('admin') && (
           <div className='flex justify-end mb-4'>
-            <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded flex items-center" data-cy='create_exercises_btn'>
+            <Link to="/exercises/add" className="bg-blue-500 text-white font-bold py-2 px-4 rounded flex items-center" 
+              data-cy='create_exercises_btn'>
               <span className="hidden sm:inline">Create New Exercise</span>
               <FiPlus className="sm:hidden text-2xl" />
             </Link>
@@ -101,7 +103,8 @@ export default function ExercisesList() {
                   data-cy={'muscle_group'}
                 />
                 <label
-                  className={`cursor-pointer px-4 py-2 rounded ${selectedMuscleGroup === group ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
+                  className={`cursor-pointer px-4 py-2 rounded ${selectedMuscleGroup === group 
+                    ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
                   htmlFor={`muscleGroup-${group}`}
                   data-cy={'muscle_group_label'}
                 >
@@ -121,7 +124,8 @@ export default function ExercisesList() {
                 data-cy='muscle_group_all'
               />
               <label
-                className={`cursor-pointer px-4 py-2 rounded ${selectedMuscleGroup === '' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
+                className={`cursor-pointer px-4 py-2 rounded ${selectedMuscleGroup === '' 
+                  ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
                 htmlFor="muscleGroup-all"
                 data-cy='muscle_group_label_all'
               >
@@ -134,7 +138,8 @@ export default function ExercisesList() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" data-cy='exercise_list'>
         <AsyncData loading={exercisesLoading || userLoading} error={exercisesError || userError}>
           {sortedExercises.map((exercise) => (
-            <ExerciseCard key={exercise.id} exercise={exercise} onDelete={handleDeleteExercise} currentUserRoles={currentUserRoles} data-cy={`exercise_card_${exercise.id}`} />
+            <ExerciseCard key={exercise.id} exercise={exercise} onDelete={handleDeleteExercise} 
+              currentUserRoles={currentUserRoles} data-cy={`exercise_card_${exercise.id}`} />
           ))}
         </AsyncData>
       </div>

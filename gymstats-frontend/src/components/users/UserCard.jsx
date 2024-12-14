@@ -17,13 +17,10 @@ export default function UserCard({ user, onDelete, onUpdateRoles }) {
   };
 
   const handleRoleChange = () => {
-    console.log('isAdmin', isAdmin);
-    console.log('user.roles', user.roles);
     
     const currentRoles = typeof user.roles === 'string' ? JSON.parse(user.roles) : user.roles;
     
     const updatedRoles = isAdmin ? currentRoles.filter((role) => role !== 'admin') : [...currentRoles, 'admin'];
-    console.log('updatedRoles', updatedRoles);
     
     onUpdateRoles(user.id, updatedRoles.map((role) => role.toLowerCase()));
     setIsAdmin(!isAdmin);

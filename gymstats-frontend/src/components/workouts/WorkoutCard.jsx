@@ -4,18 +4,18 @@ import { axios } from '../../api/index.js';
 
 const contentURL = axios.defaults.contentURL;
 
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
 export default function WorkoutCard({ workout, onDelete, user, homepage }) {
   const currentUserId = user.id;
   const currentUserRoles = user.roles;
-
-  const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  };
-
+  
   const shuffledExercises = shuffleArray([...workout.items]).slice(0, 4); // Ensure only 4 images are displayed
 
   const handleDelete = () => {
@@ -25,7 +25,6 @@ export default function WorkoutCard({ workout, onDelete, user, homepage }) {
   };
 
   const canEdit = currentUserId === workout.createdBy || currentUserRoles.includes('admin');
-
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden p-4">
       <Link to={`/workout/${workout.id}`} className="no-underline text-black">

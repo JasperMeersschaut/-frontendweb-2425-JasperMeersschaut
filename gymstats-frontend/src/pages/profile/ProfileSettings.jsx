@@ -1,6 +1,5 @@
 import useSWR from 'swr';
-import { useParams } from 'react-router-dom';
-import { getAll, save, getById } from '../../api';
+import {  save, getById } from '../../api';
 import useSWRMutation from 'swr/mutation';
 import UserForm from '../../components/users/UserForm.jsx';
 import AsyncData from '../../components/AsyncData';

@@ -26,7 +26,6 @@ export default function AddOrEditWorkout() {
   } = useSWR('workouts/muscle-focuses', getAll);
 
   const { data: user, isLoading:userLoading,error:userError } = useSWR('users/me',getById);
-  console.log('user in addoredit:'+ user);
 
   return (
     <div className="container mx-auto p-4">
