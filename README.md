@@ -73,7 +73,7 @@ RAPIDAPI_KEY=<SECRET_KEY>
 
 - Enable Corepack: `corepack enable`
 - Install all dependencies: `yarn`
-- Make sure a `.env` exists (see above) or set the environment variables in your production environment
+- Make sure a `.env` exists (see above) or set the environment variables in your production environment also add `AUTH_JWT_SECRET` to the environment variables.
 - Run the migrations: `yarn prisma migrate deploy`
 - Build the project: `yarn build`
 - Start the production server: `node build/src/index.js`
@@ -95,7 +95,7 @@ DATABASE_URL=mysql://<USERNAME>:<PASSWORD>@localhost:3306/<DATABASE_NAME>
   - This will generate a coverage report in the `__tests__/coverage` folder.
   - Open `__tests__/coverage/lcov-report/index.html` in your browser to see the coverage report.
 
-## Commit naming scheme:
+## Commit naming scheme
 - **feat:** A new feature
 - **fix:** A bug fix
 - **docs:** Documentation only changes

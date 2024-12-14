@@ -7,8 +7,7 @@
 - Student: Jasper Meersschaut
 - Studentennummer: 202396570
 - E-mailadres: [jasper.meersschaut@student.hogent.be](mailto:jasper.meersschaut@student.hogent.be)
-- Demo:
-<!--  TODO: panopto link toevoegen -->
+- Demo: [Panopto](https://hogent.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1de312db-719d-4e2d-b5b8-b246010bb2b7)
 - GitHub-repository: [GitHub Repository](https://github.com/HOGENT-frontendweb/frontendweb-2425-JasperMeersschaut)
 - Front-end Web Development
   - Online versie: https://frontendweb-jaspermeersschaut.onrender.com
@@ -47,7 +46,7 @@
   - kan zijn BMI berekenen
 - Een admin
   - kan oefeningen toevoegen
-  - kan standaar workouts toevoegen die iedereen kan zien
+  - kan standaard workouts toevoegen die iedereen kan zien
   - kan oefeningen en workouts aanpassen
   - kan oefeningen en workouts verwijderen
   - kan gebruikers bekijken, rollen aanpassen en verwijderen
@@ -139,8 +138,7 @@
 
 - [x] heeft meerdere componenten - dom & slim (naast login/register)
 - [x] applicatie is voldoende complex
-- [ ] definieert constanten (variabelen, functies en componenten) buiten de component 
-<!-- TODO: nachecken -->
+- [x] definieert constanten (variabelen, functies en componenten) buiten de component 
 - [x] minstens één form met meerdere velden met validatie (naast login/register)
 - [x] login systeem
 
@@ -166,7 +164,7 @@
 - [x] minstens één extra technologie
 - [x] node_modules, .env, productiecredentials... werden niet gepushed op GitHub
 - [x] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
-- [ ] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
+- [x] de applicatie start zonder problemen op gebruikmakend van de instructies in de README
 - [x] de applicatie draait online
 - [x] duidelijke en volledige README.md
 - [x] er werden voldoende (kleine) commits gemaakt
@@ -220,14 +218,17 @@
 ## Projectstructuur
 
 ### Front-end Web Development
-
-> Hoe heb je jouw applicatie gestructureerd (mappen, design patterns, hiërarchie van componenten, state...)?
-
 #### mappenStructuur
-gymstats-frontend
+gymstats-frontend/
+- **cypress/** -> Bevat de cypress e2e testen
+- **public/** -> Bevat de statische bestanden
+- **src/** -> Bevat de broncode 
+  - **api/** -> Bevat de API calls naar de backend
+  - **contexts/** -> Bevat de globale states
+  - **components/** -> Bevat de componenten
+  - **pages/** -> Bevat de pagina's
 
 ### Web Services
-> Hoe heb je jouw applicatie gestructureerd (mappen, design patterns...)?
 #### mappenStructuur
 
 gymstats-webservice/
@@ -240,13 +241,6 @@ gymstats-webservice/
   - **rest/** 
   - **services/** 
   - **types/** 
-
-#### Design patterns
-
-
-
-
-
 
 ## Extra technologie
 
@@ -268,9 +262,9 @@ gymstats-webservice/
 Ik heb een externe API gebruikt in mijn project. Deze wordt aangesproken door de backend, de key zit in de .env file. De API die ik gebruik is de "Smart Body Mass Index Calculator (BMI) API". Deze API berekent de BMI van een persoon op basis van zijn lengte en gewicht.
 
 **Werking**:
-- Op de profiel pagina wordt er een call gedaan naar de `api/index.ts` file. De lengte en het gewicht van de gebruiker worden meegegeven aan de API.
-- De index.js file roept de backend API aan en geeft de lengte en het gewicht van de gebruiker mee.
-- De backend API doet een call naar de externe API en geeft de lengte en het gewicht van de gebruiker mee.
+- Op de profiel pagina wordt er een GET call gedaan naar de `api/index.ts` file.
+- De index.js file roept de backend API aan.
+- De backend API doet een call naar de externe API en geeft de lengte en het gewicht van de ingelogde gebruiker mee.
 - De externe API berekent de BMI van de gebruiker en geeft deze terug aan de backend API.
 - De backend API geeft de BMI van de gebruiker terug aan de index.js file.
 - De index.js file geeft de BMI van de gebruiker terug aan de profiel pagina.
