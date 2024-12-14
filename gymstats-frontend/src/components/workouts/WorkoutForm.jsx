@@ -42,13 +42,14 @@ export default function WorkoutForm({ muscleFocuses = [], workout = EMPTY_WORKOU
     duration: {
       required: 'Duration is required',
       validate: (value) => {
-        if (!Number.isInteger(value)) {
+        const intValue = parseInt(value, 10);
+        if (!Number.isInteger(intValue)) {
           return 'Duration must be an integer';
         }
-        if (value < 1) {
+        if (intValue < 1) {
           return 'Duration must be at least 1 minute';
         }
-        if (value > 1000) {
+        if (intValue > 1000) {
           return 'Duration must be at most 1000 minutes';
         }
         return true;
@@ -92,6 +93,7 @@ export default function WorkoutForm({ muscleFocuses = [], workout = EMPTY_WORKOU
       await saveWorkout({
         id: workout?.id,
         ...values,
+        duration: parseInt(values.duration, 10), // Ensure duration is an integer
         items: selectedExercises.map((id) => ({ id })), // Include the selected exercises
       });
       navigate('/workouts');

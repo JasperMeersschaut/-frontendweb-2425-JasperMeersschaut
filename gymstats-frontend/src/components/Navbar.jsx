@@ -53,7 +53,6 @@ export default function Navbar() {
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>
         <div className="hidden sm:flex items-center space-x-4">
-          <button className="bg-gray-200 text-gray-800 p-2 rounded-md">LightMode</button>
           <NavLink className="ml-4" to="/profile" data-cy="profileIcon_btn" onClick={closeMenu}>
             <CgProfile className="text-2xl" />
           </NavLink>

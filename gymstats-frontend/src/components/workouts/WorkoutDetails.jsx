@@ -12,9 +12,6 @@ export default function WorkoutDetails({ workout }) {
         <p>
           <LoremIpsum p={1} />
         </p>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
-          Start Workout
-        </button>
       </div>
       <div className="grid grid-cols-1 gap-4">
         {ids.map((exercise) => (
