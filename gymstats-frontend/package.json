@@ -1,10 +1,10 @@
 {
-  "name": "frontendweb-budget",
+  "name": "gymstats-frontend",
   "version": "1.0.0",
-  "description": "Demo application for the course Front-end Web Development.",
+  "description": "Application for managing and saving gym workouts and exercises.",
   "type": "module",
   "main": "index.ts",
-  "repository": "git@github.com:HOGENT-frontendweb/frontendweb-budget.git",
+  "repository": "git@github.com:HOGENT-frontendweb/frontendweb-2425-JasperMeersschaut.git",
   "license": "MIT",
   "private": true,
   "packageManager": "yarn@4.4.1",

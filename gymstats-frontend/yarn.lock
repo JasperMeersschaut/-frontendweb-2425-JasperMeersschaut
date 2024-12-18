@@ -2467,39 +2467,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"frontendweb-budget@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "frontendweb-budget@workspace:."
-  dependencies:
-    "@eslint/js": "npm:^9.9.0"
-    "@stylistic/eslint-plugin": "npm:^2.9.0"
-    "@types/react": "npm:^18.3.3"
-    "@types/react-dom": "npm:^18.3.0"
-    "@vitejs/plugin-react-swc": "npm:^3.5.0"
-    autoprefixer: "npm:^10.4.20"
-    axios: "npm:^1.7.7"
-    cypress: "npm:^13.16.0"
-    eslint: "npm:^9.9.0"
-    eslint-plugin-cypress: "npm:^4.1.0"
-    eslint-plugin-react: "npm:^7.35.0"
-    eslint-plugin-react-hooks: "npm:^5.1.0-rc.0"
-    eslint-plugin-react-refresh: "npm:^0.4.9"
-    globals: "npm:^15.9.0"
-    postcss: "npm:^8.4.49"
-    react: "npm:^18.3.1"
-    react-dom: "npm:^18.3.1"
-    react-hook-form: "npm:^7.53.2"
-    react-icons: "npm:^5.3.0"
-    react-lorem-ipsum: "npm:^1.4.10"
-    react-modal: "npm:^3.16.1"
-    react-router: "npm:~6.26.0"
-    react-router-dom: "npm:^6.27.0"
-    swr: "npm:^2.2.5"
-    tailwindcss: "npm:^3.4.15"
-    vite: "npm:^5.4.1"
-  languageName: unknown
-  linkType: soft
-
 "fs-extra@npm:^9.1.0":
   version: 9.1.0
   resolution: "fs-extra@npm:9.1.0"
@@ -2715,6 +2682,39 @@ __metadata:
   checksum: 10c0/386d011a553e02bc594ac2ca0bd6d9e4c22d7fa8cfbfc448a6d148c59ea881b092db9dbe3547ae4b88e55f1b01f7c4a2ecc53b310c042793e63aa44cf6c257f2
   languageName: node
   linkType: hard
+
+"gymstats-frontend@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "gymstats-frontend@workspace:."
+  dependencies:
+    "@eslint/js": "npm:^9.9.0"
+    "@stylistic/eslint-plugin": "npm:^2.9.0"
+    "@types/react": "npm:^18.3.3"
+    "@types/react-dom": "npm:^18.3.0"
+    "@vitejs/plugin-react-swc": "npm:^3.5.0"
+    autoprefixer: "npm:^10.4.20"
+    axios: "npm:^1.7.7"
+    cypress: "npm:^13.16.0"
+    eslint: "npm:^9.9.0"
+    eslint-plugin-cypress: "npm:^4.1.0"
+    eslint-plugin-react: "npm:^7.35.0"
+    eslint-plugin-react-hooks: "npm:^5.1.0-rc.0"
+    eslint-plugin-react-refresh: "npm:^0.4.9"
+    globals: "npm:^15.9.0"
+    postcss: "npm:^8.4.49"
+    react: "npm:^18.3.1"
+    react-dom: "npm:^18.3.1"
+    react-hook-form: "npm:^7.53.2"
+    react-icons: "npm:^5.3.0"
+    react-lorem-ipsum: "npm:^1.4.10"
+    react-modal: "npm:^3.16.1"
+    react-router: "npm:~6.26.0"
+    react-router-dom: "npm:^6.27.0"
+    swr: "npm:^2.2.5"
+    tailwindcss: "npm:^3.4.15"
+    vite: "npm:^5.4.1"
+  languageName: unknown
+  linkType: soft
 
 "has-bigints@npm:^1.0.1, has-bigints@npm:^1.0.2":
   version: 1.0.2

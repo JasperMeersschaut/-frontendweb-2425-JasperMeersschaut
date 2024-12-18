@@ -16,8 +16,8 @@ export default {
       memoryCost: 2 ** 17,
     },
     jwt: {
-      audience: 'budget.hogent.be',
-      issuer: 'budget.hogent.be',
+      audience: 'gymstats.hogent.be',
+      issuer: 'gymstats.hogent.be',
     },
   },
 };

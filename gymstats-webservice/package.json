@@ -1,9 +1,9 @@
 {
-  "name": "webservices-budget",
+  "name": "gymstats-webservice",
   "version": "1.0.0",
-  "description": "Demo application for the course Web Services.",
+  "description": "Webservice for managing and saving gym workouts and exercises.",
   "main": "index.ts",
-  "repository": "git@github.com:HOGENT-frontendweb/webservices-budget.git",
+  "repository": "git@github.com:HOGENT-frontendweb/frontendweb-2425-JasperMeersschaut.git",
   "license": "MIT",
   "private": true,
   "packageManager": "yarn@4.4.0",
