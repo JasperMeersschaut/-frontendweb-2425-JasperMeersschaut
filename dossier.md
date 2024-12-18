@@ -124,7 +124,7 @@
 - `GET /api/health/version`: de versie-informatie van de server ophalen
 
 #### BMI
-- `GET /api/bmi/{userId}`: BMI-gegevens ophalen voor een gebruiker op basis van id
+- `GET /api/bmi`: BMI-gegevens ophalen op basis van de lengte en het gewicht van de ingelogde gebruiker
 
 ## Behaalde minimumvereisten
 
