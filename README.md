@@ -60,7 +60,7 @@ DATABASE_URL=mysql://<USERNAME>:<PASSWORD>@localhost:3306/<DATABASE_NAME>
 RAPIDAPI_KEY=<SECRET_KEY>
 ```
 
-> Voor het gemak van de beoordelaar geef ik hier de rapidapi key mee. Deze key is echter niet publiek en hoort niet op github te staan.
+> ❗Voor het gemak van de beoordelaar geef ik hier de rapidapi key mee. Ik ben er van bewust dat deze key niet publiek is en niet op github hoort te staan. 
 > De key is: `4b560a6094mshec597a6ddb32e21p1b5152jsn8d7fbe2c87fe`
 
 - Enable Corepack: `corepack enable`
@@ -72,6 +72,7 @@ RAPIDAPI_KEY=<SECRET_KEY>
 ### Production
 
 - Enable Corepack: `corepack enable`
+- cd /gymstats-webservice
 - Install all dependencies: `yarn`
 - Make sure a `.env` exists (see above) or set the environment variables in your production environment also add `AUTH_JWT_SECRET` to the environment variables.
 - Run the migrations: `yarn prisma migrate deploy`

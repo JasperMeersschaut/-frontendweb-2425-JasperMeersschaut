@@ -1,9 +1,4 @@
 # Dossier
-
-<!-- > Duid aan welke vakken je volgt en vermeld voor deze vakken de link naar jouw GitHub repository. In het geval je slechts één vak volgt, verwijder alle inhoud omtrent het andere vak uit dit document.
-> Lees <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet> om te weten hoe een Markdown-bestand opgemaakt moet worden.
-> Verwijder alle instructies (lijnen die starten met >). -->
-
 - Student: Jasper Meersschaut
 - Studentennummer: 202396570
 - E-mailadres: [jasper.meersschaut@student.hogent.be](mailto:jasper.meersschaut@student.hogent.be)
@@ -35,7 +30,7 @@
 - Wachtwoord: 12345678
 
 ## Projectbeschrijving
-> Mijn project heet gymstats. Je kan op mijn website oefeningen bekijken met daarbij de uitleg en een video van de oefening. Je kan ook een profiel aanmaken en je eigen workouts maken met bestaande oefeningen. Er zijn ook standaard workouts voor beginners die niet echt weten hoe een workout in elkaar zit. Je kan ook je BMI berekenen op de profiel pagina.
+ Mijn project heet gymstats. Je kan op mijn website oefeningen bekijken met daarbij de uitleg en een video van de oefening. Je kan ook een profiel aanmaken en je eigen workouts maken met bestaande oefeningen. Er zijn ook standaard workouts voor beginners die niet echt weten hoe een workout in elkaar zit. Je kan ook je BMI berekenen op de profiel pagina.
 ### Gebruikers
 - Een user 
   - kan zich registreren
@@ -52,15 +47,16 @@
   - kan gebruikers bekijken, rollen aanpassen en verwijderen
 
 ### Oefeningen
-- Een oefening heeft een naam, uitleg, afbeelding en video.
+- Een oefening heeft een naam, beschrijving, spiergroep, afbeelding en video.
 - Een oefening kan toegevoegd, aangepast en verwijderd worden door een admin.
+- Elke user ziet dezelfde oefeningen.
 
 ### Workouts
 - Een workout heeft een naam, beschrijving, lengte, spier focus en een lijst van oefeningen.
 - Een standaard workout kan toegevoegd, aangepast en verwijderd worden door een admin.
 - Een user kan zijn eigen workout maken met bestaande oefeningen.
 
-### Databank
+### ERD
 
 ![ERD](./assets/ERD.png)
 
@@ -270,10 +266,13 @@ Ik heb een externe API gebruikt in mijn project. Deze wordt aangesproken door de
 - De index.js file geeft de BMI van de gebruiker terug aan de profiel pagina.
 
 [Smart Body Mass Index Calculator](https://rapidapi.com/andreabaragiola/api/smart-body-mass-index-calculator-bmi)
+
+> ❗Deze API is betalend, ik ga deze laten draaien tot 11/02/2025. Indien dit langer moet gelieve mij te mailen op [jasper.meersschaut@student.hogent.be](mailto:jasper.meersschaut@student.hogent.be)
+
 ## Gekende bugs
 
 ### Front-end Web Development
-/
+- Soms op render komt er een error `r is undefined` of `n is undefined`. Ik denk dat dit gewoon een bug van render is. Als je de pagina herlaad is het weg. (soms zelf meerdere keren)
 
 ### Web Services
 /
@@ -282,4 +281,4 @@ Ik heb een externe API gebruikt in mijn project. Deze wordt aangesproken door de
 
 Ik vond het een zeer leuk project. De cursus zat goed in elkaar en de lessen waren ook leerzaam. Ik vond het leuk om aan het project te werken en ben blij met het resultaat. Er zijn nog een aantal functionaliteiten dat ik kon toevoegen maar voor het schoolproject aspect heb ik wel genoeg denk ik. 
 
-Het enige waar ik het wat moeilijk mee had was de minimumvereisten/puntenverdeling. Ik vond het soms moeilijk om te weten of ik nu aan een bepaalde vereiste voldeed of niet. Het puntje `definieert constanten (variabelen, functies en componenten) buiten de component` vond ik ook wat vaag. Ik heb geprobeerd om dit te doen maar ik weet niet of ik het juist heb gedaan. En dan vraag ik mij af, als je dan 1 constante niet goed doet verlies je dan al een gewicht op dit punt? Dus dat was soms eens twijfelen.
+Het enige waar ik het wat moeilijk mee had was de minimumvereisten/puntenverdeling. Ik vond het soms moeilijk om te weten of ik nu aan een bepaalde vereiste voldeed of niet. Bijvoorbeeld bij het puntje `definieert constanten (variabelen, functies en componenten) buiten de component` was het soms zoeken. Ik heb geprobeerd om dit te doen maar ik weet niet of ik het juist heb gedaan. En dan vraag ik mij af, als je dan 1 constante niet goed doet verlies je dan al een gewicht op dit punt? Dus dat was soms eens twijfelen.
